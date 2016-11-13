@@ -9,18 +9,23 @@ import rynkbit.tk.coffeelist.R;
 import rynkbit.tk.coffeelist.db.entity.User;
 
 public class ItemActivity extends AppCompatActivity {
-    private User user;
+    private ItemController mController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item);
 
-        user = this.getIntent().getParcelableExtra("user");
+        mController = new ItemController(this);
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.itemView);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 5));
-        recyclerView.setAdapter(new ItemAdapter(user));
+        recyclerView.setAdapter(mController.getItemAdapter());
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mController.refreshItemAdapter();
     }
 }

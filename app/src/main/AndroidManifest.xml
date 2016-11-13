@@ -15,7 +15,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".item.ItemActivity"></activity>
+        <activity android:name=".item.ItemActivity" />
+        <activity android:name=".admin.AdminActivity" />
+        <activity
+            android:name=".admin.user.ManageUserActivity"
+            android:label="@string/title_activity_manage_user"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

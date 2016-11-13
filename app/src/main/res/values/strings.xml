@@ -3,4 +3,16 @@
     <string name="user_balance">Balance: %1$.2f€</string>
     <string name="item_price">Price: %1$.2f€</string>
     <string name="item_stock">Stock: %1$d</string>
+    <string name="item_buy">Buy %1$s for %2$.2f€?</string>
+    <string name="item_outOfStock">%1$s not in stock</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="admin_login">Login</string>
+    <string name="admin_credentialsInvalid">Credentials are invalid</string>
+    <string name="admin_manageItems">Manage Items</string>
+    <string name="admin_manageUser">Manage User</string>
+    <string name="admin_changePassword">Change Password</string>
+    <string name="admin_setBackupPath">Set Backup Path</string>
+    <string name="title_activity_manage_user">ManageUserActivity</string>
+
 </resources>
