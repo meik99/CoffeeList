@@ -21,7 +21,7 @@
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:elevation="@dimen/cardview_default_elevation"
-            android:text="Login"
+            android:text="@string/admin_login"
             android:layout_marginRight="4dp"
             android:id="@+id/btnAdminConfirm"/>
         <Button
@@ -29,7 +29,7 @@
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:elevation="@dimen/cardview_default_elevation"
-            android:text="Cancel"
+            android:text="@string/cancel"
             android:layout_marginLeft="4dp"
             android:id="@+id/btnAdminCancel"/>
     </LinearLayout>
