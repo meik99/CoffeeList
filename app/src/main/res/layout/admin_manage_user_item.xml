@@ -36,7 +36,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0"
                 android:src="@drawable/ic_more_vert_black_24dp"
-                android:background="#00ffffff"/>
+                android:background="#00ffffff"
+                android:id="@+id/btnUserMenu"/>
         </LinearLayout>
 
 

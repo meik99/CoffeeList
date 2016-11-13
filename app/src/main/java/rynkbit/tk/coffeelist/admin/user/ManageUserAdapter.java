@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.util.LinkedList;
@@ -16,10 +17,11 @@ import rynkbit.tk.coffeelist.db.entity.User;
  * Created by michael on 11/13/16.
  */
 public class ManageUserAdapter extends RecyclerView.Adapter {
-    List<User> mUsers = new LinkedList<>();
+    private List<User> mUsers = new LinkedList<>();
+    private ManageUserController mManageUserController;
 
-    public ManageUserAdapter(){
-
+    public ManageUserAdapter(ManageUserController controller){
+        mManageUserController = controller;
     }
 
     public void setUsers(List<User> users){
@@ -58,6 +60,10 @@ public class ManageUserAdapter extends RecyclerView.Adapter {
                 ((ManageUserHolder) holder).view.getContext().getString(R.string.user_balance),
                 user.getBalance()
         ));
+        ImageButton btnUserMenu =
+                (ImageButton) manageUserHolder.view.findViewById(R.id.btnUserMenu);
+        btnUserMenu.setOnClickListener(new ManageUserMenuClickListener(mManageUserController));
+        btnUserMenu.setTag(user);
     }
 
     @Override

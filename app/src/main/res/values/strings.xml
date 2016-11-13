@@ -14,5 +14,13 @@
     <string name="admin_changePassword">Change Password</string>
     <string name="admin_setBackupPath">Set Backup Path</string>
     <string name="title_activity_manage_user">ManageUserActivity</string>
+    <string name="add">Add</string>
+    <string name="cancel">Cancel</string>
+    <string name="remove">Remove</string>
+    <string name="rename">Rename</string>
+    <string name="evenUser">Even</string>
+    <string name="remove_user_confirmation">Really remove user %1$s?</string>
+    <string name="ok">Ok</string>
+    <string name="confirm_even_user">Even user %1$s?</string>
 
 </resources>
