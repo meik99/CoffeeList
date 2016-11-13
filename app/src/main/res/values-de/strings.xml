@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Kaffeeliste</string>
+    <string name="user_balance">Betrag: %1$.2f€</string>
+    <string name="item_stock">Lagernd: %1$d</string>
+    <string name="item_price">Preis: %1$.2f€</string>
+</resources>

@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">CoffeeList</string>
+    <string name="user_balance">Balance: %1$.2f€</string>
+    <string name="item_price">Price: %1$.2f€</string>
+    <string name="item_stock">Stock: %1$d</string>
+</resources>
