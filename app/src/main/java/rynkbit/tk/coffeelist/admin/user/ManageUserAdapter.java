@@ -37,8 +37,8 @@ public class ManageUserAdapter extends RecyclerView.Adapter {
         public ManageUserHolder(View itemView) {
             super(itemView);
             view = itemView;
-            txtUsername = (TextView) view.findViewById(R.id.manage_user_name);
-            txtBalance = (TextView) view.findViewById(R.id.manage_user_balance);
+            txtUsername = (TextView) view.findViewById(R.id.manage_list_item_title);
+            txtBalance = (TextView) view.findViewById(R.id.manage_list_item_detail);
         }
     }
 
@@ -46,7 +46,7 @@ public class ManageUserAdapter extends RecyclerView.Adapter {
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view =
                 LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.admin_manage_user_item, parent, false);
+                .inflate(R.layout.admin_manage_list_item, parent, false);
         ManageUserHolder holder = new ManageUserHolder(view);
         return holder;
     }
@@ -61,7 +61,7 @@ public class ManageUserAdapter extends RecyclerView.Adapter {
                 user.getBalance()
         ));
         ImageButton btnUserMenu =
-                (ImageButton) manageUserHolder.view.findViewById(R.id.btnUserMenu);
+                (ImageButton) manageUserHolder.view.findViewById(R.id.btnListItem);
         btnUserMenu.setOnClickListener(new ManageUserMenuClickListener(mManageUserController));
         btnUserMenu.setTag(user);
     }

@@ -9,5 +9,5 @@
         android:inputType="textPersonName"
         android:hint="Name"
         android:ems="10"
-        android:id="@+id/txtAddUserName" />
+        android:id="@+id/txtRenameName" />
 </LinearLayout>

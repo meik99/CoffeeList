@@ -20,6 +20,10 @@
         <activity
             android:name=".admin.user.ManageUserActivity"
             android:label="@string/title_activity_manage_user"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".admin.item.ManageItemsActivity"
+            android:label="@string/title_activity_manage_items"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

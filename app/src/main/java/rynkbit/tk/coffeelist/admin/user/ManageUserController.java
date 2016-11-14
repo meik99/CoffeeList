@@ -8,8 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 
-import java.util.zip.Inflater;
-
 import rynkbit.tk.coffeelist.R;
 import rynkbit.tk.coffeelist.db.entity.User;
 import rynkbit.tk.coffeelist.db.facade.UserFacade;
@@ -38,15 +36,15 @@ public class ManageUserController {
     public void showCreateUserDialog() {
         final AlertDialog.Builder builder = new AlertDialog.Builder(mManageUserActivity);
         final View dialogView = LayoutInflater.from(mManageUserActivity)
-                .inflate(R.layout.manage_user_add, null, false);
+                .inflate(R.layout.manage_rename, null, false);
 
         builder.setTitle(mManageUserActivity.getString(R.string.add));
         builder.setView(dialogView);
         builder.setPositiveButton(R.string.add, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                EditText txtAddUserName = (EditText) dialogView.findViewById(R.id.txtAddUserName);
-                UserFacade.addUser(mManageUserActivity, txtAddUserName.getText().toString());
+                EditText txtAddUserName = (EditText) dialogView.findViewById(R.id.txtRenameName);
+                UserFacade.insert(mManageUserActivity, txtAddUserName.getText().toString());
                 refreshListAdapter();
                 dialogInterface.dismiss();
             }
@@ -96,8 +94,8 @@ public class ManageUserController {
         final AlertDialog.Builder renameDialog =
                 new AlertDialog.Builder(mManageUserActivity);
         View view = LayoutInflater.from(mManageUserActivity)
-                .inflate(R.layout.manage_user_add, null, false);
-        final EditText txtUserName = (EditText) view.findViewById(R.id.txtAddUserName);
+                .inflate(R.layout.manage_rename, null, false);
+        final EditText txtUserName = (EditText) view.findViewById(R.id.txtRenameName);
 
         txtUserName.setText(user.getName());
         renameDialog.setView(view);

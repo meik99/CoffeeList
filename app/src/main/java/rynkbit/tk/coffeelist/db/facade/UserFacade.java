@@ -42,7 +42,7 @@ public class UserFacade {
         return result;
     }
 
-    public static User addUser(Context activity, String username) {
+    public static User insert(Context activity, String username) {
         DbHelper dbHelper = OpenHelperManager.getHelper(activity, DbHelper.class);
         Dao<User, Integer> userDao = null;
         User user = new User();
@@ -50,7 +50,6 @@ public class UserFacade {
 
         try {
             userDao = DaoManager.createDao(dbHelper.getConnectionSource(), User.class);
-            user.setId((int) userDao.countOf());
             userDao.create(user);
         } catch (SQLException e) {
             e.printStackTrace();

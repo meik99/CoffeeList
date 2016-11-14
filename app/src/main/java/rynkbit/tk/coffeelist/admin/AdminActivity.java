@@ -14,6 +14,8 @@ public class AdminActivity extends AppCompatActivity {
         setContentView(R.layout.activity_admin);
 
         Button btnManageUser = (Button) findViewById(R.id.btnAdminManageUser);
+        Button btnManageItems = (Button) findViewById(R.id.btnAdminManageItems);
         btnManageUser.setOnClickListener(new ManageUserClickListener());
+        btnManageItems.setOnClickListener(new ManageItemsClickListener());
     }
 }

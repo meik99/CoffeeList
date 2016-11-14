@@ -45,7 +45,7 @@ public class DbHelper extends OrmLiteSqliteOpenHelper{
             List<User> testUsers = new LinkedList<>();
             List<Item> testItem = new LinkedList<>();
 
-            for(int i = 0; i < 8; i++){
+            for(int i = 0; i < 1; i++){
                 User user = new User();
                 user.setId(i);
                 user.setName("Test User " + (i+1));
@@ -53,7 +53,7 @@ public class DbHelper extends OrmLiteSqliteOpenHelper{
                 testUsers.add(user);
             }
 
-            for (int i = 0; i < 30; i++){
+            for (int i = 0; i < 3; i++){
                 Item item = new Item();
                 item.setId(i);
                 item.setName("Item " + i);

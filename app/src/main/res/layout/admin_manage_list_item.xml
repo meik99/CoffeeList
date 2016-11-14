@@ -12,23 +12,23 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:padding="@dimen/activity_vertical_margin">
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="0"
-                android:id="@+id/manage_user_name"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
-
-            <TextView
-                android:paddingLeft="@dimen/activity_vertical_margin"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:id="@+id/manage_user_balance"
+                android:id="@+id/manage_list_item_title"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+            <TextView
+                android:paddingRight="@dimen/activity_vertical_margin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:id="@+id/manage_list_item_detail"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
 
             <ImageButton
@@ -37,7 +37,7 @@
                 android:layout_weight="0"
                 android:src="@drawable/ic_more_vert_black_24dp"
                 android:background="#00ffffff"
-                android:id="@+id/btnUserMenu"/>
+                android:id="@+id/btnListItem"/>
         </LinearLayout>
 
 
