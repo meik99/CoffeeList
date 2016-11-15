@@ -23,4 +23,10 @@
     <string name="remove_user_confirmation">Benutzer %1$s wirklich entfernen?</string>
     <string name="rename">Umbenennen</string>
     <string name="title_activity_manage_user">Benutzerverwaltung</string>
+    <string name="change_price">Preis ändern</string>
+    <string name="change_stock">Gelagerte Menge ändern</string>
+    <string name="choose_directory">Speicherort wählen</string>
+    <string name="item_detail">Preis: %1$.2f\\tStock:%2$d</string>
+    <string name="remove_item_confirmation">Produkt %1$s wirklich entfernen?</string>
+    <string name="title_activity_manage_items">Produktverwaltung</string>
 </resources>
