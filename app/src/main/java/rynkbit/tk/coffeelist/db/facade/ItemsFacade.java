@@ -74,7 +74,30 @@ public class ItemsFacade {
         Dao<Item, Integer> itemDao = getItemDao(context);
 
         try {
+            Item oldItem = itemDao.queryForId(item.getId());
+            StringBuilder builder = new StringBuilder();
+
             itemDao.update(item);
+
+            builder.append("Updated item")
+                    .append(";")
+                    .append(oldItem.getId())
+                    .append(";")
+                    .append(oldItem.getName())
+                    .append(";")
+                    .append(oldItem.getStock())
+                    .append(";")
+                    .append(oldItem.getPrice())
+                    .append(";")
+                    .append("to")
+                    .append(";")
+                    .append(item.getName())
+                    .append(";")
+                    .append(item.getStock())
+                    .append(";")
+                    .append(item.getPrice());
+
+            ProtocolFacade.writeLine(context, builder.toString());
         } catch (SQLException e) {
             e.printStackTrace();
         }

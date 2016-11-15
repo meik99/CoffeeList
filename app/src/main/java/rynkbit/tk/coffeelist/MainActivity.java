@@ -1,10 +1,15 @@
 package rynkbit.tk.coffeelist;
 
+import android.Manifest;
+import android.os.Build;
+import android.support.v4.content.PermissionChecker;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Button;
+
+import java.security.Permission;
 
 public class MainActivity extends AppCompatActivity {
     private MainController mController;
@@ -25,6 +30,20 @@ public class MainActivity extends AppCompatActivity {
         btnAdminLogin.setOnClickListener(new LoginClickListener(mController));
         userView.setLayoutManager(new GridLayoutManager(this, 5));
         userView.setAdapter(mUserAdapter);
+
+        if(PermissionChecker
+                .checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) !=
+                PermissionChecker.PERMISSION_GRANTED){
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                this.requestPermissions(
+                        new String[]{
+                                Manifest.permission.WRITE_EXTERNAL_STORAGE
+                        },
+                        0
+                );
+            }
+        }
     }
 
     @Override

@@ -20,6 +20,7 @@ import rynkbit.tk.coffeelist.BuildConfig;
 import rynkbit.tk.coffeelist.db.contract.DbContract;
 import rynkbit.tk.coffeelist.db.entity.Admin;
 import rynkbit.tk.coffeelist.db.entity.Item;
+import rynkbit.tk.coffeelist.db.entity.Protocol;
 import rynkbit.tk.coffeelist.db.entity.User;
 
 
@@ -41,6 +42,7 @@ public class DbHelper extends OrmLiteSqliteOpenHelper{
             TableUtils.createTable(connectionSource, User.class);
             TableUtils.createTable(connectionSource, Item.class);
             TableUtils.createTable(connectionSource, Admin.class);
+            TableUtils.createTable(connectionSource, Protocol.class);
 
             List<User> testUsers = new LinkedList<>();
             List<Item> testItem = new LinkedList<>();
@@ -88,6 +90,7 @@ public class DbHelper extends OrmLiteSqliteOpenHelper{
             TableUtils.dropTable(connectionSource, User.class, true);
             TableUtils.dropTable(connectionSource, Item.class, true);
             TableUtils.dropTable(connectionSource, Admin.class, true);
+            TableUtils.dropTable(connectionSource, Protocol.class, true);
         } catch (SQLException e) {
             e.printStackTrace();
         }

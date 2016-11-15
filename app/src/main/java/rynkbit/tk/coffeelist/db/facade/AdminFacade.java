@@ -29,14 +29,15 @@ public class AdminFacade {
             Admin admin = new Admin();
             admin.setPassword(password);
 
-            if(adminDao.idExists(password)){
+            if(adminDao.queryForMatching(admin).size() > 0){
                 result =  true;
             }
-            OpenHelperManager.releaseHelper();
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
+        OpenHelperManager.releaseHelper();
         return result;
     }
 }

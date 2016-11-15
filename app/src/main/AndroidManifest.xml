@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="rynkbit.tk.coffeelist">
+    package="rynkbit.tk.coffeelist"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        tools:replace="android:theme"
+        >
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,6 +30,8 @@
             android:name=".admin.item.ManageItemsActivity"
             android:label="@string/title_activity_manage_items"
             android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:theme="@style/DirectoryChooserTheme"
+            android:name="net.rdrei.android.dirchooser.DirectoryChooserActivity" />
     </application>
-
 </manifest>

@@ -16,6 +16,8 @@ import rynkbit.tk.coffeelist.R;
 import rynkbit.tk.coffeelist.db.DbHelper;
 import rynkbit.tk.coffeelist.db.entity.Item;
 import rynkbit.tk.coffeelist.db.entity.User;
+import rynkbit.tk.coffeelist.db.facade.ItemsFacade;
+import rynkbit.tk.coffeelist.db.facade.UserFacade;
 
 /**
  * Created by michael on 11/13/16.
@@ -96,25 +98,32 @@ public class ItemController {
     }
 
     private void bookItem(Item item){
-        DbHelper dbHelper = OpenHelperManager.getHelper(mActivity, DbHelper.class);
-        try {
-            Dao<User, Integer> userDao =
-                    DaoManager.createDao(
-                            dbHelper.getConnectionSource(),
-                            User.class);
-            Dao<Item, Integer> itemDao =
-                    DaoManager.createDao(
-                            dbHelper.getConnectionSource(),
-                            Item.class);
+        mUser.setBalance(
+                mUser.getBalance() + item.getPrice()
+        );
+        item.setStock(item.getStock() - 1);
 
-            mUser.setBalance(mUser.getBalance() + item.getPrice());
-            item.setStock(item.getStock() - 1);
+        UserFacade.update(mActivity, mUser);
+        ItemsFacade.update(mActivity, item);
 
-            userDao.update(mUser);
-            itemDao.update(item);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+//        DbHelper dbHelper = OpenHelperManager.getHelper(mActivity, DbHelper.class);
+//        try {
+//            Dao<User, Integer> userDao =
+//                    DaoManager.createDao(
+//                            dbHelper.getConnectionSource(),
+//                            User.class);
+//            Dao<Item, Integer> itemDao =
+//                    DaoManager.createDao(
+//                            dbHelper.getConnectionSource(),
+//                            Item.class);
+//
+//            mUser.setBalance(mUser.getBalance() + item.getPrice());
+//
+//            userDao.update(mUser);
+//            itemDao.update(item);
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
     }
 
     public void showItemNotAvaiable(Item item) {
