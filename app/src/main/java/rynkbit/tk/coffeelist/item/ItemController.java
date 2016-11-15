@@ -35,13 +35,17 @@ public class ItemController {
     }
 
     public ItemAdapter getItemAdapter(){
-        refreshItemAdapter();
+        refreshItemAdapter(false);
         return mItemAdapter;
     }
 
-    public void refreshItemAdapter(){
-        mItemAdapter.setItems(getItems());
+    public void refreshItemAdapter(boolean reverted){
+        mItemAdapter.setItems(ItemsFacade.getItems(mActivity, reverted));
         mItemAdapter.notifyDataSetChanged();
+    }
+
+    public void refreshItemAdapter(){
+        refreshItemAdapter(false);
     }
 
     public List<Item> getItems(){

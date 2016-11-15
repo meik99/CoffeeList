@@ -56,7 +56,7 @@ public class ItemsFacade {
     }
 
     public static List<Item> getItems(Context context){
-        return getItems(context, false);
+        return getItems(context, true);
     }
 
     public static void remove(Context context, Item item) {

@@ -31,7 +31,7 @@ public class ManageItemsController {
     }
 
     public void refreshListAdapter(){
-        refreshListAdapter(false);
+        refreshListAdapter(true);
     }
 
     public RecyclerView.Adapter getListAdapter() {
