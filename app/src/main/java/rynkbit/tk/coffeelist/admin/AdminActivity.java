@@ -40,10 +40,13 @@ public class AdminActivity extends AppCompatActivity {
         Button btnManageItems = (Button) findViewById(R.id.btnAdminManageItems);
         Button btnChangePassword = (Button) findViewById(R.id.btnAdminChangePassword);
         btnSetProtocolPath = (Button) findViewById(R.id.btnAdminSetProtocolPath);
+        Button btnEditInvoices = (Button) findViewById(R.id.btnAdminInvoices);
 
         btnManageUser.setOnClickListener(new ManageUserClickListener());
         btnManageItems.setOnClickListener(new ManageItemsClickListener());
         btnChangePassword.setOnClickListener(new ChangePasswordListener());
+        btnEditInvoices.setOnClickListener(new EditInvoicesListener());
+
         btnSetProtocolPath.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

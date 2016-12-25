@@ -16,6 +16,7 @@ import rynkbit.tk.coffeelist.R;
 import rynkbit.tk.coffeelist.db.DbHelper;
 import rynkbit.tk.coffeelist.db.entity.Item;
 import rynkbit.tk.coffeelist.db.entity.User;
+import rynkbit.tk.coffeelist.db.facade.InvoiceFacade;
 import rynkbit.tk.coffeelist.db.facade.ItemsFacade;
 import rynkbit.tk.coffeelist.db.facade.UserFacade;
 
@@ -86,7 +87,7 @@ public class ItemController {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         bookItem(item);
-                        refreshItemAdapter();
+                        mActivity.finish();
                     }
                 }
         );
@@ -103,10 +104,11 @@ public class ItemController {
     }
 
     private void bookItem(Item item){
-        mUser.setBalance(
-                mUser.getBalance() + item.getPrice()
-        );
-        item.setStock(item.getStock() - 1);
+        InvoiceFacade.book(mActivity, mUser, item);
+//        mUser.setBalance(
+//                mUser.getBalance() + item.getPrice()
+//        );
+//        item.setStock(item.getStock() - 1);
 
         UserFacade.update(mActivity, mUser);
         ItemsFacade.update(mActivity, item);

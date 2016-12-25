@@ -10,7 +10,7 @@ import com.j256.ormlite.table.DatabaseTable;
  * Created by michael on 13/11/16.
  */
 @DatabaseTable
-public class User implements Parcelable{
+public class User implements Parcelable, Comparable{
     @DatabaseField(generatedId = true)
     private int id;
     @DatabaseField(canBeNull = false)
@@ -76,4 +76,13 @@ public class User implements Parcelable{
                     return new User[i];
                 }
             };
+
+    @Override
+    public int compareTo(Object o) {
+        if(o instanceof User){
+            User u = (User)o;
+            return this.getName().compareTo(u.getName());
+        }
+        throw new IllegalArgumentException("Object not of type User");
+    }
 }

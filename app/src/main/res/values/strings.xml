@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">CoffeeList</string>
+    <string name="app_name">Tally Sheet</string>
     <string name="user_balance">Balance: %1$.2f€</string>
     <string name="item_price">Price: %1$.2f€</string>
     <string name="item_stock">Stock: %1$d</string>
@@ -29,5 +29,14 @@
     <string name="change_stock">Change Stock</string>
     <string name="choose_directory">Choose Directory</string>
     <string name="password">Password</string>
+    <string name="admin_editInvoices">Edit Purchases</string>
+    <string name="tapToDelete">Tap to delete</string>
+    <string name="bought">bought</string>
+    <string name="fors">for</string>
+    <string name="invoice_delete">Cancel Purchase</string>
+    <string name="really_delete_invoice">Cancel purchase of %1$s for %2$.2f€ by %3$s?</string>
+    <string name="reverted">Canceled purchase of %1$s for %2$.2f€ by %3$s</string>
+    <string name="invoice_reverted_delete">Restore purchase</string>
+    <string name="really_delete_invoice_reverted">Restore purchase of %1$s for %2$.2f€ by %3$s?</string>
 
 </resources>

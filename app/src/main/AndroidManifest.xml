@@ -30,9 +30,11 @@
         <activity
             android:name=".admin.item.ManageItemsActivity"
             android:label="@string/title_activity_manage_items"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:theme="@style/DirectoryChooserTheme"
-            android:name="net.rdrei.android.dirchooser.DirectoryChooserActivity" />
+            android:name="net.rdrei.android.dirchooser.DirectoryChooserActivity"
+            android:theme="@style/DirectoryChooserTheme" />
+        <activity android:name=".admin.invoice.InvoiceActivity"></activity>
     </application>
+
 </manifest>

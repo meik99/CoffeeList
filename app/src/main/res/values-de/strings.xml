@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Kaffeeliste</string>
+    <string name="app_name">Stricherlliste</string>
     <string name="user_balance">Betrag: %1$.2f€</string>
     <string name="item_stock">Lagernd: %1$d</string>
     <string name="item_price">Preis: %1$.2f€</string>
@@ -14,7 +14,7 @@
     <string name="admin_credentialsInvalid">Falsches Password</string>
     <string name="admin_manageItems">Produkte verwalten</string>
     <string name="admin_manageUser">Benutzer verwalten</string>
-    <string name="admin_setProtocolPath">Backup-Pfad setzen</string>
+    <string name="admin_setProtocolPath">Protokoll-Pfad setzen</string>
     <string name="cancel">Abbrechen</string>
     <string name="confirm_even_user">Benutzer %1$s abrechnen?</string>
     <string name="evenUser">Abrechnen</string>
@@ -26,8 +26,17 @@
     <string name="change_price">Preis ändern</string>
     <string name="change_stock">Gelagerte Menge ändern</string>
     <string name="choose_directory">Speicherort wählen</string>
-    <string name="item_detail">Preis: %1$.2f    Stock:%2$d</string>
+    <string name="item_detail">Preis: %1$.2f    Lagernd:%2$d</string>
     <string name="remove_item_confirmation">Produkt %1$s wirklich entfernen?</string>
     <string name="title_activity_manage_items">Produktverwaltung</string>
     <string name="password">Passwort</string>
+    <string name="admin_editInvoices">Käufe stornieren</string>
+    <string name="bought">kaufte</string>
+    <string name="fors">für</string>
+    <string name="invoice_delete">Kauf stonieren</string>
+    <string name="invoice_reverted_delete">Kauf wiederherstellen</string>
+    <string name="really_delete_invoice">Storniere Kauf von %1$s für %2$.2f von %3$s?</string>
+    <string name="really_delete_invoice_reverted">Kauf von %1$s für %2$.2f von %3$s wiederherstellen?</string>
+    <string name="reverted">Kauf von %1$s für %2$.2f von %3$s storniert</string>
+    <string name="tapToDelete">Tippe zum Löschen</string>
 </resources>

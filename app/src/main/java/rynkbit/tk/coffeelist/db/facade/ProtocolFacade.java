@@ -72,25 +72,39 @@ public class ProtocolFacade {
 
         try{
             File protocol = new File(path);
+            boolean existed = protocol.exists();
             FileWriter fw = new FileWriter(protocol, true);
-
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
             Date date = new Date();
             String dateString = sdf.format(date);
+
+            if(existed == false){
+                fw.append("Date;User ID;User Name;User Balance Old;User Balance New;" +
+                        "Item ID;Item Name;Item Price;Item Stock Old;Item Stock New");
+                addNewLine(fw);
+            }
 
             fw
                 .append(dateString)
                 .append(";")
                 .append(line);
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                fw.append(System.lineSeparator());
-            }else{
-                fw.append("\n");
-            }
+            addNewLine(fw);
             fw.close();
         } catch (Exception e) {
             //Throws error when protocol path not set.
             //This may be ignored
+        }
+    }
+
+    private static void addNewLine(FileWriter fileWriter){
+        try{
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                fileWriter.append(System.lineSeparator());
+            }else{
+                fileWriter.append("\n");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

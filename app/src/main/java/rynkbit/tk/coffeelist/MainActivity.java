@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
 
         mUserAdapter.setUsers(mController.getUsers());
         btnAdminLogin.setOnClickListener(new LoginClickListener(mController));
-        userView.setLayoutManager(new GridLayoutManager(this, 5));
+        userView.setLayoutManager(new GridLayoutManager(this, Constants.GRID_COLUMNS));
         userView.setAdapter(mUserAdapter);
     }
 

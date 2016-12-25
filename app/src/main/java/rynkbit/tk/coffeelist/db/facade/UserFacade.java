@@ -8,6 +8,7 @@ import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
 
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
@@ -18,6 +19,7 @@ import rynkbit.tk.coffeelist.db.entity.Item;
 import rynkbit.tk.coffeelist.db.entity.Protocol;
 import rynkbit.tk.coffeelist.db.entity.User;
 import rynkbit.tk.coffeelist.item.ItemActivity;
+import rynkbit.tk.coffeelist.utils.Sort;
 
 /**
  * Created by michael on 11/13/16.
@@ -38,6 +40,9 @@ public class UserFacade {
         try {
 
             result = userDao.queryForAll();
+
+            result = Sort.bubble(result);
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
