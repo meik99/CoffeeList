@@ -10,6 +10,7 @@ import com.j256.ormlite.dao.DaoManager;
 import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Locale;
 
 import rynkbit.tk.coffeelist.admin.user.ManageUserActivity;
 import rynkbit.tk.coffeelist.db.DbHelper;
@@ -102,15 +103,11 @@ public class UserFacade {
             userDao.update(user);
 
             StringBuilder builder = new StringBuilder();
-            builder
-                    .append("User evened;")
-                    .append(user.getId())
-                    .append(";")
-                    .append(user.getName())
-                    .append(";")
-                    .append(user.getBalance())
-                    .append(";")
-                    .append(oldBalance);
+            builder.append(
+                    String.format(Locale.ENGLISH,
+                            "User Evened;%1$d;%2$s;%3$.2f;%4$.2f",
+                            user.getId(), user.getName(), user.getBalance(), oldBalance)
+            );
 
             ProtocolFacade.writeLine(activity, builder.toString());
         }catch (SQLException e){
@@ -134,19 +131,14 @@ public class UserFacade {
             userDao.update(user);
 
             StringBuilder builder = new StringBuilder();
-            builder.append("Updated user:")
-                    .append(";")
-                    .append(oldUser.getId())
-                    .append(";")
-                    .append(oldUser.getName())
-                    .append(";")
-                    .append(oldUser.getBalance())
-                    .append(";")
-                    .append("to")
-                    .append(";")
-                    .append(user.getName())
-                    .append(";")
-                    .append(user.getBalance());
+            builder.append(
+                    String.format(
+                            Locale.ENGLISH,
+                            "Updated User;%1$d;%2$s;%3$.2f;to;%4$s;%5$.2f",
+                            oldUser.getId(), oldUser.getName(), oldUser.getBalance(),
+                            user.getName(), user.getBalance())
+            );
+
             ProtocolFacade.writeLine(context, builder.toString());
         } catch (SQLException e) {
             e.printStackTrace();

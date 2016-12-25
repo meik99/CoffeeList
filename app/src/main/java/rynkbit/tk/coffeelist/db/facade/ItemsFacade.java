@@ -7,8 +7,11 @@ import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
 
 import java.sql.SQLException;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Locale;
 
 import rynkbit.tk.coffeelist.admin.item.ManageItemsActivity;
 import rynkbit.tk.coffeelist.db.DbHelper;
@@ -79,23 +82,11 @@ public class ItemsFacade {
 
             itemDao.update(item);
 
-            builder.append("Updated item")
-                    .append(";")
-                    .append(oldItem.getId())
-                    .append(";")
-                    .append(oldItem.getName())
-                    .append(";")
-                    .append(oldItem.getStock())
-                    .append(";")
-                    .append(oldItem.getPrice())
-                    .append(";")
-                    .append("to")
-                    .append(";")
-                    .append(item.getName())
-                    .append(";")
-                    .append(item.getStock())
-                    .append(";")
-                    .append(item.getPrice());
+            builder.append(
+                    String.format(Locale.ENGLISH, "Update Item;%1$d;%2$s;%3$d;%4$.2f;to;%5$s;%6$d;%7$.2f",
+                            oldItem.getId(), oldItem.getName(), oldItem.getStock(), oldItem.getPrice(),
+                            item.getName(), item.getStock(), item.getPrice())
+            );
 
             ProtocolFacade.writeLine(context, builder.toString());
         } catch (SQLException e) {

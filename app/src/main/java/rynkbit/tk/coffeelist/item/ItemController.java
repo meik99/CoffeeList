@@ -32,6 +32,7 @@ public class ItemController {
         mActivity = activity;
         mUser = mActivity.getIntent().getParcelableExtra("user");
         mItemAdapter = new ItemAdapter(this, mUser);
+        mActivity.setTitle(mActivity.getTitle() + String.format(" - %s", mUser.getName()));
     }
 
     public ItemAdapter getItemAdapter(){

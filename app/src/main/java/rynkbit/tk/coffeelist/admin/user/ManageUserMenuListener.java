@@ -17,6 +17,7 @@ import rynkbit.tk.coffeelist.db.facade.UserFacade;
 public class ManageUserMenuListener implements PopupMenu.OnMenuItemClickListener {
     private User mUser;
     private ManageUserController mManageUserController;
+
     public ManageUserMenuListener(ManageUserController controller, User user){
         mUser = user;
         mManageUserController = controller;

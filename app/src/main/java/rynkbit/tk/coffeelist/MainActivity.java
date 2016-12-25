@@ -30,20 +30,6 @@ public class MainActivity extends AppCompatActivity {
         btnAdminLogin.setOnClickListener(new LoginClickListener(mController));
         userView.setLayoutManager(new GridLayoutManager(this, 5));
         userView.setAdapter(mUserAdapter);
-
-        if(PermissionChecker
-                .checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) !=
-                PermissionChecker.PERMISSION_GRANTED){
-
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                this.requestPermissions(
-                        new String[]{
-                                Manifest.permission.WRITE_EXTERNAL_STORAGE
-                        },
-                        0
-                );
-            }
-        }
     }
 
     @Override

@@ -12,6 +12,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import rynkbit.tk.coffeelist.db.DbHelper;
 import rynkbit.tk.coffeelist.db.entity.Protocol;
@@ -72,7 +74,14 @@ public class ProtocolFacade {
             File protocol = new File(path);
             FileWriter fw = new FileWriter(protocol, true);
 
-            fw.append(line);
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+            Date date = new Date();
+            String dateString = sdf.format(date);
+
+            fw
+                .append(dateString)
+                .append(";")
+                .append(line);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
                 fw.append(System.lineSeparator());
             }else{

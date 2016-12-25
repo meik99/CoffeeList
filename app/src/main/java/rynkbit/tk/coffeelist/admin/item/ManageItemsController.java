@@ -46,7 +46,7 @@ public class ManageItemsController {
                         .inflate(R.layout.item_change_number, null, false);
         final EditText txtNumber = (EditText) view.findViewById(R.id.txtItemNumber);
         txtNumber.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
-        txtNumber.setText(String.valueOf(item.getPrice()));
+        txtNumber.setText(new String());
 
         builder.setTitle(R.string.change_price);
         builder.setView(view);
@@ -78,7 +78,7 @@ public class ManageItemsController {
                         .inflate(R.layout.item_change_number, null, false);
         final EditText txtNumber = (EditText) view.findViewById(R.id.txtItemNumber);
         txtNumber.setInputType(InputType.TYPE_CLASS_NUMBER);
-        txtNumber.setText(String.valueOf(item.getStock()));
+        txtNumber.setText(new String());
 
         builder.setTitle(R.string.change_stock);
         builder.setView(view);

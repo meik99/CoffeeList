@@ -1,6 +1,14 @@
 package rynkbit.tk.coffeelist.admin;
 
+import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
+import android.media.audiofx.EnvironmentalReverb;
+import android.os.Build;
+import android.os.Environment;
+import android.os.storage.StorageManager;
+import android.support.annotation.NonNull;
+import android.support.v4.content.PermissionChecker;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -9,6 +17,8 @@ import android.widget.Button;
 import net.rdrei.android.dirchooser.DirectoryChooserActivity;
 import net.rdrei.android.dirchooser.DirectoryChooserConfig;
 
+import java.security.Permission;
+
 import rynkbit.tk.coffeelist.MainActivity;
 import rynkbit.tk.coffeelist.R;
 import rynkbit.tk.coffeelist.db.facade.ProtocolFacade;
@@ -16,6 +26,10 @@ import rynkbit.tk.coffeelist.db.facade.ProtocolFacade;
 public class AdminActivity extends AppCompatActivity {
 
     private static final int REQUEST_DIRECTORY = 1;
+    private static final int REQUEST_PERMISSIONS = 2;
+
+
+    private Button btnSetProtocolPath;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +39,7 @@ public class AdminActivity extends AppCompatActivity {
         Button btnManageUser = (Button) findViewById(R.id.btnAdminManageUser);
         Button btnManageItems = (Button) findViewById(R.id.btnAdminManageItems);
         Button btnChangePassword = (Button) findViewById(R.id.btnAdminChangePassword);
-        Button btnSetProtocolPath = (Button) findViewById(R.id.btnAdminSetProtocolPath);
+        btnSetProtocolPath = (Button) findViewById(R.id.btnAdminSetProtocolPath);
 
         btnManageUser.setOnClickListener(new ManageUserClickListener());
         btnManageItems.setOnClickListener(new ManageItemsClickListener());
@@ -33,22 +47,54 @@ public class AdminActivity extends AppCompatActivity {
         btnSetProtocolPath.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final Intent chooserIntent = new Intent(
-                        AdminActivity.this,
-                        DirectoryChooserActivity.class);
+                boolean hasPermissions = false;
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if(getApplicationContext()
+                            .checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) ==
+                            PermissionChecker.PERMISSION_GRANTED) {
+                        hasPermissions = true;
+                    }else{
+                        AdminActivity.this.requestPermissions(
+                                new String[]{
+                                        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                                        Manifest.permission.READ_EXTERNAL_STORAGE
+                                },
+                                REQUEST_PERMISSIONS
+                        );
+                    }
+                }else{
+                    hasPermissions = true;
+                }
 
-                final DirectoryChooserConfig config = DirectoryChooserConfig.builder()
-                        .newDirectoryName(AdminActivity.this.getString(R.string.choose_directory))
-                        .allowReadOnlyDirectory(false)
-                        .allowNewDirectoryNameModification(true)
-                        .build();
+                if(hasPermissions == true) {
+                    final Intent chooserIntent = new Intent(
+                            AdminActivity.this,
+                            DirectoryChooserActivity.class);
 
-                chooserIntent.putExtra(DirectoryChooserActivity.EXTRA_CONFIG, config);
+                    final DirectoryChooserConfig config = DirectoryChooserConfig.builder()
+                            .newDirectoryName(AdminActivity.this.getString(R.string.choose_directory))
+                            .allowReadOnlyDirectory(true)
+                            .allowNewDirectoryNameModification(true)
+                            .initialDirectory(Environment.getExternalStorageDirectory().getPath())
+                            .build();
 
-                // REQUEST_DIRECTORY is a constant integer to identify the request, e.g. 0
-                AdminActivity.this.startActivityForResult(chooserIntent, REQUEST_DIRECTORY);
+                    chooserIntent.putExtra(DirectoryChooserActivity.EXTRA_CONFIG, config);
+
+                    // REQUEST_DIRECTORY is a constant integer to identify the request, e.g. 0
+                    AdminActivity.this.startActivityForResult(chooserIntent, REQUEST_DIRECTORY);
+                }
             }
         });
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if(requestCode == REQUEST_PERMISSIONS){
+            if(grantResults[0] == PermissionChecker.PERMISSION_GRANTED &&
+                    grantResults[1] == PermissionChecker.PERMISSION_GRANTED){
+                btnSetProtocolPath.performClick();
+            }
+        }
     }
 
     @Override
