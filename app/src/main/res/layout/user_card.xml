@@ -18,12 +18,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/txtUsername"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline"/>
+            android:text="Detlef Mayrhofer"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/txtUserbalance"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"/>
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"
+            android:text="Betrag: 0.00€"/>
     </LinearLayout>
 </android.support.v7.widget.CardView>
