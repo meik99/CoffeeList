@@ -9,7 +9,7 @@ import com.j256.ormlite.table.DatabaseTable;
  */
 @DatabaseTable
 public class Admin {
-    public static final String ADMIN_STANDARD_PASSWORD = "admin1234";
+    public static final String ADMIN_STANDARD_PASSWORD = "";
 
     @DatabaseField(dataType = DataType.STRING)
     private String password;

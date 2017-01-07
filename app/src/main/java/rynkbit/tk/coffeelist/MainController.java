@@ -39,39 +39,45 @@ public class MainController {
     }
 
     public void askCredentials() {
-        final Dialog askCredentialsDialog = new Dialog(mActivity);
-        final View dialogView = View.inflate(mActivity, R.layout.admin_login_dialog, null);
+        if(AdminFacade.areCredentialsValid(mActivity, "")){
+            Intent adminActivityIntent = new Intent(mActivity, AdminActivity.class);
+            mActivity.startActivity(adminActivityIntent);
+        }else {
 
-        askCredentialsDialog.setContentView(dialogView);
-        askCredentialsDialog.setTitle(R.string.admin_login);
+            final Dialog askCredentialsDialog = new Dialog(mActivity);
+            final View dialogView = View.inflate(mActivity, R.layout.admin_login_dialog, null);
 
-        Button btnAdminConfirm = (Button) dialogView.findViewById(R.id.btnAdminConfirm);
-        Button btnAdminCancel = (Button) dialogView.findViewById(R.id.btnAdminCancel);
+            askCredentialsDialog.setContentView(dialogView);
+            askCredentialsDialog.setTitle(R.string.admin_login);
 
-        btnAdminCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                askCredentialsDialog.dismiss();
-            }
-        });
-        btnAdminConfirm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(credentialsValid(dialogView)){
-                    Intent adminActivityIntent = new Intent(mActivity, AdminActivity.class);
-                    mActivity.startActivity(adminActivityIntent);
-                }else{
-                    Toast.makeText(
-                            mActivity,
-                            R.string.admin_credentialsInvalid,
-                            Toast.LENGTH_LONG
-                    ).show();
+            Button btnAdminConfirm = (Button) dialogView.findViewById(R.id.btnAdminConfirm);
+            Button btnAdminCancel = (Button) dialogView.findViewById(R.id.btnAdminCancel);
+
+            btnAdminCancel.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    askCredentialsDialog.dismiss();
                 }
-                askCredentialsDialog.dismiss();
-            }
-        });
+            });
+            btnAdminConfirm.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (credentialsValid(dialogView)) {
+                        Intent adminActivityIntent = new Intent(mActivity, AdminActivity.class);
+                        mActivity.startActivity(adminActivityIntent);
+                    } else {
+                        Toast.makeText(
+                                mActivity,
+                                R.string.admin_credentialsInvalid,
+                                Toast.LENGTH_LONG
+                        ).show();
+                    }
+                    askCredentialsDialog.dismiss();
+                }
+            });
 
-        askCredentialsDialog.show();
+            askCredentialsDialog.show();
+        }
     }
 
     private boolean credentialsValid(View dialogView) {
