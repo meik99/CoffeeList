@@ -12,11 +12,15 @@ import android.text.Layout;
 import android.view.View;
 import android.widget.Button;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+
 import java.security.Permission;
 
 public class MainActivity extends AppCompatActivity {
     private MainController mController;
     private UserAdapter mUserAdapter;
+    private AdView mAdView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +28,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         mController = new MainController(this);
 
+        mAdView = (AdView) findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
 
         RecyclerView userView = (RecyclerView) findViewById(R.id.userView);
         Button btnAdminLogin = (Button) findViewById(R.id.btnAdminLogin);
