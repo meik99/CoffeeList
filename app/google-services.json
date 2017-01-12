@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1077244387600",
+    "firebase_url": "https://coffeelist-794e9.firebaseio.com",
+    "project_id": "coffeelist-794e9",
+    "storage_bucket": "coffeelist-794e9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1077244387600:android:0ad30493270086ae",
+        "android_client_info": {
+          "package_name": "rynkbit.tk.coffeelist"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1077244387600-6gtpo2v23jg9qadoon44tg8jm2ppa8fb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "rynkbit.tk.coffeelist",
+            "certificate_hash": "C913004320A359D14B5F362A4D8C07DA6F207654"
+          }
+        },
+        {
+          "client_id": "1077244387600-6af80ol0l086dgj4fkd17od43g6d6dd7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyChpP-TYpUANvU76RahcoO1hoj0sA8KTME"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1077244387600-6af80ol0l086dgj4fkd17od43g6d6dd7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
