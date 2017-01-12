@@ -22,12 +22,22 @@
         ads:adUnitId="@string/banner_ad_unit_id">
     </com.google.android.gms.ads.AdView>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/userView"
+    <!--<android.support.v7.widget.RecyclerView-->
+        <!--android:id="@+id/userView"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="0dp"-->
+        <!--android:layout_weight="1"-->
+        <!--/>-->
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        />
+    >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/containerUserCard"></RelativeLayout>
+    </ScrollView>
 
     <Button
         style="@style/Base.Widget.AppCompat.Button.Colored"

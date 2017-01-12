@@ -30,18 +30,31 @@
 
             </android.support.v7.widget.Toolbar>
 
-            <android.support.design.widget.TabLayout
-                android:id="@+id/tabs"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
         </android.support.design.widget.AppBarLayout>
 
-        <android.support.v4.view.ViewPager
-            android:id="@+id/container"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+            android:orientation="horizontal"
+            >
+            <fragment
+                android:id="@+id/user_management_fragement_container"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:name="rynkbit.tk.coffeelist.admin.UserManagementFragment"
+                tools:layout="@layout/fragment_admin_user_management"></fragment>
+
+            <fragment
+                android:id="@+id/settings_management_fragement_container"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:name="rynkbit.tk.coffeelist.admin.SettingsManagementFragment"
+                tools:layout="@layout/fragment_settings_management"></fragment>
+
+        </LinearLayout>
+
     </LinearLayout>
 
 

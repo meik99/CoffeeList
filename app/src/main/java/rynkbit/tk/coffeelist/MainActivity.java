@@ -9,9 +9,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.text.Layout;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
@@ -23,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     private MainController mController;
     private UserAdapter mUserAdapter;
     private AdView mAdView;
+    private RelativeLayout mRelativeLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,15 +38,18 @@ public class MainActivity extends AppCompatActivity {
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
 
+//        RecyclerView userView = (RecyclerView) findViewById(R.id.userView);
 
-        RecyclerView userView = (RecyclerView) findViewById(R.id.userView);
+        mRelativeLayout = (RelativeLayout) findViewById(R.id.containerUserCard);
         Button btnAdminLogin = (Button) findViewById(R.id.btnAdminLogin);
-        mUserAdapter = new UserAdapter();
 
-        mUserAdapter.setUsers(mController.getUsers());
+        mController.addUserToLayout(mRelativeLayout);
+
+//        mUserAdapter = new UserAdapter();
+//        mUserAdapter.setUsers(mController.getUsers());
         btnAdminLogin.setOnClickListener(new LoginClickListener(mController));
-        userView.setLayoutManager(new GridLayoutManager(this, Constants.GRID_COLUMNS));
-        userView.setAdapter(mUserAdapter);
+//        userView.setLayoutManager(new );
+//        userView.setAdapter(mUserAdapter);
 
     }
 
@@ -51,6 +57,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        mUserAdapter.setUsers(mController.getUsers());
+        mController.addUserToLayout(mRelativeLayout);
     }
 }
