@@ -22,7 +22,7 @@ import java.security.Permission;
 import rynkbit.tk.coffeelist.MainActivity;
 import rynkbit.tk.coffeelist.R;
 import rynkbit.tk.coffeelist.db.facade.ProtocolFacade;
-
+@Deprecated
 public class AdminActivity extends AppCompatActivity {
 
     private static final int REQUEST_DIRECTORY = 1;

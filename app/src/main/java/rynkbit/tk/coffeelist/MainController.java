@@ -17,6 +17,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import rynkbit.tk.coffeelist.admin.AdminActivity;
+import rynkbit.tk.coffeelist.admin.AdminExtendedActivity;
 import rynkbit.tk.coffeelist.db.DbHelper;
 import rynkbit.tk.coffeelist.db.entity.Admin;
 import rynkbit.tk.coffeelist.db.entity.User;
@@ -40,8 +41,7 @@ public class MainController {
 
     public void askCredentials() {
         if(AdminFacade.areCredentialsValid(mActivity, "")){
-            Intent adminActivityIntent = new Intent(mActivity, AdminActivity.class);
-            mActivity.startActivity(adminActivityIntent);
+            startAdminActivity();
         }else {
 
             final Dialog askCredentialsDialog = new Dialog(mActivity);
@@ -63,8 +63,7 @@ public class MainController {
                 @Override
                 public void onClick(View view) {
                     if (credentialsValid(dialogView)) {
-                        Intent adminActivityIntent = new Intent(mActivity, AdminActivity.class);
-                        mActivity.startActivity(adminActivityIntent);
+                        startAdminActivity();
                     } else {
                         Toast.makeText(
                                 mActivity,
@@ -78,6 +77,11 @@ public class MainController {
 
             askCredentialsDialog.show();
         }
+    }
+
+    private void startAdminActivity(){
+        Intent adminActivityIntent = new Intent(mActivity, AdminExtendedActivity.class);
+        mActivity.startActivity(adminActivityIntent);
     }
 
     private boolean credentialsValid(View dialogView) {
