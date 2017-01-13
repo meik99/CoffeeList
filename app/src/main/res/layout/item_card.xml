@@ -10,8 +10,8 @@
 
     <LinearLayout
         android:orientation="vertical"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:padding="4dp">
         <TextView
             android:id="@+id/txtItemName"
@@ -22,12 +22,12 @@
 
         <TextView
             android:id="@+id/txtItemPrice"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"/>
         <TextView
             android:id="@+id/txtItemStock"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"/>
 
