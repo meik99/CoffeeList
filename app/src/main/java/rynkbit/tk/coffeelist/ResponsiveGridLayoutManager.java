@@ -7,7 +7,7 @@ import android.support.v7.widget.RecyclerView;
 /**
  * Created by mrynkiewicz on 1/12/17.
  */
-
+@Deprecated
 public class ResponsiveGridLayoutManager extends GridLayoutManager {
     private int itemMinWidth;
 

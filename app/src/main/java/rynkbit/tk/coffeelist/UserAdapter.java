@@ -1,13 +1,18 @@
 package rynkbit.tk.coffeelist;
 
-import android.support.v7.widget.ListPopupWindow;
-import android.support.v7.widget.RecyclerView;
+import android.content.Context;
+import android.util.DisplayMetrics;
+import android.view.Display;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.widget.AbsListView;
 import android.widget.BaseAdapter;
+import android.widget.Button;
+import android.widget.FrameLayout;
+import android.widget.GridView;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -18,58 +23,44 @@ import rynkbit.tk.coffeelist.db.entity.User;
  * Created by michael on 13/11/16.
  */
 
-public class UserAdapter extends RecyclerView.Adapter{
-    List<User> users = null;
+public class UserAdapter extends BaseAdapter{
+    private List<User> mUsers;
+    private GridView mUserGrid;
 
-    public UserAdapter(){
-        users = new LinkedList<>();
+    public UserAdapter(GridView userGrid){
+        mUsers = new LinkedList<>();
+        mUserGrid = userGrid;
     }
 
-    public void setUsers(List<User> users) {
-        this.users = users;
+    public void setUser(List<User> mUsers) {
+        this.mUsers = mUsers;
         this.notifyDataSetChanged();
     }
 
-    public class UserCard extends RecyclerView.ViewHolder{
-        public TextView txtUsername;
-        public TextView txtUserbalance;
-        public View view;
-
-        public UserCard(View itemView) {
-            super(itemView);
-
-            txtUsername = (TextView) itemView.findViewById(R.id.txtUsername);
-            txtUserbalance = (TextView) itemView.findViewById(R.id.txtUserbalance);
-            view = itemView;
-        }
+    @Override
+    public int getCount() {
+        return mUsers.size();
     }
 
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View userCard = View.inflate(parent.getContext(), R.layout.user_card, null);
-        UserCard userCardHolder = new UserCard(userCard);
-        return userCardHolder;
+    public Object getItem(int position) {
+        return mUsers.get(position);
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        User user = users.get(position);
-        UserCard userCard = (UserCard) holder;
-
-        userCard.view.setOnClickListener(
-                new UserClickListener(user)
-        );
-        userCard.txtUsername.setText(user.getName());
-        userCard.txtUserbalance.setText(
-                String.format(
-                        userCard.txtUserbalance.getContext().getString(R.string.user_balance),
-                        user.getBalance()
-                )
-        );
+    public long getItemId(int position) {
+        return mUsers.get(position).getId();
     }
 
     @Override
-    public int getItemCount() {
-        return users.size();
+    public View getView(int position, View convertView, ViewGroup parent) {
+        User user = mUsers.get(position);
+        UserCard userCard = new UserCard(user);
+        return userCard.createView(parent.getContext(), parent);
     }
+
+//    @Override
+//    public boolean isEmpty() {
+//        return mUsers.size() <= 0;
+//    }
 }

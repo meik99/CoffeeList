@@ -3,10 +3,15 @@ package rynkbit.tk.coffeelist;
 import android.accounts.Account;
 import android.app.Dialog;
 import android.content.Intent;
+import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.CoordinatorLayout;
+import android.text.Layout;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.GridLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,6 +23,7 @@ import com.j256.ormlite.dao.DaoManager;
 import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.concurrent.locks.ReadWriteLock;
 
 import rynkbit.tk.coffeelist.admin.AdminActivity;
 import rynkbit.tk.coffeelist.admin.AdminExtendedActivity;
@@ -93,32 +99,5 @@ public class MainController {
                 .toString();
 
         return AdminFacade.areCredentialsValid(mActivity, password);
-    }
-
-    public void addUserToLayout(RelativeLayout relativeLayout) {
-        List<User> userList = UserFacade.getUsers(mActivity);
-
-        for (User user : userList) {
-            View view = mActivity
-                    .getLayoutInflater()
-                    .inflate(R.layout.user_card, relativeLayout, false);
-            TextView username = (TextView) view.findViewById(R.id.txtUsername);
-            TextView balance = (TextView) view.findViewById(R.id.txtUserbalance);
-
-            username.setText(
-                        user.getName()
-            );
-            username.setPadding(50, 50, 50, 0);
-            balance.setText(
-                    mActivity.getString(R.string.user_balance, user.getBalance())
-            );
-            balance.setPadding(50, 0, 50, 50);
-            view.setOnClickListener(new UserClickListener(user));
-            view.setLayoutParams(
-                    new RelativeLayout.LayoutParams(
-                            ViewGroup.LayoutParams.WRAP_CONTENT,
-                            ViewGroup.LayoutParams.WRAP_CONTENT));
-            relativeLayout.addView(view);
-        }
     }
 }

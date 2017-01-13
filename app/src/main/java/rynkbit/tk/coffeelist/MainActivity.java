@@ -1,31 +1,21 @@
 package rynkbit.tk.coffeelist;
 
-import android.Manifest;
-import android.content.res.Resources;
-import android.os.Build;
-import android.support.design.widget.AppBarLayout;
-import android.support.v4.content.PermissionChecker;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.text.Layout;
-import android.view.View;
 import android.widget.Button;
-import android.widget.RelativeLayout;
+import android.widget.GridView;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
-import com.google.firebase.analytics.FirebaseAnalytics;
-
-import java.security.Permission;
 
 public class MainActivity extends AppCompatActivity {
     private MainController mController;
     private UserAdapter mUserAdapter;
+    private UserRecyclerViewAdapter mUserRecyclerViewAdapter;
     private AdView mAdView;
-    private RelativeLayout mRelativeLayout;
+    private GridView mUserGrid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,15 +28,24 @@ public class MainActivity extends AppCompatActivity {
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
 
-//        RecyclerView userView = (RecyclerView) findViewById(R.id.userView);
+        mUserRecyclerViewAdapter = new UserRecyclerViewAdapter();
 
-        mRelativeLayout = (RelativeLayout) findViewById(R.id.containerUserCard);
+        RecyclerView userView = (RecyclerView) findViewById(R.id.viewUserCardContainer);
+        userView.setLayoutManager(
+                new StaggeredGridLayoutManager(
+                        getResources().getInteger(R.integer.col_count),
+                        StaggeredGridLayoutManager.VERTICAL));
+        userView.setAdapter(mUserRecyclerViewAdapter);
+
+//
+//        mController.addUserToLayout(mUserGrid);
+
+////        mUserGrid = (GridView) findViewById(R.id.containerUserCard);
+//        mUserAdapter = new UserAdapter(mUserGrid);
+//        mUserGrid.setAdapter(mUserAdapter);
+//        mUserAdapter.setUser(mController.getUsers());
+
         Button btnAdminLogin = (Button) findViewById(R.id.btnAdminLogin);
-
-        mController.addUserToLayout(mRelativeLayout);
-
-//        mUserAdapter = new UserAdapter();
-//        mUserAdapter.setUsers(mController.getUsers());
         btnAdminLogin.setOnClickListener(new LoginClickListener(mController));
 //        userView.setLayoutManager(new );
 //        userView.setAdapter(mUserAdapter);
@@ -56,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-
-        mController.addUserToLayout(mRelativeLayout);
+//        mUserAdapter.setUser(mController.getUsers());
+        mUserRecyclerViewAdapter.setUsers(mController.getUsers());
     }
 }

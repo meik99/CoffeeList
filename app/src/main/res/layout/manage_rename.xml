@@ -10,5 +10,5 @@
         android:hint="Name"
         android:ems="10"
         android:id="@+id/txtRenameName"
-        android:maxLength="19"/>
+        android:maxLength="18"/>
 </LinearLayout>

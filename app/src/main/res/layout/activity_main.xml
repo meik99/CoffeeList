@@ -28,17 +28,21 @@
         <!--android:layout_height="0dp"-->
         <!--android:layout_weight="1"-->
         <!--/>-->
-    <ScrollView
+
+        <!--<GridView-->
+            <!--android:numColumns="auto_fit"-->
+            <!--android:columnWidth="170dp"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="0dp"-->
+            <!--android:layout_weight="1"-->
+
+            <!--android:stretchMode="columnWidth"-->
+            <!--android:id="@+id/containerUserCard"/>-->
+    <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-    >
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/containerUserCard"></RelativeLayout>
-    </ScrollView>
-
+        android:id="@+id/viewUserCardContainer"/>
     <Button
         style="@style/Base.Widget.AppCompat.Button.Colored"
         android:id="@+id/btnAdminLogin"
