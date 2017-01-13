@@ -27,9 +27,9 @@ public class MainActivity extends AppCompatActivity {
         mController = new MainController(this);
 
         //load app
-        mAdView = (AdView) findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
+//        mAdView = (AdView) findViewById(R.id.adView);
+//        AdRequest adRequest = new AdRequest.Builder().build();
+//        mAdView.loadAd(adRequest);
 
         mUserRecyclerViewAdapter = new UserRecyclerViewAdapter();
 
