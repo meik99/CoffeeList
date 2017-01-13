@@ -1,12 +1,14 @@
 package rynkbit.tk.coffeelist.admin;
 
 import android.Manifest;
-import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Environment;
+import android.renderscript.Matrix2f;
 import android.support.v4.content.PermissionChecker;
+
+import com.j256.ormlite.table.TableUtils;
 
 import net.rdrei.android.dirchooser.DirectoryChooserActivity;
 import net.rdrei.android.dirchooser.DirectoryChooserConfig;
@@ -20,8 +22,10 @@ import rynkbit.tk.coffeelist.db.facade.ProtocolFacade;
 
 public class SettingsManagementController {
     private final SettingsManagementFragment mFragment;
-    private static final int REQUEST_DIRECTORY = 1;
-    private static final int REQUEST_PERMISSIONS = 2;
+    private static final int REQUEST_DIRECTORY_PROTOCOL = 1;
+    private static final int REQUEST_PERMISSIONS_CHOOSER = 2;
+    private static final int REQUEST_PERMISSIONS_BACKUP = 3;
+    private static final int REQUEST_DIRECTORY_BACKUP = 4;
 
     private final String[] permissions;
 
@@ -36,63 +40,99 @@ public class SettingsManagementController {
     public void openPathChooser(){
         boolean hasPermissions = false;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if(mFragment.getContext()
-                    .checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) ==
-                    PermissionChecker.PERMISSION_GRANTED) {
-                hasPermissions = true;
-            }else{
-                mFragment.requestPermissions(
-                        permissions,
-                        REQUEST_PERMISSIONS
-                );
-            }
+            hasPermissions = askReadWritePermissions(REQUEST_PERMISSIONS_CHOOSER);
         }else{
             hasPermissions = true;
         }
 
         if(hasPermissions == true) {
-            final Intent chooserIntent = new Intent(
-                    mFragment.getContext(),
-                    DirectoryChooserActivity.class);
 
-            final DirectoryChooserConfig config = DirectoryChooserConfig.builder()
-                    .newDirectoryName(mFragment.getContext().getString(R.string.choose_directory))
-                    .allowReadOnlyDirectory(true)
-                    .allowNewDirectoryNameModification(true)
-                    .initialDirectory(Environment.getExternalStorageDirectory().getPath())
-                    .build();
-
-            chooserIntent.putExtra(DirectoryChooserActivity.EXTRA_CONFIG, config);
-
-            // REQUEST_DIRECTORY is a constant integer to identify the request, e.g. 0
-           mFragment.startActivityForResult(chooserIntent, REQUEST_DIRECTORY);
+            // REQUEST_DIRECTORY_PROTOCOL is a constant integer to identify the request, e.g. 0
+           mFragment.startActivityForResult(
+                   createOpenChooserIntent(), REQUEST_DIRECTORY_PROTOCOL);
         }
     }
 
     public void handleRequestPermissionResult(int requestCode, String[] permissions, int[] grantResults) {
-        if(requestCode == REQUEST_PERMISSIONS){
-            boolean allGranted = true;
-            for(int i = 0; i < permissions.length && allGranted == true; i++){
-                if(grantResults[i] == PackageManager.PERMISSION_DENIED){
-                    allGranted = false;
-                }
+        boolean allGranted = true;
+        for(int i = 0; i < permissions.length && allGranted == true; i++){
+            if(grantResults[i] == PackageManager.PERMISSION_DENIED){
+                allGranted = false;
             }
+        }
+
+        if(requestCode == REQUEST_PERMISSIONS_CHOOSER){
             if(allGranted == true){
                 openPathChooser();
             }
+        }else if(requestCode == REQUEST_PERMISSIONS_BACKUP){
+
         }
     }
 
     public void handleActivityResult(int requestCode, int resultCode, Intent data) {
-        if(requestCode == REQUEST_DIRECTORY){
-            if (resultCode == DirectoryChooserActivity.RESULT_CODE_DIR_SELECTED) {
-                String path =
-                        data
-                                .getStringExtra(DirectoryChooserActivity.RESULT_SELECTED_DIR);
-                ProtocolFacade.setPath(mFragment.getContext(), path);
-            } else {
-                // Nothing selected
+        String path =
+            data
+                .getStringExtra(
+                            DirectoryChooserActivity.RESULT_SELECTED_DIR);
+        if(requestCode == REQUEST_DIRECTORY_PROTOCOL){
+            if (resultCode == DirectoryChooserActivity.RESULT_CODE_DIR_SELECTED){
+                ProtocolFacade.setProtocolPath(mFragment.getContext(), path);
+            }
+        }else if(requestCode == REQUEST_DIRECTORY_BACKUP){
+            makeBackup(path);
+        }
+    }
+
+    private void makeBackup(String path) {
+
+    }
+
+    public void createBackup() {
+        boolean hasPermissions =
+                askReadWritePermissions(REQUEST_PERMISSIONS_BACKUP);
+        if(hasPermissions == true){
+            String path =
+                    ProtocolFacade.getBackupPath(mFragment.getContext());
+            if(path == null){
+                Intent intent = createOpenChooserIntent();
+                mFragment.startActivityForResult(intent, REQUEST_DIRECTORY_BACKUP);
+            }else{
+                makeBackup(path);
             }
         }
+    }
+
+    private boolean askReadWritePermissions(int requestCode){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if(mFragment.getContext()
+                    .checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) ==
+                    PermissionChecker.PERMISSION_GRANTED) {
+                return  true;
+            }else{
+                mFragment.requestPermissions(
+                        permissions,
+                        requestCode
+                );
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private Intent createOpenChooserIntent(){
+        final Intent chooserIntent = new Intent(
+                mFragment.getContext(),
+                DirectoryChooserActivity.class);
+
+        final DirectoryChooserConfig config = DirectoryChooserConfig.builder()
+                .newDirectoryName(mFragment.getContext().getString(R.string.choose_directory))
+                .allowReadOnlyDirectory(true)
+                .allowNewDirectoryNameModification(true)
+                .initialDirectory(Environment.getExternalStorageDirectory().getPath())
+                .build();
+
+        chooserIntent.putExtra(DirectoryChooserActivity.EXTRA_CONFIG, config);
+        return chooserIntent;
     }
 }

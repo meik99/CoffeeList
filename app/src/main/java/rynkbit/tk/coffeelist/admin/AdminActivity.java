@@ -1,12 +1,9 @@
 package rynkbit.tk.coffeelist.admin;
 
 import android.Manifest;
-import android.content.Context;
 import android.content.Intent;
-import android.media.audiofx.EnvironmentalReverb;
 import android.os.Build;
 import android.os.Environment;
-import android.os.storage.StorageManager;
 import android.support.annotation.NonNull;
 import android.support.v4.content.PermissionChecker;
 import android.support.v7.app.AppCompatActivity;
@@ -17,9 +14,6 @@ import android.widget.Button;
 import net.rdrei.android.dirchooser.DirectoryChooserActivity;
 import net.rdrei.android.dirchooser.DirectoryChooserConfig;
 
-import java.security.Permission;
-
-import rynkbit.tk.coffeelist.MainActivity;
 import rynkbit.tk.coffeelist.R;
 import rynkbit.tk.coffeelist.db.facade.ProtocolFacade;
 @Deprecated
@@ -109,7 +103,7 @@ public class AdminActivity extends AppCompatActivity {
                 String path =
                         data
                                 .getStringExtra(DirectoryChooserActivity.RESULT_SELECTED_DIR);
-                ProtocolFacade.setPath(this, path);
+                ProtocolFacade.setProtocolPath(this, path);
             } else {
                 // Nothing selected
             }

@@ -1,6 +1,5 @@
 package rynkbit.tk.coffeelist.db.facade;
 
-import android.app.Activity;
 import android.content.Context;
 
 import com.j256.ormlite.android.apptools.OpenHelperManager;
@@ -8,17 +7,13 @@ import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
 
 import java.sql.SQLException;
-import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 
-import rynkbit.tk.coffeelist.admin.user.ManageUserActivity;
 import rynkbit.tk.coffeelist.db.DbHelper;
 import rynkbit.tk.coffeelist.db.entity.Item;
-import rynkbit.tk.coffeelist.db.entity.Protocol;
 import rynkbit.tk.coffeelist.db.entity.User;
-import rynkbit.tk.coffeelist.item.ItemActivity;
 import rynkbit.tk.coffeelist.utils.Sort;
 
 /**

@@ -40,12 +40,13 @@ public class SettingsManagementFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_settings_management, container, false);
         Button btnChangePassword = (Button) view.findViewById(R.id.btnAdminChangePassword);
+        Button btnCreateBackupPath = (Button) view.findViewById(R.id.btnAdminCreateBackup);
 
         btnSetProtocolPath = (Button) view.findViewById(R.id.btnAdminSetProtocolPath);
         mManagementController = new SettingsManagementController(this);
 
         btnChangePassword.setOnClickListener(new ChangePasswordListener());
-
+        btnCreateBackupPath.setOnClickListener(new CreateBackupListener(mManagementController));
         btnSetProtocolPath.setOnClickListener(new SetProtocolPathClickListener(
                 mManagementController
         ));

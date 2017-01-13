@@ -5,6 +5,6 @@ package rynkbit.tk.coffeelist.db.contract;
  */
 
 public class DbContract {
-    public static final int DB_VERSION = 16;
+    public static final int DB_VERSION = 17;
     public static final String DB_NAME = "coffeelist.sqlite";
 }
