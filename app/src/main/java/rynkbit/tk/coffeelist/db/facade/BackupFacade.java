@@ -13,11 +13,15 @@ import org.json.JSONStringer;
 
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -42,7 +46,6 @@ public class BackupFacade {
         Dao<Item, Integer> itemDao;
 
         try {
-            StringBuilder builder = new StringBuilder();
             List<Object> objectList = new LinkedList<>();
 
             userDao = DaoManager.createDao(
@@ -58,9 +61,7 @@ public class BackupFacade {
                     new FileOutputStream(finalPath, false)
             );
 
-            for(Object object : objectList){
-                outputStream.writeObject(object);
-            }
+            outputStream.writeObject(objectList);
 
             outputStream.flush();
             outputStream.close();
@@ -72,6 +73,47 @@ public class BackupFacade {
     }
 
     public static void readBackup(Context context, String path){
+        String finalPath = path + File.separator + filename;
+        DbHelper dbHelper = new DbHelper(context);
+        Dao<User, Integer> userDao;
+        Dao<Item, Integer> itemDao;
 
+        try {
+            List<Object> objectList = new LinkedList<>();
+
+            userDao = DaoManager.createDao(
+                    dbHelper.getConnectionSource(),
+                    User.class);
+            itemDao = DaoManager.createDao(
+                    dbHelper.getConnectionSource(),
+                    Item.class);
+
+
+            ObjectInputStream inputStream = new ObjectInputStream(
+                    new FileInputStream(finalPath)
+            );
+
+            List<Object> objects = (List<Object>) inputStream.readObject();
+
+            for(Object object : objects){
+                if(object instanceof List){
+                    List<Object> subList = (List)object;
+                    for(Object backupObject : subList){
+                        if(backupObject instanceof User){
+                            userDao.create((User)backupObject);
+                        }else if(backupObject instanceof Item){
+                            itemDao.create((Item)backupObject);
+                        }
+                    }
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 }

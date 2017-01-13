@@ -44,5 +44,6 @@
     <string name="user_management_section_title">User Management</string>
     <string name="settins_management_section_title">Admin Settings</string>
     <string name="admin_createBackup">Create Backup</string>
+    <string name="admin_readBackup">Read Backup</string>
 
 </resources>

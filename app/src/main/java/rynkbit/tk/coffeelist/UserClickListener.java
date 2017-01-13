@@ -1,6 +1,7 @@
 package rynkbit.tk.coffeelist;
 
 import android.content.Intent;
+import android.os.Parcelable;
 import android.view.View;
 
 import rynkbit.tk.coffeelist.db.entity.User;
@@ -18,7 +19,7 @@ public class UserClickListener implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         Intent intent = new Intent(view.getContext(), ItemActivity.class);
-        intent.putExtra("user", user);
+        intent.putExtra("user", (Parcelable) user);
         view.getContext().startActivity(intent);
     }
 }

@@ -3,11 +3,15 @@ package rynkbit.tk.coffeelist.db.entity;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
+import java.io.Serializable;
+
 /**
  * Created by michael on 13/11/16.
  */
 @DatabaseTable
-public class Item {
+public class Item implements Serializable{
+    private static final long serialVersionUID = 1L;
+
     @DatabaseField(generatedId = true)
     private int id;
     @DatabaseField(canBeNull = false)

@@ -5,15 +5,13 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Environment;
-import android.renderscript.Matrix2f;
 import android.support.v4.content.PermissionChecker;
-
-import com.j256.ormlite.table.TableUtils;
 
 import net.rdrei.android.dirchooser.DirectoryChooserActivity;
 import net.rdrei.android.dirchooser.DirectoryChooserConfig;
 
 import rynkbit.tk.coffeelist.R;
+import rynkbit.tk.coffeelist.db.facade.BackupFacade;
 import rynkbit.tk.coffeelist.db.facade.ProtocolFacade;
 
 /**
@@ -24,8 +22,10 @@ public class SettingsManagementController {
     private final SettingsManagementFragment mFragment;
     private static final int REQUEST_DIRECTORY_PROTOCOL = 1;
     private static final int REQUEST_PERMISSIONS_CHOOSER = 2;
-    private static final int REQUEST_PERMISSIONS_BACKUP = 3;
-    private static final int REQUEST_DIRECTORY_BACKUP = 4;
+    private static final int REQUEST_PERMISSIONS_WRITE_BACKUP = 3;
+    private static final int REQUEST_DIRECTORY_WRITE_BACKUP = 4;
+    private static final int REQUEST_PERMISSIONS_READ_BACKUP = 5;
+    private static final int REQUEST_DIRECTORY_READ_BACKUP = 6;
 
     private final String[] permissions;
 
@@ -65,8 +65,12 @@ public class SettingsManagementController {
             if(allGranted == true){
                 openPathChooser();
             }
-        }else if(requestCode == REQUEST_PERMISSIONS_BACKUP){
-
+        }else if(requestCode == REQUEST_PERMISSIONS_WRITE_BACKUP){
+            Intent intent = createOpenChooserIntent();
+            mFragment.startActivityForResult(intent, REQUEST_DIRECTORY_WRITE_BACKUP);
+        }else if(requestCode == REQUEST_PERMISSIONS_READ_BACKUP){
+            Intent intent = createOpenChooserIntent();
+            mFragment.startActivityForResult(intent, REQUEST_DIRECTORY_READ_BACKUP);
         }
     }
 
@@ -79,24 +83,28 @@ public class SettingsManagementController {
             if (resultCode == DirectoryChooserActivity.RESULT_CODE_DIR_SELECTED){
                 ProtocolFacade.setProtocolPath(mFragment.getContext(), path);
             }
-        }else if(requestCode == REQUEST_DIRECTORY_BACKUP){
+        }else if(requestCode == REQUEST_DIRECTORY_WRITE_BACKUP){
             makeBackup(path);
+        }else if(requestCode == REQUEST_DIRECTORY_READ_BACKUP){
+            readBackupFromPath(path);
         }
     }
 
     private void makeBackup(String path) {
-
+        if(path != null) {
+            BackupFacade.createBackup(mFragment.getContext(), path);
+        }
     }
 
     public void createBackup() {
         boolean hasPermissions =
-                askReadWritePermissions(REQUEST_PERMISSIONS_BACKUP);
+                askReadWritePermissions(REQUEST_PERMISSIONS_WRITE_BACKUP);
         if(hasPermissions == true){
             String path =
                     ProtocolFacade.getBackupPath(mFragment.getContext());
             if(path == null){
                 Intent intent = createOpenChooserIntent();
-                mFragment.startActivityForResult(intent, REQUEST_DIRECTORY_BACKUP);
+                mFragment.startActivityForResult(intent, REQUEST_DIRECTORY_WRITE_BACKUP);
             }else{
                 makeBackup(path);
             }
@@ -134,5 +142,26 @@ public class SettingsManagementController {
 
         chooserIntent.putExtra(DirectoryChooserActivity.EXTRA_CONFIG, config);
         return chooserIntent;
+    }
+
+    public void readBackup() {
+        boolean hasPermissions =
+                askReadWritePermissions(REQUEST_PERMISSIONS_READ_BACKUP);
+        if(hasPermissions == true){
+            String path =
+                    ProtocolFacade.getBackupPath(mFragment.getContext());
+            if(path == null){
+                Intent intent = createOpenChooserIntent();
+                mFragment.startActivityForResult(intent, REQUEST_DIRECTORY_READ_BACKUP);
+            }else{
+                readBackupFromPath(path);
+            }
+        }
+    }
+
+    private void readBackupFromPath(String path) {
+        if(path != null) {
+            BackupFacade.readBackup(mFragment.getContext(), path);
+        }
     }
 }
