@@ -108,7 +108,7 @@ public class AdminActivity extends AppCompatActivity {
             if (resultCode == DirectoryChooserActivity.RESULT_CODE_DIR_SELECTED) {
                 String path =
                         data
-                            .getStringExtra(DirectoryChooserActivity.RESULT_SELECTED_DIR);
+                                .getStringExtra(DirectoryChooserActivity.RESULT_SELECTED_DIR);
                 ProtocolFacade.setPath(this, path);
             } else {
                 // Nothing selected

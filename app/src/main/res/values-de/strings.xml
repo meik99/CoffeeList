@@ -39,4 +39,9 @@
     <string name="really_delete_invoice_reverted">Kauf von %1$s für %2$.2f von %3$s wiederherstellen?</string>
     <string name="reverted">Kauf von %1$s für %2$.2f von %3$s storniert</string>
     <string name="tapToDelete">Tippe zum Löschen</string>
+    <string name="action_settings">Einstellungen</string>
+    <string name="admin_createBackup">Backup erstellen</string>
+    <string name="settins_management_section_title">Administrator Einstellungen</string>
+    <string name="title_activity_admin_extended">Einstellungen</string>
+    <string name="user_management_section_title">Benutzerverwaltung</string>
 </resources>

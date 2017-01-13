@@ -1,9 +1,12 @@
 package rynkbit.tk.coffeelist;
 
+import android.content.res.Resources;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.util.DisplayMetrics;
+import android.util.TypedValue;
 import android.widget.Button;
 import android.widget.GridView;
 
@@ -32,9 +35,8 @@ public class MainActivity extends AppCompatActivity {
 
         RecyclerView userView = (RecyclerView) findViewById(R.id.viewUserCardContainer);
         userView.setLayoutManager(
-                new StaggeredGridLayoutManager(
-                        getResources().getInteger(R.integer.col_count),
-                        StaggeredGridLayoutManager.VERTICAL));
+                new ResponsiveStaggeredGridLayoutManager(
+                        this, StaggeredGridLayoutManager.VERTICAL));
         userView.setAdapter(mUserRecyclerViewAdapter);
 
 //
