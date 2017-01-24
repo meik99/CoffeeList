@@ -22,7 +22,7 @@ public class ResponsiveStaggeredGridLayoutManager extends StaggeredGridLayoutMan
         float px = TypedValue
                 .applyDimension(
                         TypedValue.COMPLEX_UNIT_DIP,
-                        170,
+                        138,
                         resources.getDisplayMetrics());
         float colCount = metrics.widthPixels / px;
 
