@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         mController = new MainController(this);
 
-        //load app
+//        //load app
 //        mAdView = (AdView) findViewById(R.id.adView);
 //        AdRequest adRequest = new AdRequest.Builder().build();
 //        mAdView.loadAd(adRequest);
@@ -39,19 +39,8 @@ public class MainActivity extends AppCompatActivity {
                         this, StaggeredGridLayoutManager.VERTICAL));
         userView.setAdapter(mUserRecyclerViewAdapter);
 
-//
-//        mController.addUserToLayout(mUserGrid);
-
-////        mUserGrid = (GridView) findViewById(R.id.containerUserCard);
-//        mUserAdapter = new UserAdapter(mUserGrid);
-//        mUserGrid.setAdapter(mUserAdapter);
-//        mUserAdapter.setUser(mController.getUsers());
-
         Button btnAdminLogin = (Button) findViewById(R.id.btnAdminLogin);
         btnAdminLogin.setOnClickListener(new LoginClickListener(mController));
-//        userView.setLayoutManager(new );
-//        userView.setAdapter(mUserAdapter);
-
     }
 
     @Override

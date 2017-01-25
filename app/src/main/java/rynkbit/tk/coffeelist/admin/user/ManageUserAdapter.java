@@ -11,6 +11,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import rynkbit.tk.coffeelist.R;
+import rynkbit.tk.coffeelist.admin.user.advanced.ManageUserAdvancedClickListener;
 import rynkbit.tk.coffeelist.db.entity.User;
 
 /**
@@ -55,13 +56,17 @@ public class ManageUserAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         User user = mUsers.get(position);
         ManageUserHolder manageUserHolder = (ManageUserHolder) holder;
+        ImageButton btnUserMenu =
+                (ImageButton) manageUserHolder.view.findViewById(R.id.btnListItem);
+
         manageUserHolder.txtUsername.setText(user.getName());
         manageUserHolder.txtBalance.setText(String.format(
                 ((ManageUserHolder) holder).view.getContext().getString(R.string.user_balance),
                 user.getBalance()
         ));
-        ImageButton btnUserMenu =
-                (ImageButton) manageUserHolder.view.findViewById(R.id.btnListItem);
+        manageUserHolder.view.setOnClickListener(new ManageUserAdvancedClickListener());
+        manageUserHolder.view.setTag(user);
+
         btnUserMenu.setOnClickListener(new ManageUserMenuClickListener(mManageUserController));
         btnUserMenu.setTag(user);
     }

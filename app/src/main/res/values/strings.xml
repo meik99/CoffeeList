@@ -45,5 +45,9 @@
     <string name="settins_management_section_title">Admin Settings</string>
     <string name="admin_createBackup">Create Backup</string>
     <string name="admin_readBackup">Read Backup</string>
+    <string name="title_activity_edit_user" translatable="false">EditUserActivity</string>
+    <string name="section_format" translatable="false">Hello World from section: %1$d</string>
+    <string name="edit_user_name">Name</string>
+    <string name="edit_user_balance">Balance</string>
 
 </resources>

@@ -37,7 +37,11 @@ public class ManageUserActivity extends AppCompatActivity {
         RecyclerView listManageUser = (RecyclerView) findViewById(R.id.listManageUser);
         listManageUser.setLayoutManager(new LinearLayoutManager(this));
         listManageUser.setAdapter(mManageUserController.getListAdapter());
-        mManageUserController.refreshListAdapter();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mManageUserController.refreshListAdapter();
+    }
 }

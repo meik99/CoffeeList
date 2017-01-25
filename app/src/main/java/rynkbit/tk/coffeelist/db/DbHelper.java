@@ -114,6 +114,11 @@ public class DbHelper extends OrmLiteSqliteOpenHelper{
 
     private void updateTo17(SQLiteDatabase sqLiteDatabase,
                             ConnectionSource connectionSource){
+        try {
+            TableUtils.createTable(connectionSource, PathConfig.class);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         String path = null;
         Cursor cursor = sqLiteDatabase.query(
                 "PROTOCOL",
@@ -133,11 +138,7 @@ public class DbHelper extends OrmLiteSqliteOpenHelper{
         sqLiteDatabase.rawQuery("drop table protocol", null);
 
         if(path != null){
-            try {
-                TableUtils.createTable(connectionSource, PathConfig.class);
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+
             PathConfig pathConfig = new PathConfig();
             pathConfig.setPath(path, PathType.PROTOCOL);
             try {

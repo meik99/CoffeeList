@@ -45,4 +45,6 @@
     <string name="title_activity_admin_extended">Einstellungen</string>
     <string name="user_management_section_title">Benutzerverwaltung</string>
     <string name="admin_readBackup">Backup einlesen</string>
+    <string name="edit_user_name">Name</string>
+    <string name="edit_user_balance">kontostand</string>
 </resources>
