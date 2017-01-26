@@ -44,6 +44,10 @@
         <activity
             android:name=".admin.user.advanced.mvc.EditUserActivity"
             android:label="@string/title_activity_edit_user"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".admin.item.advanced.mvc.EditItemsActivity"
+            android:label="@string/title_activity_edit_items"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

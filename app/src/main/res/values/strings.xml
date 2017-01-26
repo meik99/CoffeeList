@@ -49,5 +49,7 @@
     <string name="section_format" translatable="false">Hello World from section: %1$d</string>
     <string name="edit_user_name">Name</string>
     <string name="edit_user_balance">Balance</string>
+    <string name="title_activity_edit_items">EditItemsActivity</string>
+    <string name="tapToEdit">Tap to edit</string>
 
 </resources>

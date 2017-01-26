@@ -12,6 +12,7 @@ import rynkbit.tk.coffeelist.R;
 import rynkbit.tk.coffeelist.admin.user.advanced.binding.EditBalanceTextWatcher;
 import rynkbit.tk.coffeelist.admin.user.advanced.binding.EditNameTextWatcher;
 import rynkbit.tk.coffeelist.admin.user.advanced.mvc.EditUserActivity;
+import rynkbit.tk.coffeelist.admin.user.advanced.mvc.EditUserController;
 import rynkbit.tk.coffeelist.db.entity.User;
 
 /**

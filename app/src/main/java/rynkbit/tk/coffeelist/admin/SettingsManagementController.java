@@ -75,18 +75,20 @@ public class SettingsManagementController {
     }
 
     public void handleActivityResult(int requestCode, int resultCode, Intent data) {
-        String path =
-            data
-                .getStringExtra(
-                            DirectoryChooserActivity.RESULT_SELECTED_DIR);
-        if(requestCode == REQUEST_DIRECTORY_PROTOCOL){
-            if (resultCode == DirectoryChooserActivity.RESULT_CODE_DIR_SELECTED){
-                ProtocolFacade.setProtocolPath(mFragment.getContext(), path);
+        if(data != null) {
+            String path =
+                    data
+                            .getStringExtra(
+                                    DirectoryChooserActivity.RESULT_SELECTED_DIR);
+            if (requestCode == REQUEST_DIRECTORY_PROTOCOL) {
+                if (resultCode == DirectoryChooserActivity.RESULT_CODE_DIR_SELECTED) {
+                    ProtocolFacade.setProtocolPath(mFragment.getContext(), path);
+                }
+            } else if (requestCode == REQUEST_DIRECTORY_WRITE_BACKUP) {
+                makeBackup(path);
+            } else if (requestCode == REQUEST_DIRECTORY_READ_BACKUP) {
+                readBackupFromPath(path);
             }
-        }else if(requestCode == REQUEST_DIRECTORY_WRITE_BACKUP){
-            makeBackup(path);
-        }else if(requestCode == REQUEST_DIRECTORY_READ_BACKUP){
-            readBackupFromPath(path);
         }
     }
 

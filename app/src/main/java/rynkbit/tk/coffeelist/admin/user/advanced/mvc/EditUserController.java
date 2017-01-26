@@ -1,8 +1,10 @@
 package rynkbit.tk.coffeelist.admin.user.advanced.mvc;
 
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v7.widget.RecyclerView;
 
-import rynkbit.tk.coffeelist.admin.user.advanced.EditUserSectionAdapter;
+import rynkbit.tk.coffeelist.admin.user.advanced.adapter.EditUserListAdapter;
+import rynkbit.tk.coffeelist.admin.user.advanced.adapter.EditUserSectionAdapter;
 import rynkbit.tk.coffeelist.db.entity.User;
 import rynkbit.tk.coffeelist.db.facade.UserFacade;
 
@@ -22,6 +24,9 @@ public class EditUserController {
                 (User) mEditUserActivity.getIntent().getParcelableExtra(
                         EditUserActivity.USER_EXTRA));
         mEditUserModel.setUsers(UserFacade.getUsers(activity));
+        mEditUserModel.setEditUserListAdapter(
+                new EditUserListAdapter(this, mEditUserModel.getUsers())
+        );
     }
 
     public FragmentPagerAdapter getPageAdapter() {
@@ -31,6 +36,13 @@ public class EditUserController {
         pageAdapter.setItems(mEditUserModel.getUsers());
 
         return pageAdapter;
+    }
+
+    public void setCurrentUser(User user){
+        mEditUserModel.setCurrentUser(user);
+        mEditUserActivity.mViewPager.setCurrentItem(
+                getCurrentUserIndex()
+        );
     }
 
     public int getCurrentUserIndex() {
@@ -47,5 +59,14 @@ public class EditUserController {
         }
 
         return index;
+    }
+
+    public RecyclerView.Adapter getUserListAdapter() {
+        return mEditUserModel.getEditUserListAdapter();
+    }
+
+    public void updateUsers() {
+        mEditUserModel.setUsers(UserFacade.getUsers(mEditUserActivity));
+        mEditUserModel.getEditUserListAdapter().setUserList(mEditUserModel.getUsers());
     }
 }

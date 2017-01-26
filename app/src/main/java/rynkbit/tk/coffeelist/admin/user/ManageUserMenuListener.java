@@ -29,9 +29,9 @@ public class ManageUserMenuListener implements PopupMenu.OnMenuItemClickListener
             case R.id.removeUser:
                 mManageUserController.removeUser(mUser);
                 break;
-            case R.id.renameUser:
-                mManageUserController.renameUser(mUser);
-                break;
+//            case R.id.renameUser:
+//                mManageUserController.renameUser(mUser);
+//                break;
             case R.id.bookUser:
                 mManageUserController.evenUser(mUser);
                 break;

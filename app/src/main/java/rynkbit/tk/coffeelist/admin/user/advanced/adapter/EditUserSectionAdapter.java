@@ -1,4 +1,4 @@
-package rynkbit.tk.coffeelist.admin.user.advanced;
+package rynkbit.tk.coffeelist.admin.user.advanced.adapter;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 import java.util.List;
 
+import rynkbit.tk.coffeelist.admin.user.advanced.EditUserFragment;
 import rynkbit.tk.coffeelist.admin.user.advanced.mvc.EditUserActivity;
 import rynkbit.tk.coffeelist.db.entity.User;
 

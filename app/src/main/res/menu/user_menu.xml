@@ -4,6 +4,6 @@
         android:title="@string/remove"/>
     <item android:id="@+id/bookUser"
         android:title="@string/evenUser"/>
-    <item android:id="@+id/renameUser"
-        android:title="@string/rename"/>
+    <!--<item android:id="@+id/renameUser"-->
+        <!--android:title="@string/rename"/>-->
 </menu>

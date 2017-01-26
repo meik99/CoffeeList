@@ -1,33 +1,26 @@
 package rynkbit.tk.coffeelist.admin.user.advanced.mvc;
 
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-
-import android.widget.TextView;
 
 import rynkbit.tk.coffeelist.R;
-import rynkbit.tk.coffeelist.admin.user.advanced.EditUserSectionAdapter;
 
 public class EditUserActivity extends AppCompatActivity {
 
     public static final String USER_EXTRA = "START_USER";
 
     private FragmentPagerAdapter mSectionsPagerAdapter;
-    private ViewPager mViewPager;
+    protected ViewPager mViewPager;
     private EditUserController mController;
+    private RecyclerView mUserListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +34,7 @@ public class EditUserActivity extends AppCompatActivity {
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
 
-
+        mUserListView = (RecyclerView) findViewById(R.id.userListView);
     }
 
     @Override
@@ -49,6 +42,13 @@ public class EditUserActivity extends AppCompatActivity {
         mSectionsPagerAdapter = mController.getPageAdapter();
         mViewPager.setAdapter(mSectionsPagerAdapter);
         mViewPager.setCurrentItem(mController.getCurrentUserIndex());
+
+        if(mUserListView != null){
+            mUserListView.setAdapter(mController.getUserListAdapter());
+            mUserListView.setLayoutManager(
+                    new LinearLayoutManager(
+                            this, LinearLayoutManager.VERTICAL, false));
+        }
         super.onResume();
 
     }
@@ -56,7 +56,7 @@ public class EditUserActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_edit_user, menu);
+//        getMenuInflater().inflate(R.menu.menu_edit_user, menu);
         return true;
     }
 
