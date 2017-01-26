@@ -8,11 +8,13 @@ import com.j256.ormlite.table.DatabaseTable;
 
 import java.io.Serializable;
 
+import rynkbit.tk.coffeelist.db.contract.NamedEntity;
+
 /**
  * Created by michael on 13/11/16.
  */
 @DatabaseTable
-public class User implements Parcelable, Comparable, Serializable{
+public class User implements Parcelable, Comparable, Serializable, NamedEntity{
     private static final long serialVersionUID = 1L;
     @DatabaseField(generatedId = true)
     private int id;

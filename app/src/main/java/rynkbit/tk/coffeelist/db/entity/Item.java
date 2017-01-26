@@ -1,15 +1,20 @@
 package rynkbit.tk.coffeelist.db.entity;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
 import java.io.Serializable;
 
+import rynkbit.tk.coffeelist.db.contract.NamedEntity;
+
 /**
  * Created by michael on 13/11/16.
  */
 @DatabaseTable
-public class Item implements Serializable{
+public class Item implements Serializable, NamedEntity, Parcelable{
     private static final long serialVersionUID = 1L;
 
     @DatabaseField(generatedId = true)
@@ -51,5 +56,39 @@ public class Item implements Serializable{
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public static final Parcelable.Creator CREATOR =
+            new Creator() {
+                @Override
+                public Object createFromParcel(Parcel parcel) {
+                    return new User(parcel);
+                }
+
+                @Override
+                public Object[] newArray(int i) {
+                    return new User[i];
+                }
+            };
+
+    public Item(){}
+    public Item(Parcel parcel){
+        id = parcel.readInt();
+        name = parcel.readString();
+        price = parcel.readDouble();
+        stock = parcel.readInt();
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id);
+        dest.writeString(name);
+        dest.writeDouble(price);
+        dest.writeInt(stock);
     }
 }

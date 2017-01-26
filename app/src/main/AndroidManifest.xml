@@ -42,7 +42,7 @@
             android:label="@string/title_activity_admin_extended"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".admin.user.advanced.mvc.EditUserActivity"
+            android:name=".admin.edit.mvc.EditNamedObjectActivity"
             android:label="@string/title_activity_edit_user"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity

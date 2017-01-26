@@ -1,4 +1,4 @@
-package rynkbit.tk.coffeelist.admin.user.advanced;
+package rynkbit.tk.coffeelist.admin.edit;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,10 +9,9 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 
 import rynkbit.tk.coffeelist.R;
-import rynkbit.tk.coffeelist.admin.user.advanced.binding.EditBalanceTextWatcher;
-import rynkbit.tk.coffeelist.admin.user.advanced.binding.EditNameTextWatcher;
-import rynkbit.tk.coffeelist.admin.user.advanced.mvc.EditUserActivity;
-import rynkbit.tk.coffeelist.admin.user.advanced.mvc.EditUserController;
+import rynkbit.tk.coffeelist.admin.edit.binding.EditBalanceTextWatcher;
+import rynkbit.tk.coffeelist.admin.edit.binding.EditNameTextWatcher;
+import rynkbit.tk.coffeelist.admin.edit.mvc.EditNamedObjectActivity;
 import rynkbit.tk.coffeelist.db.entity.User;
 
 /**
@@ -27,7 +26,7 @@ public class EditUserFragment extends Fragment {
     public void setArguments(Bundle args) {
         super.setArguments(args);
 
-        mUser = args.getParcelable(EditUserActivity.USER_EXTRA);
+        mUser = args.getParcelable(EditNamedObjectActivity.USER_EXTRA);
     }
 
     @Nullable
@@ -43,7 +42,7 @@ public class EditUserFragment extends Fragment {
             User user =
                     savedInstanceState
                             .getParcelable(
-                                    EditUserActivity.USER_EXTRA);
+                                    EditNamedObjectActivity.USER_EXTRA);
             mUser = user;
         }
         if(mUser != null){

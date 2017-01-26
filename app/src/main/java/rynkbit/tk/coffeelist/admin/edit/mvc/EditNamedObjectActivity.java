@@ -1,4 +1,4 @@
-package rynkbit.tk.coffeelist.admin.user.advanced.mvc;
+package rynkbit.tk.coffeelist.admin.edit.mvc;
 
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,13 +13,13 @@ import android.view.MenuItem;
 
 import rynkbit.tk.coffeelist.R;
 
-public class EditUserActivity extends AppCompatActivity {
+public class EditNamedObjectActivity extends AppCompatActivity {
 
     public static final String USER_EXTRA = "START_USER";
 
     private FragmentPagerAdapter mSectionsPagerAdapter;
     protected ViewPager mViewPager;
-    private EditUserController mController;
+    private EditNamedObjectController mController;
     private RecyclerView mUserListView;
 
     @Override
@@ -30,7 +30,7 @@ public class EditUserActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        mController = new EditUserController(this);
+        mController = new EditNamedObjectController(this);
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
 

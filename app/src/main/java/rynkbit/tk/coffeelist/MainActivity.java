@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-//        mUserAdapter.setUser(mController.getUsers());
+//        mUserAdapter.setUser(mController.getObjects());
         mUserRecyclerViewAdapter.setUsers(mController.getUsers());
     }
 }

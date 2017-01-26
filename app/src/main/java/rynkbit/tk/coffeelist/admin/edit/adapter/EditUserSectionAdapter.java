@@ -1,4 +1,4 @@
-package rynkbit.tk.coffeelist.admin.user.advanced.adapter;
+package rynkbit.tk.coffeelist.admin.edit.adapter;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -7,8 +7,8 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 import java.util.List;
 
-import rynkbit.tk.coffeelist.admin.user.advanced.EditUserFragment;
-import rynkbit.tk.coffeelist.admin.user.advanced.mvc.EditUserActivity;
+import rynkbit.tk.coffeelist.admin.edit.EditUserFragment;
+import rynkbit.tk.coffeelist.admin.edit.mvc.EditNamedObjectActivity;
 import rynkbit.tk.coffeelist.db.entity.User;
 
 /**
@@ -31,7 +31,7 @@ public class EditUserSectionAdapter extends FragmentPagerAdapter {
             fragment = new EditUserFragment();
 
             bundle.putParcelable(
-                    EditUserActivity.USER_EXTRA,
+                    EditNamedObjectActivity.USER_EXTRA,
                     users.get(position));
             fragment.setArguments(bundle);
         }

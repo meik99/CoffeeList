@@ -11,7 +11,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import rynkbit.tk.coffeelist.R;
-import rynkbit.tk.coffeelist.admin.user.advanced.ManageUserAdvancedClickListener;
+import rynkbit.tk.coffeelist.admin.edit.ManageUserAdvancedClickListener;
 import rynkbit.tk.coffeelist.db.entity.User;
 
 /**

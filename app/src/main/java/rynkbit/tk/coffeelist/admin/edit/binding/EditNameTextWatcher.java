@@ -1,14 +1,9 @@
-package rynkbit.tk.coffeelist.admin.user.advanced.binding;
+package rynkbit.tk.coffeelist.admin.edit.binding;
 
 import android.content.Context;
 import android.text.Editable;
-import android.text.TextWatcher;
 
-import org.w3c.dom.Text;
-
-import rynkbit.tk.coffeelist.admin.user.advanced.mvc.EditUserController;
 import rynkbit.tk.coffeelist.db.entity.User;
-import rynkbit.tk.coffeelist.db.facade.UserFacade;
 
 /**
  * Created by michael on 1/24/17.
