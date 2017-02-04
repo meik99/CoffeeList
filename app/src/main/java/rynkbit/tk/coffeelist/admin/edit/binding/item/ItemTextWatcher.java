@@ -1,27 +1,29 @@
-package rynkbit.tk.coffeelist.admin.edit.binding;
+package rynkbit.tk.coffeelist.admin.edit.binding.item;
 
 import android.content.Context;
 import android.text.Editable;
 import android.text.TextWatcher;
 
+import rynkbit.tk.coffeelist.db.entity.Item;
 import rynkbit.tk.coffeelist.db.entity.User;
+import rynkbit.tk.coffeelist.db.facade.ItemsFacade;
 import rynkbit.tk.coffeelist.db.facade.UserFacade;
 
 /**
  * Created by michael on 1/24/17.
  */
 
-public abstract class UserTextWatcher implements TextWatcher{
-    private final User mUser;
+public abstract class ItemTextWatcher implements TextWatcher{
+    private final Item mItem;
     private final Context mContext;
 
-    public UserTextWatcher(Context context, User user){
-        this.mUser = user;
+    public ItemTextWatcher(Context context, Item item){
+        this.mItem = item;
         this.mContext = context;
     }
 
-    public User getUser() {
-        return mUser;
+    public Item getItem() {
+        return mItem;
     }
 
     public Context getContext() {
@@ -40,8 +42,8 @@ public abstract class UserTextWatcher implements TextWatcher{
 
     @Override
     public void afterTextChanged(Editable s) {
-        if(mUser != null){
-            UserFacade.update(mContext, mUser);
+        if(mItem != null){
+            ItemsFacade.update(mContext, mItem);
         }
     }
 }

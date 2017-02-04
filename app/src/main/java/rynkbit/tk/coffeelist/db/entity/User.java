@@ -69,15 +69,15 @@ public class User implements Parcelable, Comparable, Serializable, NamedEntity{
         parcel.writeDouble(balance);
     }
 
-    public static final Parcelable.Creator CREATOR =
-            new Creator() {
+    public static final Parcelable.Creator<User> CREATOR =
+            new Creator<User>() {
                 @Override
-                public Object createFromParcel(Parcel parcel) {
+                public User createFromParcel(Parcel parcel) {
                     return new User(parcel);
                 }
 
                 @Override
-                public Object[] newArray(int i) {
+                public User[] newArray(int i) {
                     return new User[i];
                 }
             };

@@ -3,14 +3,15 @@ package rynkbit.tk.coffeelist.admin.item;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Parcelable;
 import android.support.v7.widget.RecyclerView;
 import android.text.InputType;
-import android.text.method.NumberKeyListener;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 
 import rynkbit.tk.coffeelist.R;
+import rynkbit.tk.coffeelist.admin.edit.mvc.EditNamedObjectActivity;
 import rynkbit.tk.coffeelist.db.entity.Item;
 import rynkbit.tk.coffeelist.db.facade.ItemsFacade;
 
@@ -189,5 +190,11 @@ public class ManageItemsController {
             }
         });
         builder.show();
+    }
+
+    public void editItems(Item item) {
+        Intent intent = new Intent(mActivity, EditNamedObjectActivity.class);
+        intent.putExtra(EditNamedObjectActivity.EXTRA_ITEM, (Parcelable) item);
+        mActivity.startActivity(intent);
     }
 }

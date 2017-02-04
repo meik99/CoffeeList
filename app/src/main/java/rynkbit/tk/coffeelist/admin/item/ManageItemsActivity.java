@@ -13,6 +13,8 @@ import rynkbit.tk.coffeelist.R;
 
 public class ManageItemsActivity extends AppCompatActivity {
 
+    private ManageItemsController mController;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,7 +22,7 @@ public class ManageItemsActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        final ManageItemsController controller = new ManageItemsController(this);
+        mController = new ManageItemsController(this);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -28,7 +30,7 @@ public class ManageItemsActivity extends AppCompatActivity {
             public void onClick(View view) {
 //                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
 //                        .setAction("Action", null).show();
-                controller.addItem();
+                mController.addItem();
 
             }
         });
@@ -37,8 +39,13 @@ public class ManageItemsActivity extends AppCompatActivity {
 
         RecyclerView listManageItems = (RecyclerView) findViewById(R.id.listManageItems);
         listManageItems.setLayoutManager(new LinearLayoutManager(this));
-        listManageItems.setAdapter(controller.getListAdapter());
-        controller.refreshListAdapter(true);
+        listManageItems.setAdapter(mController.getListAdapter());
+        mController.refreshListAdapter(true);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mController.refreshListAdapter();
+    }
 }

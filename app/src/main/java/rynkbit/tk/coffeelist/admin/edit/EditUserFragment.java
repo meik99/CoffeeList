@@ -9,8 +9,8 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 
 import rynkbit.tk.coffeelist.R;
-import rynkbit.tk.coffeelist.admin.edit.binding.EditBalanceTextWatcher;
-import rynkbit.tk.coffeelist.admin.edit.binding.EditNameTextWatcher;
+import rynkbit.tk.coffeelist.admin.edit.binding.user.EditBalanceTextWatcher;
+import rynkbit.tk.coffeelist.admin.edit.binding.user.EditNameTextWatcher;
 import rynkbit.tk.coffeelist.admin.edit.mvc.EditNamedObjectActivity;
 import rynkbit.tk.coffeelist.db.entity.User;
 
@@ -26,7 +26,7 @@ public class EditUserFragment extends Fragment {
     public void setArguments(Bundle args) {
         super.setArguments(args);
 
-        mUser = args.getParcelable(EditNamedObjectActivity.USER_EXTRA);
+        mUser = args.getParcelable(EditNamedObjectActivity.EXTRA_USER);
     }
 
     @Nullable
@@ -42,7 +42,7 @@ public class EditUserFragment extends Fragment {
             User user =
                     savedInstanceState
                             .getParcelable(
-                                    EditNamedObjectActivity.USER_EXTRA);
+                                    EditNamedObjectActivity.EXTRA_USER);
             mUser = user;
         }
         if(mUser != null){

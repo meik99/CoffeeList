@@ -7,8 +7,10 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 import java.util.List;
 
+import rynkbit.tk.coffeelist.admin.edit.EditItemFragment;
 import rynkbit.tk.coffeelist.admin.edit.EditUserFragment;
 import rynkbit.tk.coffeelist.admin.edit.mvc.EditNamedObjectActivity;
+import rynkbit.tk.coffeelist.db.contract.NamedEntity;
 import rynkbit.tk.coffeelist.db.entity.User;
 
 /**
@@ -16,7 +18,7 @@ import rynkbit.tk.coffeelist.db.entity.User;
  */
 
 public class EditUserSectionAdapter extends FragmentPagerAdapter {
-    private List<User> users;
+    private List<NamedEntity> objects;
 
     public EditUserSectionAdapter(FragmentManager fm) {
         super(fm);
@@ -24,15 +26,25 @@ public class EditUserSectionAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        EditUserFragment fragment = null;
+        Fragment fragment = null;
 
-        if(users != null && users.size() > 0 && users.size() > position) {
+        if(objects != null && objects.size() > 0 && objects.size() > position) {
             Bundle bundle = new Bundle();
-            fragment = new EditUserFragment();
 
-            bundle.putParcelable(
-                    EditNamedObjectActivity.USER_EXTRA,
-                    users.get(position));
+            if(objects.get(position) instanceof User){
+                fragment = new EditUserFragment();
+                bundle.putParcelable(
+                        EditNamedObjectActivity.EXTRA_USER,
+                        objects.get(position)
+                );
+            }else{
+                fragment = new EditItemFragment();
+                bundle.putParcelable(
+                        EditNamedObjectActivity.EXTRA_ITEM,
+                        objects.get(position)
+                );
+            }
+
             fragment.setArguments(bundle);
         }
 
@@ -41,19 +53,19 @@ public class EditUserSectionAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return users != null ? users.size() : 0;
+        return objects != null ? objects.size() : 0;
     }
 
-    public void setItems(List<User> items) {
-        this.users = items;
+    public void setItems(List<NamedEntity> items) {
+        this.objects = items;
         notifyDataSetChanged();
     }
 
     @Override
     public CharSequence getPageTitle(int position) {
         StringBuilder result = new StringBuilder();
-        if(users != null && users.size() > 0 && users.size() > position) {
-            result.append(users.get(position).getName());
+        if(objects != null && objects.size() > 0 && objects.size() > position) {
+            result.append(objects.get(position).getName());
         }
         return result.toString();
     }

@@ -1,4 +1,4 @@
-package rynkbit.tk.coffeelist.admin.edit.binding;
+package rynkbit.tk.coffeelist.admin.edit.binding.user;
 
 import android.content.Context;
 import android.text.Editable;

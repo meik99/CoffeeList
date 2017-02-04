@@ -15,7 +15,8 @@ import rynkbit.tk.coffeelist.R;
 
 public class EditNamedObjectActivity extends AppCompatActivity {
 
-    public static final String USER_EXTRA = "START_USER";
+    public static final String EXTRA_USER = "EXTRA_USER";
+    public static final String EXTRA_ITEM = "EXTRA_ITEM";
 
     private FragmentPagerAdapter mSectionsPagerAdapter;
     protected ViewPager mViewPager;
@@ -41,10 +42,10 @@ public class EditNamedObjectActivity extends AppCompatActivity {
     protected void onResume() {
         mSectionsPagerAdapter = mController.getPageAdapter();
         mViewPager.setAdapter(mSectionsPagerAdapter);
-        mViewPager.setCurrentItem(mController.getCurrentUserIndex());
+        mViewPager.setCurrentItem(mController.getCurrentObjectIndex());
 
         if(mUserListView != null){
-            mUserListView.setAdapter(mController.getUserListAdapter());
+            mUserListView.setAdapter(mController.getObjectListAdapter());
             mUserListView.setLayoutManager(
                     new LinearLayoutManager(
                             this, LinearLayoutManager.VERTICAL, false));

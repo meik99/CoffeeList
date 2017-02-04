@@ -12,6 +12,8 @@ import java.util.List;
 import rynkbit.tk.coffeelist.R;
 import rynkbit.tk.coffeelist.admin.edit.mvc.EditNamedObjectController;
 import rynkbit.tk.coffeelist.db.contract.NamedEntity;
+import rynkbit.tk.coffeelist.db.entity.Item;
+import rynkbit.tk.coffeelist.db.entity.User;
 
 /**
  * Created by michael on 1/25/17.
@@ -51,28 +53,55 @@ public class EditNamedEntityListAdapter extends RecyclerView.Adapter{
         return new EditNamedEntityListAdapter.ViewHolder(v);
     }
 
+    public void updateList(){
+        this.notifyDataSetChanged();
+    }
+
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if(mNamedEntities != null && mNamedEntities.size() > position){
-            final int userPosition = position;
+            final int entityPosition = position;
+            final NamedEntity entity = mNamedEntities.get(position);
+
             EditNamedEntityListAdapter.ViewHolder userHolder = (ViewHolder) holder;
 
             userHolder.username.setText(mNamedEntities.get(position).getName());
             userHolder.username.setTextColor(Color.WHITE);
             userHolder.info.setTextColor(Color.WHITE);
-//            userHolder.info.setText(
-//               String.format(
-//                       holder.itemView.getResources().getString(R.string.user_balance),
-//                       mNamedEntities.get(position).getBalance()
-//               )
-//            );
-//            userHolder.itemView.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    mController.updateUsers();
-//                    mController.setCurrentUser(mNamedEntities.get(userPosition));
-//                }
-//            });
+
+            if(entity instanceof User){
+                User user = (User)entity;
+
+                userHolder.info.setText(
+                   String.format(
+                           holder.itemView.getResources().getString(R.string.user_balance),
+                           user.getBalance()
+                   )
+                );
+                userHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        mController.updateObjects(User.class);
+                        mController.setCurrentObject(entity);
+                    }
+                });
+            }else{
+                Item item = (Item)entity;
+                userHolder.info.setText(
+                        String.format(
+                                holder.itemView.getResources().getString(R.string.item_detail),
+                                item.getPrice(),
+                                item.getStock()
+                        )
+                );
+                userHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        mController.updateObjects(Item.class);
+                        mController.setCurrentObject(entity);
+                    }
+                });
+            }
         }
     }
 

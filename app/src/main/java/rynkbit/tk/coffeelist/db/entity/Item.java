@@ -58,16 +58,16 @@ public class Item implements Serializable, NamedEntity, Parcelable{
         this.price = price;
     }
 
-    public static final Parcelable.Creator CREATOR =
-            new Creator() {
+    public static final Parcelable.Creator<Item> CREATOR =
+            new Creator<Item>() {
                 @Override
-                public Object createFromParcel(Parcel parcel) {
-                    return new User(parcel);
+                public Item createFromParcel(Parcel parcel) {
+                    return new Item(parcel);
                 }
 
                 @Override
-                public Object[] newArray(int i) {
-                    return new User[i];
+                public Item[] newArray(int i) {
+                    return new Item[i];
                 }
             };
 

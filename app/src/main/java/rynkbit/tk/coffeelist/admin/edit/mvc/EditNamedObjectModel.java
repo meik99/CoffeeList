@@ -10,16 +10,16 @@ import rynkbit.tk.coffeelist.db.contract.NamedEntity;
  */
 
 public class EditNamedObjectModel {
-    private NamedEntity currentUser;
+    private NamedEntity currentObject;
     private List<NamedEntity> objects;
     private EditNamedEntityListAdapter mEditNamedEntityListAdapter;
 
     public void setCurrentObject(NamedEntity entity) {
-        this.currentUser = entity;
+        this.currentObject = entity;
     }
 
     public NamedEntity getCurrentObject() {
-        return currentUser;
+        return currentObject;
     }
 
     public void setObjects(List<NamedEntity> entities) {

@@ -1,27 +1,17 @@
 package rynkbit.tk.coffeelist.db.facade;
 
 import android.content.Context;
-import android.content.Intent;
 
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
-import com.j256.ormlite.field.types.StringBytesType;
-import com.j256.ormlite.support.BaseConnectionSource;
-import com.j256.ormlite.support.ConnectionSource;
 
-import org.json.JSONStringer;
-
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.ObjectInput;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -34,12 +24,20 @@ import rynkbit.tk.coffeelist.db.entity.User;
  */
 
 public class BackupFacade {
-    private static final String filename = "tallysheet.dat";
-    private BackupFacade(){
-
+    public interface BackupCreatedListener {
+        void onSuccess();
+        void onError();
     }
 
-    public static void createBackup(Context context, String path){
+
+    private static final String filename = "tallysheet.dat";
+    private BackupFacade(){
+    }
+
+
+    public static void createBackup(Context context,
+                                    String path,
+                                    BackupCreatedListener... backupCreatedListeners){
         String finalPath = path + File.separator + filename;
         DbHelper dbHelper = new DbHelper(context);
         Dao<User, Integer> userDao;
@@ -65,10 +63,21 @@ public class BackupFacade {
 
             outputStream.flush();
             outputStream.close();
-        } catch (SQLException e) {
+        } catch (SQLException | IOException e) {
             e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+            for (BackupCreatedListener listener :
+                    backupCreatedListeners) {
+                if(listener != null){
+                    listener.onError();
+                }
+            }
+        }
+
+        for (BackupCreatedListener listener :
+                backupCreatedListeners) {
+            if(listener != null){
+                listener.onSuccess();
+            }
         }
     }
 
@@ -100,9 +109,9 @@ public class BackupFacade {
                     List<Object> subList = (List)object;
                     for(Object backupObject : subList){
                         if(backupObject instanceof User){
-                            userDao.create((User)backupObject);
+                            userDao.createOrUpdate((User)backupObject);
                         }else if(backupObject instanceof Item){
-                            itemDao.create((Item)backupObject);
+                            itemDao.createOrUpdate((Item)backupObject);
                         }
                     }
                 }

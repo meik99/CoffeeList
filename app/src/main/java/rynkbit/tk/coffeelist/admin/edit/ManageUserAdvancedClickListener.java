@@ -15,7 +15,7 @@ public class ManageUserAdvancedClickListener implements View.OnClickListener {
     public void onClick(View v) {
         User user = (User) v.getTag();
         Intent intent = new Intent(v.getContext(), EditNamedObjectActivity.class);
-        intent.putExtra(EditNamedObjectActivity.USER_EXTRA, (Parcelable) user);
+        intent.putExtra(EditNamedObjectActivity.EXTRA_USER, (Parcelable) user);
 
         v.getContext().startActivity(intent);
     }

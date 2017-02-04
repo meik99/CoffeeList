@@ -66,6 +66,9 @@ public class ManageItemsAdapter extends RecyclerView.Adapter {
         Item item = items.get(position);
         ManageItemsHolder itemsHolder = (ManageItemsHolder) holder;
 
+        itemsHolder.view.setTag(item);
+
+        itemsHolder.view.setOnClickListener(new ManageItemsEditClickListener(mController));
         itemsHolder.itemName.setText(item.getName());
         itemsHolder.itemDetail.setText(
                 String.format(itemsHolder.view.getContext().getString(

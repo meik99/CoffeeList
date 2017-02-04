@@ -1,5 +1,6 @@
 package rynkbit.tk.coffeelist.admin.edit.mvc;
 
+import android.content.Intent;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v7.widget.RecyclerView;
 
@@ -27,9 +28,15 @@ public class EditNamedObjectController {
 
         mEditNamedObjectActivity = activity;
 
-        mEditNamedObjectModel.setCurrentObject(
-                (NamedEntity) mEditNamedObjectActivity.getIntent().getParcelableExtra(
-                        EditNamedObjectActivity.USER_EXTRA));
+        Intent intent = mEditNamedObjectActivity.getIntent();
+
+        if(intent.hasExtra(EditNamedObjectActivity.EXTRA_USER)){
+            User user = intent.getParcelableExtra(EditNamedObjectActivity.EXTRA_USER);
+            mEditNamedObjectModel.setCurrentObject(user);
+        }else if(intent.hasExtra(EditNamedObjectActivity.EXTRA_ITEM)){
+            Item item = intent.getParcelableExtra(EditNamedObjectActivity.EXTRA_ITEM);
+            mEditNamedObjectModel.setCurrentObject(item);
+        }
 
         mEditNamedObjectModel.setObjects(getEntities());
         mEditNamedObjectModel.setEditUserListAdapter(
@@ -54,6 +61,8 @@ public class EditNamedObjectController {
                 entities.add(item);
             }
         }
+
+        return entities;
     }
 
     public FragmentPagerAdapter getPageAdapter() {
@@ -65,14 +74,14 @@ public class EditNamedObjectController {
         return pageAdapter;
     }
 
-    public void setCurrentUser(User user){
-        mEditNamedObjectModel.setCurrentObject(user);
+    public void setCurrentObject(NamedEntity entity){
+        mEditNamedObjectModel.setCurrentObject(entity);
         mEditNamedObjectActivity.mViewPager.setCurrentItem(
-                getCurrentUserIndex()
+                getCurrentObjectIndex()
         );
     }
 
-    public int getCurrentUserIndex() {
+    public int getCurrentObjectIndex() {
         int index = -1;
 
         for (int i = 0;
@@ -80,7 +89,7 @@ public class EditNamedObjectController {
                 index == -1;
              i++){
             if(mEditNamedObjectModel.getObjects().get(i).getId() ==
-                    mEditNamedObjectModel.getCurrentUser().getId()){
+                    mEditNamedObjectModel.getCurrentObject().getId()){
                 index = i;
             }
         }
@@ -88,12 +97,28 @@ public class EditNamedObjectController {
         return index;
     }
 
-    public RecyclerView.Adapter getUserListAdapter() {
+    public RecyclerView.Adapter getObjectListAdapter() {
         return mEditNamedObjectModel.getEditUserListAdapter();
     }
 
-    public void updateUsers() {
-        mEditNamedObjectModel.setUsers(UserFacade.getUsers(mEditNamedObjectActivity));
+    public void updateObjects(Class clazz){
+        List<NamedEntity> entityList = new LinkedList<>();
+
+        if(clazz == User.class){
+            List<User> userList = UserFacade.getUsers(mEditNamedObjectActivity);
+            for (User u :
+                    userList) {
+                entityList.add(u);
+            }
+        }else if(clazz == Item.class){
+            List<Item> itemList = ItemsFacade.getItems(mEditNamedObjectActivity);
+            for (Item i :
+                    itemList) {
+                entityList.add(i);
+            }
+        }
+
+        mEditNamedObjectModel.setObjects(entityList);
         mEditNamedObjectModel.getEditUserListAdapter().setNamedEntities(mEditNamedObjectModel.getObjects());
     }
 }
