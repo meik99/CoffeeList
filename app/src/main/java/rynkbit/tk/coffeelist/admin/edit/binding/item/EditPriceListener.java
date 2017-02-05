@@ -2,6 +2,7 @@ package rynkbit.tk.coffeelist.admin.edit.binding.item;
 
 import android.content.Context;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.util.Log;
 
 import rynkbit.tk.coffeelist.db.entity.Item;
@@ -20,11 +21,18 @@ public class EditPriceListener extends ItemTextWatcher{
     @Override
     public void afterTextChanged(Editable s) {
         if(getItem() != null){
+            String number = s.toString();
             try {
-                getItem().setPrice(Double.parseDouble(s.toString()));
+                number = number.replace(",", ".");
+
+                if(TextUtils.isEmpty(number)){
+                    number = "0.0";
+                }
+
+                getItem().setPrice(Double.parseDouble(number));
             }catch(NumberFormatException doubleFormatException){
                 try{
-                    getItem().setPrice(Integer.parseInt(s.toString()));
+                    getItem().setPrice(Integer.parseInt(number));
                 }catch(NumberFormatException integerFormatException){
                     Log.i(TAG, "afterTextChanged: could not parse " + s.toString());
                 }

@@ -2,6 +2,7 @@ package rynkbit.tk.coffeelist.admin.edit.binding.user;
 
 import android.content.Context;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.util.Log;
 
 import rynkbit.tk.coffeelist.db.entity.User;
@@ -20,11 +21,17 @@ public class EditBalanceTextWatcher extends UserTextWatcher{
     @Override
     public void afterTextChanged(Editable s) {
         if(getUser() != null){
+            String number = s.toString();
             try {
-                getUser().setBalance(Double.parseDouble(s.toString()));
+                number = number.replace(",", ".");
+
+                if(TextUtils.isEmpty(number)){
+                    number = "0.0";
+                }
+                getUser().setBalance(Double.parseDouble(number));
             }catch(NumberFormatException doubleFormatException){
                 try {
-                    getUser().setBalance(Integer.parseInt(s.toString()));
+                    getUser().setBalance(Integer.parseInt(number));
                 }catch(NumberFormatException inegerFormatException){
                     Log.i(TAG, "afterTextChanged: could not parse " + s.toString());
                 }
