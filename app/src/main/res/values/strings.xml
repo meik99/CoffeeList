@@ -53,7 +53,6 @@
     <string name="tapToEdit">Tap to edit</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
     <string name="item_edit_stock">Stock</string>
     <string name="item_edit_price">Price</string>
     <string name="really_read_backup">Load backup? Current data will be destroyed!</string>

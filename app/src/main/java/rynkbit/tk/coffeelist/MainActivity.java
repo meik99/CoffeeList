@@ -5,15 +5,20 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.GridView;
+import android.widget.LinearLayout;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 
 public class MainActivity extends AppCompatActivity {
+    private final String RELEASE_ADS = "release_ads";
+
     private MainController mController;
     private UserAdapter mUserAdapter;
     private UserRecyclerViewAdapter mUserRecyclerViewAdapter;
@@ -27,9 +32,14 @@ public class MainActivity extends AppCompatActivity {
         mController = new MainController(this);
 
 //        //load app
-//        mAdView = (AdView) findViewById(R.id.adView);
-//        AdRequest adRequest = new AdRequest.Builder().build();
-//        mAdView.loadAd(adRequest);
+        if(BuildConfig.BUILD_TYPE.equals(RELEASE_ADS)){
+            mAdView = (AdView) findViewById(R.id.adView);
+            mAdView.setLayoutParams(new LinearLayout.LayoutParams(
+                    ViewGroup.LayoutParams.WRAP_CONTENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT));
+            AdRequest adRequest = new AdRequest.Builder().build();
+            mAdView.loadAd(adRequest);
+        }
 
         mUserRecyclerViewAdapter = new UserRecyclerViewAdapter();
 
