@@ -1,12 +1,15 @@
 package rynkbit.tk.coffeelist.db.facade;
 
 import android.content.Context;
+import android.os.AsyncTask;
 
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.stmt.query.In;
 
 import java.sql.SQLException;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -21,6 +24,26 @@ import rynkbit.tk.coffeelist.utils.Sort;
  * Created by michael on 11/19/16.
  */
 public class InvoiceFacade {
+    private static AsyncTask<Void, Void, Void> mAsnycTask;
+
+    public interface InvoiceFacadeListener{
+        void onInvoicesReady(List<Invoice> invoices);
+    }
+
+    private static List<InvoiceFacadeListener> mInvoiceListeners = new LinkedList<>();
+
+    public static void addInvoiceListener(InvoiceFacadeListener listener){
+        if(listener != null){
+            mInvoiceListeners.add(listener);
+        }
+    }
+
+    public static void removeInvoiceListener(InvoiceFacadeListener listener){
+        if(listener != null){
+            mInvoiceListeners.remove(listener);
+        }
+    }
+
     public static void book(Context context, User user, Item item) {
         Dao<Invoice, Integer> dao = getInvoiceDao(context);
         int itemStock = item.getStock();
@@ -91,18 +114,40 @@ public class InvoiceFacade {
         return result;
     }
 
-    public static List<Invoice> getInvoices(Context context) {
-        List<Invoice> result = new LinkedList<>();
-        Dao<Invoice, Integer> invoiceDao = getInvoiceDao(context);
-
-        try {
-            result = invoiceDao.queryForAll();
-            result = Sort.bubble(result, true);
-        } catch (SQLException e) {
-            e.printStackTrace();
+    public static void getInvoices(final Context context) {
+        if(mAsnycTask != null){
+            mAsnycTask.cancel(true);
         }
 
-        return result;
+        mAsnycTask = new AsyncTask<Void, Void, Void>(){
+            @Override
+            protected Void doInBackground(Void... voids) {
+                List<Invoice> result = new LinkedList<>();
+                Dao<Invoice, Integer> invoiceDao = getInvoiceDao(context);
+
+                try {
+                    result = invoiceDao.queryForAll();
+//                    result = Sort.bubble(result, true);
+                    Collections
+                    .sort(result, new Comparator<Invoice>() {
+                        @Override
+                        public int compare(Invoice invoice, Invoice t1) {
+                            return t1.compareTo(invoice);
+                        }
+                    });
+
+                    for (InvoiceFacadeListener listener :
+                            mInvoiceListeners) {
+                        listener.onInvoicesReady(result);
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+
+                return null;
+            }
+        };
+        mAsnycTask.execute();
     }
 
     public static void remove(Context context, Invoice invoice) {

@@ -1,12 +1,14 @@
 package rynkbit.tk.coffeelist.admin.invoice;
 
+import java.util.List;
+
 import rynkbit.tk.coffeelist.db.entity.Invoice;
 import rynkbit.tk.coffeelist.db.facade.InvoiceFacade;
 
 /**
  * Created by michael on 11/19/16.
  */
-public class InvoiceController {
+public class InvoiceController implements InvoiceFacade.InvoiceFacadeListener {
     InvoiceActivity mActivity;
     private InvoiceListAdapter listAdapter;
 
@@ -17,7 +19,8 @@ public class InvoiceController {
     }
 
     private void refreshAdapter() {
-        listAdapter.setInvoiceList(InvoiceFacade.getInvoices(mActivity));
+        InvoiceFacade.addInvoiceListener(this);
+        InvoiceFacade.getInvoices(mActivity);
     }
 
     public InvoiceListAdapter getListAdapter() {
@@ -27,5 +30,10 @@ public class InvoiceController {
     public void deleteInvoice(Invoice invoice) {
         InvoiceFacade.remove(mActivity, invoice);
         refreshAdapter();
+    }
+
+    @Override
+    public void onInvoicesReady(List<Invoice> invoices) {
+        listAdapter.setInvoiceList(invoices);
     }
 }

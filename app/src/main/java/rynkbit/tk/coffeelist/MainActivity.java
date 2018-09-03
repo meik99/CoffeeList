@@ -13,16 +13,12 @@ import android.widget.Button;
 import android.widget.GridView;
 import android.widget.LinearLayout;
 
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
-
 public class MainActivity extends AppCompatActivity {
     private final String RELEASE_ADS = "release_ads";
 
     private MainController mController;
     private UserAdapter mUserAdapter;
     private UserRecyclerViewAdapter mUserRecyclerViewAdapter;
-    private AdView mAdView;
     private GridView mUserGrid;
 
     @Override
@@ -30,16 +26,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mController = new MainController(this);
-
-//        //load app
-        if(BuildConfig.BUILD_TYPE.equals(RELEASE_ADS)){
-            mAdView = (AdView) findViewById(R.id.adView);
-            mAdView.setLayoutParams(new LinearLayout.LayoutParams(
-                    ViewGroup.LayoutParams.WRAP_CONTENT,
-                    ViewGroup.LayoutParams.WRAP_CONTENT));
-            AdRequest adRequest = new AdRequest.Builder().build();
-            mAdView.loadAd(adRequest);
-        }
 
         mUserRecyclerViewAdapter = new UserRecyclerViewAdapter();
 
