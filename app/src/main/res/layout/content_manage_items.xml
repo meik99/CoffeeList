@@ -11,7 +11,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="rynkbit.tk.coffeelist.admin.item.ManageItemsActivity"
+    tools:context="rynkbit.tk.coffeelist.ui.admin.item.ManageItemsActivity"
     tools:showIn="@layout/activity_manage_items">
 
 
@@ -20,11 +20,11 @@
         android:layout_height="wrap_content"
         android:text="@string/tapToEdit"/>
 
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/listManageItems">
 
-    </android.support.v7.widget.RecyclerView>
+    </androidx.recyclerview.widget.RecyclerView>
 
 </LinearLayout>

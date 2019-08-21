@@ -8,7 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="rynkbit.tk.coffeelist.admin.invoice.InvoiceActivity">
+    tools:context="rynkbit.tk.coffeelist.ui.admin.invoice.InvoiceActivity">
 
     <TextView
         android:layout_width="match_parent"
@@ -16,11 +16,11 @@
         android:hint="@string/tapToDelete"
         android:id="@+id/txtTapToDelete"/>
 
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/invoiceView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/txtTapToDelete">
-    </android.support.v7.widget.RecyclerView>
+    </androidx.recyclerview.widget.RecyclerView>
 
 </RelativeLayout>

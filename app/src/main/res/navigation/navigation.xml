@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/customerFragment">
+
+    <fragment
+        android:id="@+id/customerFragment"
+        android:name="rynkbit.tk.coffeelist.ui.customer.CustomerFragment"
+        android:label="customer_fragment"
+        tools:layout="@layout/customer_fragment" >
+        <action
+            android:id="@+id/action_customerFragment_to_adminLoginDialog"
+            app:destination="@id/adminLoginDialog" />
+        <action
+            android:id="@+id/action_customerFragment_to_administrationFragment"
+            app:destination="@id/administrationFragment" />
+    </fragment>
+    <dialog
+        android:id="@+id/adminLoginDialog"
+        android:name="rynkbit.tk.coffeelist.ui.customer.AdminLoginDialog"
+        android:label="AdminLoginDialog" />
+    <fragment
+        android:id="@+id/administrationFragment"
+        android:name="rynkbit.tk.coffeelist.ui.admin.AdministrationFragment"
+        android:label="administration_fragment"
+        tools:layout="@layout/administration_fragment" />
+</navigation>

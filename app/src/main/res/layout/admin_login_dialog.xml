@@ -11,30 +11,30 @@
         android:ems="10"
         android:id="@+id/txtAdminPassword" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="4dp">
-        <Button
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:elevation="@dimen/cardview_default_elevation"
-            android:text="@string/admin_login"
-            android:layout_marginRight="4dp"
-            android:layout_marginEnd="4dp"
-            android:id="@+id/btnAdminConfirm"
-            style="@style/Base.Widget.AppCompat.Button.Colored"/>
-        <Button
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:text="@string/cancel"
-            android:layout_marginLeft="4dp"
-            android:layout_marginStart="4dp"
-            android:id="@+id/btnAdminCancel"
-            style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"/>
-    </LinearLayout>
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:orientation="horizontal"-->
+<!--        android:padding="4dp">-->
+<!--        <Button-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_weight="1"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:elevation="@dimen/cardview_default_elevation"-->
+<!--            android:text="@string/admin_login"-->
+<!--            android:layout_marginRight="4dp"-->
+<!--            android:layout_marginEnd="4dp"-->
+<!--            android:id="@+id/btnAdminConfirm"-->
+<!--            style="@style/Base.Widget.AppCompat.Button.Colored"/>-->
+<!--        <Button-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_weight="1"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="@string/cancel"-->
+<!--            android:layout_marginLeft="4dp"-->
+<!--            android:layout_marginStart="4dp"-->
+<!--            android:id="@+id/btnAdminCancel"-->
+<!--            style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"/>-->
+<!--    </LinearLayout>-->
 
 </LinearLayout>
