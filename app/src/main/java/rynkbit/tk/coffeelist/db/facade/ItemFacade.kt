@@ -20,4 +20,15 @@ class ItemFacade : BaseFacade<DatabaseItem, Item>() {
                         item.stock
                 ))
     }
+
+    fun update(item: Item): Single<Int> {
+        return appDatabase
+                .itemDao()
+                .update(DatabaseItem(
+                        item.id,
+                        item.name,
+                        item.price,
+                        item.stock
+                ))
+    }
 }
