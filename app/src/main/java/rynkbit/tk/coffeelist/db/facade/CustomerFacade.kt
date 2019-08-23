@@ -10,29 +10,10 @@ import rynkbit.tk.coffeelist.contract.entity.Customer
 import rynkbit.tk.coffeelist.db.AppDatabase
 import rynkbit.tk.coffeelist.db.entity.DatabaseCustomer
 
-class CustomerFacade : KoinComponent{
-    private val appDatabase by inject<AppDatabase>()
+class CustomerFacade : BaseFacade<DatabaseCustomer, Customer>() {
 
-    fun findAll(): LiveData<List<Customer>>{
-        val liveData = MutableLiveData<List<Customer>>()
-
-        appDatabase
-                .customerDao()
-                .findAll()
-                .subscribeOn(Schedulers.newThread())
-                .map {
-                    val customers = mutableListOf<Customer>()
-
-                    for (customer in it){
-                        customers.add(customer)
-                    }
-
-                    liveData.postValue(customers)
-
-                    return@map it
-                }.subscribe()
-
-        return liveData
+    fun findAll(): LiveData<List<Customer>> {
+        return super.findAll(Customer::class.java)
     }
 
     fun insert(customer: Customer): Single<Long> {

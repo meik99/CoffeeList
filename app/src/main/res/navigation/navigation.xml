@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_customerFragment_to_administrationFragment"
             app:destination="@id/administrationFragment" />
+        <action
+            android:id="@+id/action_customerFragment_to_itemFragment"
+            app:destination="@id/itemFragment" />
     </fragment>
     <dialog
         android:id="@+id/adminLoginDialog"
@@ -26,4 +29,9 @@
         android:name="rynkbit.tk.coffeelist.ui.admin.AdministrationFragment"
         android:label="administration_fragment"
         tools:layout="@layout/administration_fragment" />
+    <fragment
+        android:id="@+id/itemFragment"
+        android:name="rynkbit.tk.coffeelist.ui.item.ItemFragment"
+        android:label="item_fragment"
+        tools:layout="@layout/item_fragment" />
 </navigation>

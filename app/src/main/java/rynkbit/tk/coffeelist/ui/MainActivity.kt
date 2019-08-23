@@ -14,8 +14,10 @@ import org.koin.dsl.module
 import rynkbit.tk.coffeelist.R
 import rynkbit.tk.coffeelist.db.AppDatabase
 import rynkbit.tk.coffeelist.db.facade.CustomerFacade
+import rynkbit.tk.coffeelist.db.facade.ItemFacade
 import rynkbit.tk.coffeelist.ui.customer.CustomerAdapter
 import rynkbit.tk.coffeelist.ui.entity.UICustomer
+import rynkbit.tk.coffeelist.ui.entity.UIItem
 
 class MainActivity : AppCompatActivity() {
     private lateinit var mCustomerAdapter: CustomerAdapter
@@ -31,6 +33,15 @@ class MainActivity : AppCompatActivity() {
                             for(i in 0..50){
                                 CustomerFacade()
                                         .insert(UICustomer(0, "Test Customer $i"))
+                                        .subscribeOn(Schedulers.newThread())
+                                        .subscribe()
+                                ItemFacade()
+                                        .insert(UIItem(
+                                                0,
+                                                "Test Item $i",
+                                                i * 0.75,
+                                                i
+                                        ))
                                         .subscribeOn(Schedulers.newThread())
                                         .subscribe()
                             }

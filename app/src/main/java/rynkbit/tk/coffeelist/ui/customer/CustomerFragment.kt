@@ -13,6 +13,7 @@ import kotlinx.android.synthetic.main.customer_fragment.*
 
 import rynkbit.tk.coffeelist.R
 import rynkbit.tk.coffeelist.db.facade.CustomerFacade
+import rynkbit.tk.coffeelist.ui.MainViewModel
 import rynkbit.tk.coffeelist.ui.ResponsiveStaggeredGridLayoutManager
 
 class CustomerFragment : Fragment() {
@@ -28,8 +29,15 @@ class CustomerFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        val activityViewModel = ViewModelProvider(activity!!)[MainViewModel::class.java]
+
         viewModel = ViewModelProvider(this).get(CustomerViewModel::class.java)
         mCustomerAdapter = CustomerAdapter()
+
+        mCustomerAdapter.onClickListener = {
+            activityViewModel.customer  = it
+            Navigation.findNavController(view!!).navigate(R.id.action_customerFragment_to_itemFragment)
+        }
 
         viewUserCardContainer.layoutManager = ResponsiveStaggeredGridLayoutManager(
                 context!!, StaggeredGridLayoutManager.VERTICAL

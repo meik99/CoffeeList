@@ -14,12 +14,16 @@ import rynkbit.tk.coffeelist.contract.entity.Customer
 class CustomerAdapter : RecyclerView.Adapter<CustomerAdapter.ViewHolder>() {
     private val customers = mutableListOf<Customer>()
 
+    var onClickListener: ((customer: Customer) -> Unit)? = null
+
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         val customer = customers[position]
 
-        viewHolder.view.setOnClickListener(
-                CustomerClickListener(customer)
-        )
+        viewHolder.view.setOnClickListener{
+            onClickListener?.apply {
+                this(customer)
+            }
+        }
         viewHolder.txtUserName.text = customer.name
 //        viewHolder.txtUserBalance.text = String.format(
 //                viewHolder.txtUserBalance.context.getString(R.string.user_balance),
