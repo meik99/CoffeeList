@@ -12,9 +12,13 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import kotlinx.android.synthetic.main.customer_fragment.*
 
 import rynkbit.tk.coffeelist.R
+import rynkbit.tk.coffeelist.contract.entity.InvoiceState
 import rynkbit.tk.coffeelist.db.facade.CustomerFacade
+import rynkbit.tk.coffeelist.db.facade.InvoiceFacade
+import rynkbit.tk.coffeelist.db.facade.ItemFacade
 import rynkbit.tk.coffeelist.ui.MainViewModel
 import rynkbit.tk.coffeelist.ui.ResponsiveStaggeredGridLayoutManager
+import rynkbit.tk.coffeelist.ui.entity.UICustomer
 
 class CustomerFragment : Fragment() {
 
@@ -57,9 +61,30 @@ class CustomerFragment : Fragment() {
 
         CustomerFacade().findAll().observe(
                 this,
-                Observer {
+                Observer {customers ->
+                    val uiCustomers = mutableListOf<UICustomer>()
+
                     activity?.runOnUiThread {
-                        mCustomerAdapter.updateUsers(it.sortedBy { it.name })
+                        InvoiceFacade().findAll().observe(this, Observer {invoices ->
+                            activity?.runOnUiThread {
+                                ItemFacade().findAll().observe(this, Observer {items ->
+                                    customers.forEach {customer ->
+                                        var balance = 0.toDouble()
+
+                                        invoices.filter {
+                                            it.customerId == customer.id &&
+                                                    it.state == InvoiceState.OPEN
+                                        }.forEach { invoice ->
+                                            balance += items.find { it.id == invoice.itemId }
+                                                    ?.price ?: 0.toDouble()
+                                        }
+
+                                        uiCustomers.add(UICustomer(customer.id, customer.name, balance))
+                                        mCustomerAdapter.updateUsers(uiCustomers.sortedBy { it.name  })
+                                    }
+                                })
+                            }
+                        })
                     }
 
                 }

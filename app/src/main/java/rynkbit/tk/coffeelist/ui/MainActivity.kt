@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity() {
 
                             for(i in 0..50){
                                 CustomerFacade()
-                                        .insert(UICustomer(0, "Test Customer $i"))
+                                        .insert(UICustomer(0, "Test Customer $i", 0.toDouble()))
                                         .subscribeOn(Schedulers.newThread())
                                         .subscribe()
                                 ItemFacade()

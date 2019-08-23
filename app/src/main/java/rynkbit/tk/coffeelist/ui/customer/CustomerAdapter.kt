@@ -6,15 +6,16 @@ import android.view.ViewGroup
 import android.widget.TextView
 import rynkbit.tk.coffeelist.R
 import rynkbit.tk.coffeelist.contract.entity.Customer
+import rynkbit.tk.coffeelist.ui.entity.UICustomer
 
 /**
  * Created by michael on 1/13/17.
  */
 
 class CustomerAdapter : RecyclerView.Adapter<CustomerAdapter.ViewHolder>() {
-    private val customers = mutableListOf<Customer>()
+    private val customers = mutableListOf<UICustomer>()
 
-    var onClickListener: ((customer: Customer) -> Unit)? = null
+    var onClickListener: ((customer: UICustomer) -> Unit)? = null
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         val customer = customers[position]
@@ -25,10 +26,10 @@ class CustomerAdapter : RecyclerView.Adapter<CustomerAdapter.ViewHolder>() {
             }
         }
         viewHolder.txtUserName.text = customer.name
-//        viewHolder.txtUserBalance.text = String.format(
-//                viewHolder.txtUserBalance.context.getString(R.string.user_balance),
-//                user.balance
-//        )
+        viewHolder.txtUserBalance.text = String.format(
+                viewHolder.txtUserBalance.context.getString(R.string.user_balance),
+                customer.balance
+        )
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -40,7 +41,7 @@ class CustomerAdapter : RecyclerView.Adapter<CustomerAdapter.ViewHolder>() {
         return customers.size
     }
 
-    fun updateUsers(customerList: List<Customer>) {
+    fun updateUsers(customerList: List<UICustomer>) {
         customers.clear()
         customers.addAll(customerList)
         this.notifyDataSetChanged()
