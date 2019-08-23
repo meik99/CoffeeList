@@ -15,7 +15,7 @@ class ItemAdapter : RecyclerView.Adapter<ItemAdapter.ViewHolder>() {
 
     private var items = mutableListOf<Item>()
 
-    var onClickListener: (() -> Unit)? = null
+    var onClickListener: ((item: Item) -> Unit)? = null
 
     fun updateItems(itemList: List<Item>) {
         items.clear()
@@ -50,7 +50,7 @@ class ItemAdapter : RecyclerView.Adapter<ItemAdapter.ViewHolder>() {
         )
 
         holder.view.setOnClickListener {
-            onClickListener?.apply { this() }
+            onClickListener?.apply { this(item) }
         }
     }
 

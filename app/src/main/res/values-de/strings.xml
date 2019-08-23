@@ -4,7 +4,7 @@
     <string name="user_balance">Betrag: %1$.2f€</string>
     <string name="item_stock">Lagernd: %1$d</string>
     <string name="item_price">Preis: %1$.2f€</string>
-    <string name="item_buy">%1$s für %2$.2f€ kaufen?</string>
+    <string name="item_buy_text">%1$s für %2$.2f€ kaufen?</string>
     <string name="item_outOfStock">%1$s ist nicht verfügbar</string>
     <string name="no">Nein</string>
     <string name="yes">Ja</string>
@@ -54,4 +54,5 @@
     <string name="item_edit_stock">Lagernd</string>
     <string name="really_read_backup">Backup laden? Alle derzeitigen Daten werden gelöscht!</string>
     <string name="tapToEdit">Zum Edititeren berühren</string>
+    <string name="item_buy_title">%1$s kaufen?</string>
 </resources>
