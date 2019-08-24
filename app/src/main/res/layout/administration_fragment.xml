@@ -91,7 +91,7 @@
         app:layout_constraintTop_toBottomOf="@+id/cardView6">
 
         <Button
-            android:id="@+id/btnAdminInvoices"
+            android:id="@+id/btnAdminManageInvoices"
             style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -160,7 +160,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <Button
-            android:id="@+id/btnAdminManageUser"
+            android:id="@+id/btnAdminManageCustomer"
             style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

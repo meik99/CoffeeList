@@ -15,7 +15,7 @@
             app:destination="@id/adminLoginDialog" />
         <action
             android:id="@+id/action_customerFragment_to_administrationFragment"
-            app:destination="@id/administrationFragment" />
+            app:destination="@id/navigationAdministration" />
         <action
             android:id="@+id/action_customerFragment_to_itemFragment"
             app:destination="@id/itemFragment" />
@@ -25,13 +25,42 @@
         android:name="rynkbit.tk.coffeelist.ui.customer.AdminLoginDialog"
         android:label="AdminLoginDialog" />
     <fragment
-        android:id="@+id/administrationFragment"
-        android:name="rynkbit.tk.coffeelist.ui.admin.AdministrationFragment"
-        android:label="administration_fragment"
-        tools:layout="@layout/administration_fragment" />
-    <fragment
         android:id="@+id/itemFragment"
         android:name="rynkbit.tk.coffeelist.ui.item.ItemFragment"
         android:label="item_fragment"
         tools:layout="@layout/item_fragment" />
+    <navigation
+        android:id="@+id/navigationAdministration"
+        app:startDestination="@id/administrationFragment" >
+        <fragment
+            android:id="@+id/manageCustomer"
+            android:name="rynkbit.tk.coffeelist.ui.admin.user.ManageCustomer"
+            android:label="manage_customer_fragment"
+            tools:layout="@layout/manage_customer_fragment" />
+        <fragment
+            android:id="@+id/manageInvoicesFragment"
+            android:name="rynkbit.tk.coffeelist.ui.admin.invoice.ManageInvoicesFragment"
+            android:label="manage_invoices_fragment"
+            tools:layout="@layout/manage_invoices_fragment" />
+        <fragment
+            android:id="@+id/manageItemsFragment"
+            android:name="rynkbit.tk.coffeelist.ui.admin.item.ManageItemsFragment"
+            android:label="manage_items_fragment"
+            tools:layout="@layout/manage_items_fragment" />
+        <fragment
+            android:id="@+id/administrationFragment"
+            android:name="rynkbit.tk.coffeelist.ui.admin.AdministrationFragment"
+            android:label="administration_fragment"
+            tools:layout="@layout/administration_fragment">
+            <action
+                android:id="@+id/action_administrationFragment_to_manageCustomer"
+                app:destination="@id/manageCustomer" />
+            <action
+                android:id="@+id/action_administrationFragment_to_manageInvoicesFragment"
+                app:destination="@id/manageInvoicesFragment" />
+            <action
+                android:id="@+id/action_administrationFragment_to_manageItemsFragment"
+                app:destination="@id/manageItemsFragment" />
+        </fragment>
+    </navigation>
 </navigation>

@@ -1,21 +1,16 @@
 package rynkbit.tk.coffeelist.ui.admin
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-
+import androidx.navigation.Navigation
+import kotlinx.android.synthetic.main.administration_fragment.*
 import rynkbit.tk.coffeelist.R
 
 class AdministrationFragment : Fragment() {
-
-    companion object {
-        fun newInstance() = AdministrationFragment()
-    }
-
     private lateinit var viewModel: AdministrationViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -26,6 +21,19 @@ class AdministrationFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(AdministrationViewModel::class.java)
+
+        btnAdminManageCustomer.setOnClickListener {
+            Navigation.findNavController(activity!!, R.id.nav_host)
+                    .navigate(R.id.action_administrationFragment_to_manageCustomer)
+        }
+        btnAdminManageItems.setOnClickListener {
+            Navigation.findNavController(activity!!, R.id.nav_host)
+                    .navigate(R.id.action_administrationFragment_to_manageItemsFragment)
+        }
+        btnAdminManageInvoices.setOnClickListener {
+            Navigation.findNavController(activity!!, R.id.nav_host)
+                    .navigate(R.id.action_administrationFragment_to_manageInvoicesFragment)
+        }
     }
 
 }

@@ -24,9 +24,9 @@ public class UserManagementFragment extends Fragment {
             @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_admin_user_management, container, false);
 
-        Button btnManageUser = (Button) view.findViewById(R.id.btnAdminManageUser);
+        Button btnManageUser = (Button) view.findViewById(R.id.btnAdminManageCustomer);
         Button btnManageItems = (Button) view.findViewById(R.id.btnAdminManageItems);
-        Button btnEditInvoices = (Button) view.findViewById(R.id.btnAdminInvoices);
+        Button btnEditInvoices = (Button) view.findViewById(R.id.btnAdminManageInvoices);
 
         btnManageUser.setOnClickListener(new ManageUserClickListener());
         btnManageItems.setOnClickListener(new ManageItemsClickListener());
