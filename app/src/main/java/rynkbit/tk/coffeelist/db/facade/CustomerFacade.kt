@@ -14,13 +14,21 @@ class CustomerFacade : BaseFacade<DatabaseCustomer, Customer>() {
         return super.findAll(Customer::class.java)
     }
 
-    fun insert(customer: Customer): Single<Long> {
-        return appDatabase
+    fun insert(customer: Customer): LiveData<Long> {
+        val liveData = MutableLiveData<Long>()
+
+        appDatabase
                 .customerDao()
                 .insert(DatabaseCustomer(
                         customer.id,
                         customer.name
                 ))
+                .subscribeOn(Schedulers.newThread())
+                .map {
+                    liveData.postValue(it)
+                }
+                .subscribe()
+        return liveData
     }
 
     fun getBalance(customer: Customer): LiveData<Double>{

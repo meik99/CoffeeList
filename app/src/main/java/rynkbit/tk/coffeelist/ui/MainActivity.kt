@@ -33,8 +33,6 @@ class MainActivity : AppCompatActivity() {
                             for(i in 0..50){
                                 CustomerFacade()
                                         .insert(UICustomer(0, "Test Customer $i", 0.toDouble()))
-                                        .subscribeOn(Schedulers.newThread())
-                                        .subscribe()
                                 ItemFacade()
                                         .insert(UIItem(
                                                 0,
@@ -42,8 +40,6 @@ class MainActivity : AppCompatActivity() {
                                                 i * 0.75,
                                                 i
                                         ))
-                                        .subscribeOn(Schedulers.newThread())
-                                        .subscribe()
                             }
 
                         }
