@@ -39,7 +39,7 @@ class CustomerFragment : Fragment() {
         mCustomerAdapter = CustomerAdapter()
 
         mCustomerAdapter.onClickListener = {
-            activityViewModel.customer  = it
+            activityViewModel.customer = it
             Navigation.findNavController(view!!).navigate(R.id.action_customerFragment_to_itemFragment)
         }
 
@@ -48,8 +48,8 @@ class CustomerFragment : Fragment() {
         )
         viewUserCardContainer.adapter = mCustomerAdapter
 
-        btnAdminLogin.setOnClickListener{
-            viewModel.askCredentials(context!!){
+        btnAdminLogin.setOnClickListener {
+            viewModel.askCredentials(context!!) {
                 Navigation.findNavController(view!!).navigate(R.id.action_customerFragment_to_administrationFragment)
             }
                     .show(fragmentManager!!, CustomerFragment::class.simpleName)
@@ -61,30 +61,25 @@ class CustomerFragment : Fragment() {
 
         CustomerFacade().findAll().observe(
                 this,
-                Observer {customers ->
+                Observer { customers ->
                     val uiCustomers = mutableListOf<UICustomer>()
 
                     activity?.runOnUiThread {
-                        InvoiceFacade().findAll().observe(this, Observer {invoices ->
-                            activity?.runOnUiThread {
-                                ItemFacade().findAll().observe(this, Observer {items ->
-                                    customers.forEach {customer ->
-                                        var balance = 0.toDouble()
+                        customers.forEach { customer ->
+                            CustomerFacade()
+                                    .getBalance(customer)
+                                    .observe(this,
+                                            Observer { balance ->
+                                                uiCustomers.removeAll { it.id == customer.id }
+                                                uiCustomers.add(UICustomer(
+                                                        customer.id,
+                                                        customer.name,
+                                                        balance
+                                                ))
 
-                                        invoices.filter {
-                                            it.customerId == customer.id &&
-                                                    it.state == InvoiceState.OPEN
-                                        }.forEach { invoice ->
-                                            balance += items.find { it.id == invoice.itemId }
-                                                    ?.price ?: 0.toDouble()
-                                        }
-
-                                        uiCustomers.add(UICustomer(customer.id, customer.name, balance))
-                                        mCustomerAdapter.updateUsers(uiCustomers.sortedBy { it.name  })
-                                    }
-                                })
-                            }
-                        })
+                                                mCustomerAdapter.updateUsers(uiCustomers.sortedBy { it.name })
+                                            })
+                        }
                     }
 
                 }
