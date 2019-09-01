@@ -34,7 +34,7 @@
         app:startDestination="@id/administrationFragment" >
         <fragment
             android:id="@+id/manageCustomer"
-            android:name="rynkbit.tk.coffeelist.ui.admin.user.ManageCustomer"
+            android:name="rynkbit.tk.coffeelist.ui.admin.customer.ManageCustomerFragment"
             android:label="manage_customer_fragment"
             tools:layout="@layout/manage_customer_fragment" />
         <fragment

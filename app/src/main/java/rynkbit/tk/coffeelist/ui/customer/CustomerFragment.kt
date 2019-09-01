@@ -12,13 +12,9 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import kotlinx.android.synthetic.main.customer_fragment.*
 
 import rynkbit.tk.coffeelist.R
-import rynkbit.tk.coffeelist.contract.entity.InvoiceState
-import rynkbit.tk.coffeelist.db.facade.CustomerFacade
-import rynkbit.tk.coffeelist.db.facade.InvoiceFacade
-import rynkbit.tk.coffeelist.db.facade.ItemFacade
 import rynkbit.tk.coffeelist.ui.MainViewModel
 import rynkbit.tk.coffeelist.ui.ResponsiveStaggeredGridLayoutManager
-import rynkbit.tk.coffeelist.ui.entity.UICustomer
+import rynkbit.tk.coffeelist.ui.facade.UICustomerFacade
 
 class CustomerFragment : Fragment() {
 
@@ -59,31 +55,11 @@ class CustomerFragment : Fragment() {
     override fun onResume() {
         super.onResume()
 
-        CustomerFacade().findAll().observe(
-                this,
-                Observer { customers ->
-                    val uiCustomers = mutableListOf<UICustomer>()
-
-                    activity?.runOnUiThread {
-                        customers.forEach { customer ->
-                            CustomerFacade()
-                                    .getBalance(customer)
-                                    .observe(this,
-                                            Observer { balance ->
-                                                uiCustomers.removeAll { it.id == customer.id }
-                                                uiCustomers.add(UICustomer(
-                                                        customer.id,
-                                                        customer.name,
-                                                        balance
-                                                ))
-
-                                                mCustomerAdapter.updateUsers(uiCustomers.sortedBy { it.name })
-                                            })
-                        }
-                    }
-
-                }
-        )
+        UICustomerFacade()
+                .findCustomersWithBalance(this, activity!!)
+                .observe(this, Observer {customers ->
+                    mCustomerAdapter.updateCustomers(customers.sortedBy { it.name })
+                })
     }
 
 

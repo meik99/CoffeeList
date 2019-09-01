@@ -3,7 +3,7 @@
     <item android:id="@+id/removeUser"
         android:title="@string/remove"/>
     <item android:id="@+id/bookUser"
-        android:title="@string/evenUser"/>
+        android:title="@string/clear_balance"/>
     <!--<item android:id="@+id/renameUser"-->
         <!--android:title="@string/rename"/>-->
 </menu>

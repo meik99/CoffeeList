@@ -2,6 +2,7 @@ package rynkbit.tk.coffeelist.db.facade
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import io.reactivex.schedulers.Schedulers
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 import rynkbit.tk.coffeelist.db.AppDatabase
@@ -37,6 +38,18 @@ abstract class BaseFacade<DatabaseEntity : Entity, Entity> : KoinComponent{
         }
                 .subscribe()
 
+        return liveData
+    }
+
+    protected fun delete(entity: DatabaseEntity, entityClass: Class<Entity>): MutableLiveData<Unit> {
+        val liveData = MutableLiveData<Unit>()
+        findDao(entityClass)
+                .delete(entity)
+                .subscribeOn(Schedulers.newThread())
+                .map {
+                    liveData.postValue(Unit)
+                }
+                .subscribe()
         return liveData
     }
 }

@@ -2,6 +2,7 @@ package rynkbit.tk.coffeelist.db.facade
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
 import rynkbit.tk.coffeelist.contract.entity.Customer
 import rynkbit.tk.coffeelist.contract.entity.Invoice
@@ -45,5 +46,49 @@ class InvoiceFacade : BaseFacade<DatabaseInvoice, Invoice>() {
                         Date(),
                         InvoiceState.OPEN
                 ))
+    }
+
+    fun deleteByCustomer(customerId: Int): LiveData<Unit> {
+        val liveData = MutableLiveData<Unit>()
+        appDatabase
+                .invoiceDao()
+                .deleteByCustomer(customerId)
+                .subscribeOn(Schedulers.newThread())
+                .map {
+                    liveData.postValue(Unit)
+                }
+                .subscribe()
+        return liveData
+    }
+
+    fun clearCustomer(customer: Customer): LiveData<Unit> {
+        val liveData = MutableLiveData<Unit>()
+
+        appDatabase
+                .invoiceDao()
+                .findByCustomerAndState(customer.id, InvoiceState.OPEN)
+                .subscribeOn(Schedulers.newThread())
+                .map { invoices ->
+                    invoices.forEach {
+                        appDatabase
+                                .invoiceDao()
+                                .update(
+                                        DatabaseInvoice(
+                                                id = it.id,
+                                                customerId = it.customerId,
+                                                itemId = it.itemId,
+                                                date = it.date,
+                                                state = InvoiceState.CLOSED
+                                        )
+                                )
+                                .subscribeOn(Schedulers.newThread())
+                                .subscribe { success, error ->
+                                    liveData.postValue(Unit)
+                                }
+
+                    }
+                }
+                .subscribe()
+        return liveData
     }
 }

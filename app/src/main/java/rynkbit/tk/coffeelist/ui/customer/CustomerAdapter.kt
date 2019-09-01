@@ -41,7 +41,7 @@ class CustomerAdapter : RecyclerView.Adapter<CustomerAdapter.ViewHolder>() {
         return customers.size
     }
 
-    fun updateUsers(customerList: List<UICustomer>) {
+    fun updateCustomers(customerList: List<UICustomer>) {
         customers.clear()
         customers.addAll(customerList)
         this.notifyDataSetChanged()

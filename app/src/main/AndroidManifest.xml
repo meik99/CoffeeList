@@ -25,10 +25,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.admin.user.ManageUserActivity"
-            android:label="@string/title_activity_manage_user"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
             android:name=".ui.admin.item.ManageItemsActivity"
             android:label="@string/title_activity_manage_items"
             android:theme="@style/AppTheme.NoActionBar" />

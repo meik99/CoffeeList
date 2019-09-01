@@ -16,11 +16,11 @@
     <string name="admin_manageUser">Benutzer verwalten</string>
     <string name="admin_setProtocolPath">Protokoll-Pfad setzen</string>
     <string name="cancel">Abbrechen</string>
-    <string name="confirm_even_user">Benutzer %1$s abrechnen?</string>
-    <string name="evenUser">Abrechnen</string>
+    <string name="confirm_clear_balance">Benutzer %1$s abrechnen?</string>
+    <string name="clear_balance">Abrechnen</string>
     <string name="ok">Ok</string>
     <string name="remove">Entfernen</string>
-    <string name="remove_user_confirmation">Benutzer %1$s wirklich entfernen?</string>
+    <string name="remove_customer_confirmation">Benutzer %1$s wirklich entfernen?</string>
     <string name="rename">Umbenennen</string>
     <string name="title_activity_manage_user">Benutzerverwaltung</string>
     <string name="change_price">Preis ändern</string>
@@ -55,4 +55,5 @@
     <string name="really_read_backup">Backup laden? Alle derzeitigen Daten werden gelöscht!</string>
     <string name="tapToEdit">Zum Edititeren berühren</string>
     <string name="item_buy_title">%1$s kaufen?</string>
+    <string name="changes_are_saved_automatically">Änderungen werden automatisch gespeichert</string>
 </resources>

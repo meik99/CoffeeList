@@ -60,4 +60,11 @@ class CustomerFacade : BaseFacade<DatabaseCustomer, Customer>() {
                 .subscribe()
         return liveData
     }
+
+    fun delete(customer: Customer): MutableLiveData<Unit> {
+        return super.delete(DatabaseCustomer(
+                customer.id,
+                customer.name
+        ), Customer::class.java)
+    }
 }

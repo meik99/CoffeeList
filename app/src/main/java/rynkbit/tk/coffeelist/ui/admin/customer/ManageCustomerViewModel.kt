@@ -1,4 +1,4 @@
-package rynkbit.tk.coffeelist.ui.admin.user
+package rynkbit.tk.coffeelist.ui.admin.customer
 
 import androidx.lifecycle.ViewModel
 
