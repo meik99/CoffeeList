@@ -15,6 +15,7 @@ import kotlinx.android.synthetic.main.manage_customer_fragment.*
 import rynkbit.tk.coffeelist.R
 import rynkbit.tk.coffeelist.db.facade.CustomerFacade
 import rynkbit.tk.coffeelist.db.facade.InvoiceFacade
+import rynkbit.tk.coffeelist.ui.admin.customer.add.AddCustomerDialog
 import rynkbit.tk.coffeelist.ui.entity.UICustomer
 import rynkbit.tk.coffeelist.ui.facade.UICustomerFacade
 
@@ -35,6 +36,24 @@ class ManageCustomerFragment : Fragment() {
 
         listEditItems.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         listEditItems.adapter = adapter
+
+        fabAddCustomer.setOnClickListener {
+            AddCustomerDialog { dialogInterface, name ->
+                onAddCustomer(dialogInterface, name)
+            }.show(fragmentManager!!, null)
+
+        }
+    }
+
+    private fun onAddCustomer(dialogInterface: DialogInterface, name: String) {
+        CustomerFacade()
+                .insert(UICustomer(
+                        0, name, 0.0
+                ))
+                .observe(this, Observer {
+                    dialogInterface.dismiss()
+                    updateCustomers()
+                })
     }
 
     override fun onResume() {
