@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-android-extensions'
 
 buildscript {
     repositories {
@@ -41,7 +41,8 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.config
+//            signingConfig signingConfigs.config
+            signingConfig null
         }
     }
     compileOptions {
@@ -49,6 +50,9 @@ android {
         targetCompatibility "1.8"
     }
     productFlavors {
+    }
+    lintOptions {
+        abortOnError false
     }
 }
 
