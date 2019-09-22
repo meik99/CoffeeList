@@ -48,12 +48,12 @@
     <string name="admin_readBackup">Read Backup</string>
     <string name="title_activity_edit_user" translatable="false">EditUserActivity</string>
     <string name="section_format" translatable="false">Hello World from section: %1$d</string>
-    <string name="edit_user_name">Name</string>
+    <string name="name">Name</string>
     <string name="edit_user_balance">Balance</string>
     <string name="title_activity_edit_items" translatable="false">EditItemsActivity</string>
     <string name="tapToEdit">Tap to edit</string>
-    <string name="item_edit_stock">Stock</string>
-    <string name="item_edit_price">Price</string>
+    <string name="stock">Stock</string>
+    <string name="price">Price</string>
     <string name="really_read_backup">Load backup? Current data will be destroyed!</string>
     <string name="found_backup">Found backup!</string>
     <string name="backup_created">Backup created!</string>

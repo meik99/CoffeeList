@@ -45,13 +45,13 @@
     <string name="title_activity_admin_extended">Einstellungen</string>
     <string name="user_management_section_title">Benutzerverwaltung</string>
     <string name="admin_readBackup">Backup einlesen</string>
-    <string name="edit_user_name">Name</string>
+    <string name="name">Name</string>
     <string name="edit_user_balance">Kontostand</string>
     <string name="backup_created">Backup erstellt!</string>
     <string name="backup_not_created">Konnte Backup nicht erstellen!</string>
     <string name="found_backup">Backup gefunden!</string>
-    <string name="item_edit_price">Preis</string>
-    <string name="item_edit_stock">Lagernd</string>
+    <string name="price">Preis</string>
+    <string name="stock">Lagernd</string>
     <string name="really_read_backup">Backup laden? Alle derzeitigen Daten werden gelöscht!</string>
     <string name="tapToEdit">Zum Edititeren berühren</string>
     <string name="item_buy_title">%1$s kaufen?</string>

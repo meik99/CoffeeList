@@ -40,7 +40,7 @@ class ManageCustomerFragment : Fragment() {
         fabAddCustomer.setOnClickListener {
             AddCustomerDialog { dialogInterface, name ->
                 onAddCustomer(dialogInterface, name)
-            }.show(fragmentManager!!, null)
+            }.show(parentFragmentManager, null)
 
         }
     }

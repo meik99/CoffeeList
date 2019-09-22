@@ -21,7 +21,7 @@ class ManageCustomerAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
                 LayoutInflater.from(parent.context)
-                    .inflate(R.layout.edit_customer_item, parent, false)
+                    .inflate(R.layout.edit_customer, parent, false)
         )
     }
 

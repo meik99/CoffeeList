@@ -11,7 +11,7 @@ import android.widget.EditText
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import kotlinx.android.synthetic.main.edit_customer_item.view.*
+import kotlinx.android.synthetic.main.edit_customer.view.*
 import rynkbit.tk.coffeelist.R
 import java.lang.IllegalStateException
 
