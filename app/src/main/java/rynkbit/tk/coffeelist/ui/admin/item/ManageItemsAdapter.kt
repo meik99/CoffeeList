@@ -25,7 +25,7 @@ class ManageItemsAdapter : RecyclerView.Adapter<ManageItemsAdapter.ViewHolder>()
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = items[position]
         val currencyFormat = NumberFormat.getCurrencyInstance(Locale.getDefault())
-
+ 
         holder.apply{
             txtId.text = item.id.toString()
             editName.setText(item.name)
