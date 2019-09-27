@@ -15,6 +15,7 @@ import kotlinx.android.synthetic.main.manage_customer_fragment.*
 import rynkbit.tk.coffeelist.R
 import rynkbit.tk.coffeelist.db.facade.CustomerFacade
 import rynkbit.tk.coffeelist.db.facade.InvoiceFacade
+import rynkbit.tk.coffeelist.db.facade.ItemFacade
 import rynkbit.tk.coffeelist.ui.admin.customer.add.AddCustomerDialog
 import rynkbit.tk.coffeelist.ui.entity.UICustomer
 import rynkbit.tk.coffeelist.ui.facade.UICustomerFacade
@@ -33,6 +34,7 @@ class ManageCustomerFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(ManageCustomerViewModel::class.java)
         adapter = ManageCustomerAdapter()
+
         adapter.onClearBalance = onClearBalance()
         adapter.onRemoveCustomer = onRemoveCustomer()
         adapter.onUpdateCustomer = onUpdateCustomer()
@@ -59,32 +61,49 @@ class ManageCustomerFragment : Fragment() {
                 })
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
+    override fun onResume() {
+        super.onResume()
         updateCustomers()
     }
 
-    override fun onResume() {
-        super.onResume()
-    }
-
     private fun updateCustomers() {
-        UICustomerFacade()
-                .findCustomersWithBalance(this, activity!!)
-                .observe(this, Observer { customers ->
-                    adapter.updateCustomers(customers.sortedBy { it.id })
-                })
+        val liveData = viewModel.updateAll(this)
+
+        liveData.observe(this, Observer { finishedUpdating ->
+            if (finishedUpdating.all { it }) {
+                liveData.removeObservers(this)
+
+                val uiCustomers = mutableListOf<UICustomer>()
+
+                for (customer in viewModel.customers){
+                    val invoices = viewModel.invoice.filter { it.customerId == customer.id }
+                    var balance = 0.0
+
+                    for (invoice in invoices) {
+                        balance += viewModel.items.find { it.id  == invoice.itemId }?.price ?: 0.0
+                    }
+
+                    uiCustomers.add(UICustomer(
+                            customer.id,
+                            customer.name,
+                            balance
+                    ))
+                }
+
+                adapter.updateCustomers(uiCustomers)
+            }
+        })
     }
 
     private fun onUpdateCustomer(): (customer: UICustomer) -> Unit = { customer ->
-        CustomerFacade()
+        viewModel
+                .customerFacade
                 .update(customer)
                 .observe(this, Observer {
                 })
     }
 
-    private fun onRemoveCustomer(): (customer: UICustomer) -> Unit = {customer ->
+    private fun onRemoveCustomer(): (customer: UICustomer) -> Unit = { customer ->
         val dialogBuilder = AlertDialog.Builder(context)
 
         dialogBuilder
@@ -115,7 +134,7 @@ class ManageCustomerFragment : Fragment() {
                 .show()
     }
 
-    private fun onClearBalance(): (customer: UICustomer) -> Unit = {customer ->
+    private fun onClearBalance(): (customer: UICustomer) -> Unit = { customer ->
         val dialogBuilder = AlertDialog.Builder(context)
 
         dialogBuilder
