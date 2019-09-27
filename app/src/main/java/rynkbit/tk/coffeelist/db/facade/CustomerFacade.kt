@@ -31,6 +31,13 @@ class CustomerFacade : BaseFacade<DatabaseCustomer, Customer>() {
         return liveData
     }
 
+    fun update(customer: Customer): LiveData<Unit> {
+        return super.update(DatabaseCustomer(
+                customer.id,
+                customer.name
+        ), Customer::class.java)
+    }
+
     fun getBalance(customer: Customer): LiveData<Double>{
         val liveData = MutableLiveData<Double>()
         appDatabase
@@ -61,7 +68,7 @@ class CustomerFacade : BaseFacade<DatabaseCustomer, Customer>() {
         return liveData
     }
 
-    fun delete(customer: Customer): MutableLiveData<Unit> {
+    fun delete(customer: Customer): LiveData<Unit> {
         return super.delete(DatabaseCustomer(
                 customer.id,
                 customer.name

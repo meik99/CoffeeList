@@ -24,11 +24,11 @@ public class ManageItemsController {
 
     public ManageItemsController(ManageItemsActivity manageItemsActivity) {
         mActivity = manageItemsActivity;
-        listAdapter = new ManageItemsAdapter(this);
+//        listAdapter = new ManageItemsAdapter(this);
     }
 
     public void refreshListAdapter(boolean reverted){
-        listAdapter.setItems(ItemsFacade.getItems(mActivity, reverted));
+//        listAdapter.setItems(ItemsFacade.getItems(mActivity, reverted));
     }
 
     public void refreshListAdapter(){

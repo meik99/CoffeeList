@@ -41,10 +41,22 @@ abstract class BaseFacade<DatabaseEntity : Entity, Entity> : KoinComponent{
         return liveData
     }
 
-    protected fun delete(entity: DatabaseEntity, entityClass: Class<Entity>): MutableLiveData<Unit> {
+    protected fun delete(entity: DatabaseEntity, entityClass: Class<Entity>): LiveData<Unit> {
         val liveData = MutableLiveData<Unit>()
         findDao(entityClass)
                 .delete(entity)
+                .subscribeOn(Schedulers.newThread())
+                .map {
+                    liveData.postValue(Unit)
+                }
+                .subscribe()
+        return liveData
+    }
+
+    protected fun update(entity: DatabaseEntity, entityClass: Class<Entity>): LiveData<Unit> {
+        val liveData = MutableLiveData<Unit>()
+        findDao(entityClass)
+                .update(entity)
                 .subscribeOn(Schedulers.newThread())
                 .map {
                     liveData.postValue(Unit)

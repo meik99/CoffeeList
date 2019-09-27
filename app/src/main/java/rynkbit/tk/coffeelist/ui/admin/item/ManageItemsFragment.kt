@@ -7,16 +7,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import kotlinx.android.synthetic.main.manage_items_fragment.*
 
 import rynkbit.tk.coffeelist.R
 
 class ManageItemsFragment : Fragment() {
-
-    companion object {
-        fun newInstance() = ManageItemsFragment()
-    }
-
     private lateinit var viewModel: ManageItemsViewModel
+    private lateinit var itemsAdapter: ManageItemsAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -26,7 +24,11 @@ class ManageItemsFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(ManageItemsViewModel::class.java)
-        // TODO: Use the ViewModel
+
+        itemsAdapter = ManageItemsAdapter()
+
+        listItems.layoutManager = LinearLayoutManager(context!!, LinearLayoutManager.VERTICAL, false)
+        listItems.adapter = itemsAdapter
     }
 
 }

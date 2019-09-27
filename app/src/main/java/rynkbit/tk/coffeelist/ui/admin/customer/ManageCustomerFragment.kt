@@ -32,7 +32,10 @@ class ManageCustomerFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(ManageCustomerViewModel::class.java)
-        adapter = ManageCustomerAdapter(onRemoveCustomer(), onClearBalance())
+        adapter = ManageCustomerAdapter()
+        adapter.onClearBalance = onClearBalance()
+        adapter.onRemoveCustomer = onRemoveCustomer()
+        adapter.onUpdateCustomer = onUpdateCustomer()
 
         listEditItems.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         listEditItems.adapter = adapter
@@ -56,10 +59,14 @@ class ManageCustomerFragment : Fragment() {
                 })
     }
 
-    override fun onResume() {
-        super.onResume()
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
 
         updateCustomers()
+    }
+
+    override fun onResume() {
+        super.onResume()
     }
 
     private fun updateCustomers() {
@@ -67,6 +74,13 @@ class ManageCustomerFragment : Fragment() {
                 .findCustomersWithBalance(this, activity!!)
                 .observe(this, Observer { customers ->
                     adapter.updateCustomers(customers.sortedBy { it.id })
+                })
+    }
+
+    private fun onUpdateCustomer(): (customer: UICustomer) -> Unit = { customer ->
+        CustomerFacade()
+                .update(customer)
+                .observe(this, Observer {
                 })
     }
 
