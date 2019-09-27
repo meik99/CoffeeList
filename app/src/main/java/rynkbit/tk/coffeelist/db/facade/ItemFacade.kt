@@ -61,4 +61,49 @@ class ItemFacade : BaseFacade<DatabaseItem, Item>() {
                 item.stock - 1
         ))
     }
+
+    fun updateName(item: Item): LiveData<Int> {
+        val liveData = MutableLiveData<Int>()
+
+        appDatabase
+                .itemDao()
+                .updateName(item.id, item.name)
+                .subscribeOn(Schedulers.newThread())
+                .map {
+                    liveData.postValue(it)
+                }
+                .subscribe()
+
+        return liveData
+    }
+
+    fun updatePrice(item: Item): LiveData<Int> {
+        val liveData = MutableLiveData<Int>()
+
+        appDatabase
+                .itemDao()
+                .updatePrice(item.id, item.price)
+                .subscribeOn(Schedulers.newThread())
+                .map {
+                    liveData.postValue(it)
+                }
+                .subscribe()
+
+        return liveData
+    }
+
+    fun updateStock(item: Item): LiveData<Int> {
+        val liveData = MutableLiveData<Int>()
+
+        appDatabase
+                .itemDao()
+                .updateStock(item.id, item.stock)
+                .subscribeOn(Schedulers.newThread())
+                .map {
+                    liveData.postValue(it)
+                }
+                .subscribe()
+
+        return liveData
+    }
 }

@@ -1,7 +1,8 @@
 package rynkbit.tk.coffeelist.ui.admin.item
 
 import androidx.lifecycle.ViewModel
+import rynkbit.tk.coffeelist.db.facade.ItemFacade
 
 class ManageItemsViewModel : ViewModel() {
-    // TODO: Implement the ViewModel
+    val itemsFacade = ItemFacade()
 }

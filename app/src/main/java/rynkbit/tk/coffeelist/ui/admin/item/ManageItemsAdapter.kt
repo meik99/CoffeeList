@@ -5,13 +5,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.TextView
+import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.RecyclerView
 import rynkbit.tk.coffeelist.R
 import rynkbit.tk.coffeelist.ui.entity.UIItem
-import java.text.NumberFormat
-import java.util.*
 
-class ManageItemsAdapter : RecyclerView.Adapter<ManageItemsAdapter.ViewHolder>() {
+class ManageItemsAdapter(
+        private val onUpdateItemName: ((UIItem) -> Unit)?,
+        private val onUpdateItemPrice: ((UIItem) -> Unit)?,
+        private val onUpdateItemStock: ((UIItem) -> Unit)?
+) : RecyclerView.Adapter<ManageItemsAdapter.ViewHolder>() {
     private val items = mutableListOf<UIItem>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -24,14 +27,31 @@ class ManageItemsAdapter : RecyclerView.Adapter<ManageItemsAdapter.ViewHolder>()
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = items[position]
-        val currencyFormat = NumberFormat.getCurrencyInstance(Locale.getDefault())
 
         holder.apply{
             txtId.text = item.id.toString()
             editName.setText(item.name)
-            editPrice.setText(currencyFormat.format(item.price))
-            editStock.setText(item.stock)
+            editPrice.setText(item.price.toString())
+            editStock.setText(item.stock.toString())
+
+            editName.addTextChangedListener { s -> onUpdateItemName?.apply {
+                this(UIItem(item.id, s.toString(), item.price, item.stock)) }
+            }
+            editPrice.addTextChangedListener { onUpdateItemPrice?.apply {
+                val price = editPrice.text.toString().toDoubleOrNull()
+                this(UIItem(item.id, item.name, price ?: item.price, item.stock)) }
+            }
+            editStock.addTextChangedListener { onUpdateItemStock?.apply {
+                val stock = editStock.text.toString().toIntOrNull()
+                this(UIItem(item.id, item.name, item.price, stock ?: item.stock)) }
+            }
         }
+    }
+
+    fun updateItems(itemList: List<UIItem>) {
+        items.clear()
+        items.addAll(itemList)
+        notifyDataSetChanged()
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
