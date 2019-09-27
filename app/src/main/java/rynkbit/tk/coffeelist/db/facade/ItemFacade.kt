@@ -106,4 +106,16 @@ class ItemFacade : BaseFacade<DatabaseItem, Item>() {
 
         return liveData
     }
+
+    fun delete(item: Item): LiveData<Unit> {
+        return super.delete(
+                DatabaseItem(
+                        item.id,
+                        item.name,
+                        item.price,
+                        item.stock
+                ),
+                Item::class.java
+        )
+    }
 }

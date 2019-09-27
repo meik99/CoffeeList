@@ -3,6 +3,7 @@ package rynkbit.tk.coffeelist.ui.admin.item
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import androidx.core.widget.addTextChangedListener
@@ -13,7 +14,8 @@ import rynkbit.tk.coffeelist.ui.entity.UIItem
 class ManageItemsAdapter(
         private val onUpdateItemName: ((UIItem) -> Unit)?,
         private val onUpdateItemPrice: ((UIItem) -> Unit)?,
-        private val onUpdateItemStock: ((UIItem) -> Unit)?
+        private val onUpdateItemStock: ((UIItem) -> Unit)?,
+        private val onRemoveItem: ((item: UIItem) -> Unit)?
 ) : RecyclerView.Adapter<ManageItemsAdapter.ViewHolder>() {
     private val items = mutableListOf<UIItem>()
 
@@ -45,6 +47,9 @@ class ManageItemsAdapter(
                 val stock = editStock.text.toString().toIntOrNull()
                 this(UIItem(item.id, item.name, item.price, stock ?: item.stock)) }
             }
+            btnRemove.setOnClickListener {
+                onRemoveItem?.apply { this(item) }
+            }
         }
     }
 
@@ -59,5 +64,6 @@ class ManageItemsAdapter(
         val editName: EditText = itemView.findViewById(R.id.editName)
         val editPrice: EditText = itemView.findViewById(R.id.editPrice)
         val editStock: EditText = itemView.findViewById(R.id.editStock)
+        val btnRemove: Button = itemView.findViewById(R.id.btnRemoveItem)
     }
 }

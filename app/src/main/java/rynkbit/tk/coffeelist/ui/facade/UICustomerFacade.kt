@@ -17,12 +17,12 @@ class UICustomerFacade {
         CustomerFacade().findAll().observe(
                 lifecycleOwner,
                 Observer { customers ->
-                    activity.runOnUiThread {
-                        findBalanceForCustomers(lifecycleOwner, customers)
-                                .observe(lifecycleOwner, Observer {
-                                    uiCustomersLiveData.postValue(it)
-                                })
-                    }
+
+                    findBalanceForCustomers(lifecycleOwner, customers)
+                            .observe(lifecycleOwner, Observer {
+                                uiCustomersLiveData.postValue(it)
+                            })
+
 
                 }
         )

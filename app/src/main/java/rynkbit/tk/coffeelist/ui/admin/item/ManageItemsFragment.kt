@@ -1,5 +1,7 @@
 package rynkbit.tk.coffeelist.ui.admin.item
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -29,15 +31,44 @@ class ManageItemsFragment : Fragment() {
         itemsAdapter = ManageItemsAdapter(
                 updateName(),
                 updatePrice(),
-                updateStock()
+                updateStock(),
+                onRemoveItem()
         )
 
         listItems.layoutManager = LinearLayoutManager(context!!, LinearLayoutManager.VERTICAL, false)
         listItems.adapter = itemsAdapter
+
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+        updateItems()
+    }
+
+    private fun onRemoveItem(): (item: UIItem) -> Unit = { item ->
+        val dialogBuilder = AlertDialog.Builder(context)
+
+        dialogBuilder
+                .setTitle(R.string.remove)
+                .setMessage(getString(R.string.remove_item_confirmation, item.name))
+                .setPositiveButton(R.string.confirm_label) { dialogInterface: DialogInterface, i: Int ->
+                    viewModel
+                            .itemsFacade
+                            .delete(item)
+                            .observe(this, Observer {
+                                updateItems()
+                            })
+                }
+                .setNegativeButton(R.string.cancel) { dialogInterface: DialogInterface, i: Int ->
+                    dialogInterface.dismiss()
+                }
+                .create()
+                .show()
     }
 
     private fun updateName(): ((UIItem) -> Unit) = { item ->
-       viewModel
+        viewModel
                 .itemsFacade
                 .updateName(item)
                 .observe(this, Observer { })
@@ -55,11 +86,6 @@ class ManageItemsFragment : Fragment() {
                 .itemsFacade
                 .updateStock(item)
                 .observe(this, Observer { })
-    }
-
-    override fun onResume() {
-        super.onResume()
-        updateItems()
     }
 
     private fun updateItems() {

@@ -75,12 +75,12 @@ class ManageCustomerFragment : Fragment() {
 
                 val uiCustomers = mutableListOf<UICustomer>()
 
-                for (customer in viewModel.customers){
+                for (customer in viewModel.customers) {
                     val invoices = viewModel.invoice.filter { it.customerId == customer.id }
                     var balance = 0.0
 
                     for (invoice in invoices) {
-                        balance += viewModel.items.find { it.id  == invoice.itemId }?.price ?: 0.0
+                        balance += viewModel.items.find { it.id == invoice.itemId }?.price ?: 0.0
                     }
 
                     uiCustomers.add(UICustomer(
@@ -115,15 +115,13 @@ class ManageCustomerFragment : Fragment() {
                             .observe(this, Observer {
                                 dialogInterface.dismiss()
 
-                                activity!!.runOnUiThread {
-                                    CustomerFacade()
-                                            .delete(customer)
-                                            .observe(this, Observer {
-                                                activity!!.runOnUiThread {
-                                                    updateCustomers()
-                                                }
-                                            })
-                                }
+                                CustomerFacade()
+                                        .delete(customer)
+                                        .observe(this, Observer {
+                                            updateCustomers()
+
+                                        })
+
 
                             })
                 }
@@ -146,13 +144,13 @@ class ManageCustomerFragment : Fragment() {
                     InvoiceFacade()
                             .clearCustomer(customer)
                             .observe(this, Observer {
-                                activity!!.runOnUiThread {
-                                    UICustomerFacade()
-                                            .findCustomersWithBalance(this, activity!!)
-                                            .observe(this, Observer { customers ->
-                                                adapter.updateCustomers(customers.sortedBy { it.id })
-                                            })
-                                }
+
+                                UICustomerFacade()
+                                        .findCustomersWithBalance(this, activity!!)
+                                        .observe(this, Observer { customers ->
+                                            adapter.updateCustomers(customers.sortedBy { it.id })
+                                        })
+
                             })
                 }
                 .setNegativeButton(R.string.cancel) { dialogInterface: DialogInterface, i: Int ->
