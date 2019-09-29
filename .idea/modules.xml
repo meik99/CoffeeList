@@ -5,6 +5,8 @@
       <module fileurl="file://$PROJECT_DIR$/AndroidStudioProjects-CoffeeList.iml" filepath="$PROJECT_DIR$/AndroidStudioProjects-CoffeeList.iml" />
       <module fileurl="file://$PROJECT_DIR$/CoffeeList.iml" filepath="$PROJECT_DIR$/CoffeeList.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/CoffeeList-app.iml" filepath="$PROJECT_DIR$/app/CoffeeList-app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/StudioProjects-CoffeeList.iml" filepath="$PROJECT_DIR$/StudioProjects-CoffeeList.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/StudioProjects-CoffeeList-app.iml" filepath="$PROJECT_DIR$/app/StudioProjects-CoffeeList-app.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

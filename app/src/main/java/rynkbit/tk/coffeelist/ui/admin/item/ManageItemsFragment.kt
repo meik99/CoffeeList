@@ -13,6 +13,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.manage_items_fragment.*
 
 import rynkbit.tk.coffeelist.R
+import rynkbit.tk.coffeelist.contract.entity.Item
+import rynkbit.tk.coffeelist.db.facade.ItemFacade
+import rynkbit.tk.coffeelist.ui.admin.item.add.AddItemDialog
 import rynkbit.tk.coffeelist.ui.entity.UIItem
 
 class ManageItemsFragment : Fragment() {
@@ -38,6 +41,20 @@ class ManageItemsFragment : Fragment() {
         listItems.layoutManager = LinearLayoutManager(context!!, LinearLayoutManager.VERTICAL, false)
         listItems.adapter = itemsAdapter
 
+        fabAddItem.setOnClickListener {
+            AddItemDialog(onAddItem()).show(parentFragmentManager, null)
+        }
+    }
+
+    private fun onAddItem(): (DialogInterface, Item) -> Unit = { dialog, item ->
+        val liveData = viewModel
+                .itemsFacade
+                .insert(item)
+        liveData.observe(this, Observer {
+            liveData.removeObservers(this)
+            updateItems()
+            dialog.dismiss()
+        })
 
     }
 
