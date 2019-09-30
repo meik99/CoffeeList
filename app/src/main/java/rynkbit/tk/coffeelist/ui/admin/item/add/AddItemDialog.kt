@@ -3,20 +3,12 @@ package rynkbit.tk.coffeelist.ui.admin.item.add
 import android.app.AlertDialog
 import android.app.Dialog
 import android.content.DialogInterface
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
-import androidx.lifecycle.ViewModelProvider
 import kotlinx.android.synthetic.main.add_item_fragment.view.*
-
 import rynkbit.tk.coffeelist.R
 import rynkbit.tk.coffeelist.contract.entity.Item
 import rynkbit.tk.coffeelist.ui.entity.UIItem
-import java.lang.IllegalStateException
 
 class AddItemDialog(
         private val positivButtonListener: ((DialogInterface, Item) -> Unit)
@@ -34,7 +26,7 @@ class AddItemDialog(
             builder
                     .setView(view)
                     .setTitle(R.string.add)
-                    .setPositiveButton(R.string.ok, DialogInterface.OnClickListener { dialogInterface, i ->
+                    .setPositiveButton(R.string.ok, DialogInterface.OnClickListener { dialogInterface, _ ->
                         positivButtonListener(dialogInterface, UIItem(
                                 0,
                                 editItemName.text.toString(),
@@ -42,7 +34,7 @@ class AddItemDialog(
                                 editItemStock.text.toString().toIntOrNull() ?: 0
                         ))
                     })
-                    .setNegativeButton(R.string.cancel, DialogInterface.OnClickListener { dialogInterface, i ->
+                    .setNegativeButton(R.string.cancel, DialogInterface.OnClickListener { dialogInterface, _ ->
                         dialogInterface.dismiss()
                     })
 

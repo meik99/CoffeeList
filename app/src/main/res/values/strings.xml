@@ -60,5 +60,12 @@
     <string name="backup_not_created">Could not write backup!</string>
     <string name="changes_are_saved_automatically">Changes are saved automatically</string>
     <string name="id" translatable="false">Id</string>
+    <string name="customer_name">Customer Name</string>
+    <string name="customer_id">Customer Id</string>
+    <string name="item_id">Item Id</string>
+    <string name="item_name">Item Name</string>
+    <string name="item_price_label">Item Price</string>
+    <string name="date">Date</string>
+    <string name="invoice_state">State</string>
 
 </resources>

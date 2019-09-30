@@ -56,4 +56,11 @@
     <string name="tapToEdit">Zum Edititeren berühren</string>
     <string name="item_buy_title">%1$s kaufen?</string>
     <string name="changes_are_saved_automatically">Änderungen werden automatisch gespeichert</string>
+    <string name="customer_id">Benutzer Id</string>
+    <string name="customer_name">Benutzername</string>
+    <string name="date">Datum</string>
+    <string name="invoice_state">Status</string>
+    <string name="item_id">Produkt Id</string>
+    <string name="item_name">Produktname</string>
+    <string name="item_price_label">Produktpreis</string>
 </resources>

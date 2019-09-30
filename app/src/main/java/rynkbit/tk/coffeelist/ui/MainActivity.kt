@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
-import io.reactivex.schedulers.Schedulers
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -13,11 +12,7 @@ import org.koin.core.context.stopKoin
 import org.koin.dsl.module
 import rynkbit.tk.coffeelist.R
 import rynkbit.tk.coffeelist.db.AppDatabase
-import rynkbit.tk.coffeelist.db.facade.CustomerFacade
-import rynkbit.tk.coffeelist.db.facade.ItemFacade
 import rynkbit.tk.coffeelist.ui.customer.CustomerAdapter
-import rynkbit.tk.coffeelist.ui.entity.UICustomer
-import rynkbit.tk.coffeelist.ui.entity.UIItem
 
 class MainActivity : AppCompatActivity() {
     private lateinit var mCustomerAdapter: CustomerAdapter
@@ -30,20 +25,21 @@ class MainActivity : AppCompatActivity() {
                         override fun onCreate(db: SupportSQLiteDatabase) {
                             super.onCreate(db)
 
-                            for(i in 0..50){
-                                CustomerFacade()
-                                        .insert(UICustomer(0, "Test Customer $i", 0.toDouble()))
-                                ItemFacade()
-                                        .insert(UIItem(
-                                                0,
-                                                "Test Item $i",
-                                                i * 0.75,
-                                                i
-                                        ))
-                            }
+//                            for(i in 0..50){
+//                                CustomerFacade()
+//                                        .insert(UICustomer(0, "Test Customer $i", 0.toDouble()))
+//                                ItemFacade()
+//                                        .insert(UIItem(
+//                                                0,
+//                                                "Test Item $i",
+//                                                i * 0.75,
+//                                                i
+//                                        ))
+//                            }
 
                         }
                     })
+                    .fallbackToDestructiveMigration()
                     .build()
         }
     }

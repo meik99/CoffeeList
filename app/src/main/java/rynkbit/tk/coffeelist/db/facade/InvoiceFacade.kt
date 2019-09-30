@@ -2,14 +2,12 @@ package rynkbit.tk.coffeelist.db.facade
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
 import rynkbit.tk.coffeelist.contract.entity.Customer
 import rynkbit.tk.coffeelist.contract.entity.Invoice
 import rynkbit.tk.coffeelist.contract.entity.InvoiceState
 import rynkbit.tk.coffeelist.contract.entity.Item
 import rynkbit.tk.coffeelist.db.entity.DatabaseInvoice
-import rynkbit.tk.coffeelist.ui.entity.UIInvoice
 import java.util.*
 
 class InvoiceFacade : BaseFacade<DatabaseInvoice, Invoice>() {
@@ -23,11 +21,14 @@ class InvoiceFacade : BaseFacade<DatabaseInvoice, Invoice>() {
         appDatabase
                 .invoiceDao()
                 .insert(DatabaseInvoice(
-                        invoice.id,
-                        invoice.customerId,
-                        invoice.itemId,
-                        invoice.date,
-                        invoice.state
+                        id = invoice.id,
+                        customerId = invoice.customerId,
+                        customerName = invoice.customerName,
+                        itemId = invoice.itemId,
+                        itemName = invoice.itemName,
+                        itemPrice = invoice.itemPrice,
+                        date = invoice.date,
+                        state = invoice.state
                 ))
                 .subscribeOn(Schedulers.newThread())
                 .map {
@@ -39,12 +40,15 @@ class InvoiceFacade : BaseFacade<DatabaseInvoice, Invoice>() {
     }
 
     fun createInvoiceForCustomerAndItem(item: Item, customer: Customer): LiveData<Long> {
-        return insert(UIInvoice(
-                        0,
-                        customer.id,
-                        item.id,
-                        Date(),
-                        InvoiceState.OPEN
+        return insert(DatabaseInvoice(
+                        id = 0,
+                        customerId = customer.id,
+                        customerName = customer.name,
+                        itemId = item.id,
+                        itemName = item.name,
+                        itemPrice = item.price,
+                        date = Date(),
+                        state = InvoiceState.OPEN
                 ))
     }
 
@@ -76,7 +80,10 @@ class InvoiceFacade : BaseFacade<DatabaseInvoice, Invoice>() {
                                         DatabaseInvoice(
                                                 id = it.id,
                                                 customerId = it.customerId,
+                                                customerName = it.customerName,
                                                 itemId = it.itemId,
+                                                itemName = it.itemName,
+                                                itemPrice = it.itemPrice,
                                                 date = it.date,
                                                 state = InvoiceState.CLOSED
                                         )
