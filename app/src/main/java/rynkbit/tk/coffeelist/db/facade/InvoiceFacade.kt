@@ -41,15 +41,15 @@ class InvoiceFacade : BaseFacade<DatabaseInvoice, Invoice>() {
 
     fun createInvoiceForCustomerAndItem(item: Item, customer: Customer): LiveData<Long> {
         return insert(DatabaseInvoice(
-                        id = 0,
-                        customerId = customer.id,
-                        customerName = customer.name,
-                        itemId = item.id,
-                        itemName = item.name,
-                        itemPrice = item.price,
-                        date = Date(),
-                        state = InvoiceState.OPEN
-                ))
+                id = 0,
+                customerId = customer.id,
+                customerName = customer.name,
+                itemId = item.id,
+                itemName = item.name,
+                itemPrice = item.price,
+                date = Date(),
+                state = InvoiceState.OPEN
+        ))
     }
 
     fun deleteByCustomer(customerId: Int): LiveData<Unit> {
@@ -97,5 +97,19 @@ class InvoiceFacade : BaseFacade<DatabaseInvoice, Invoice>() {
                 }
                 .subscribe()
         return liveData
+    }
+
+    fun update(invoice: Invoice): LiveData<Unit> {
+        return super.update(
+                DatabaseInvoice(
+                        id = invoice.id,
+                        customerId = invoice.customerId,
+                        customerName = invoice.customerName,
+                        itemId = invoice.itemId,
+                        itemName = invoice.itemName,
+                        itemPrice = invoice.itemPrice,
+                        state = invoice.state,
+                        date = invoice.date
+                ), Invoice::class.java)
     }
 }
