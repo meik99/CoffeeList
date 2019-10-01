@@ -8,6 +8,8 @@
       <module fileurl="file://$PROJECT_DIR$/StudioProjects-CoffeeList.iml" filepath="$PROJECT_DIR$/StudioProjects-CoffeeList.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/StudioProjects-CoffeeList-app.iml" filepath="$PROJECT_DIR$/app/StudioProjects-CoffeeList-app.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/micha-StudioProjects-CoffeeList.iml" filepath="$PROJECT_DIR$/micha-StudioProjects-CoffeeList.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/micha-StudioProjects-CoffeeList-app.iml" filepath="$PROJECT_DIR$/app/micha-StudioProjects-CoffeeList-app.iml" />
     </modules>
   </component>
 </project>
