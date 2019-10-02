@@ -10,6 +10,15 @@ class AdminSettings{
                 sharedPreferences.getString(KEY_PASSWORD, "") == password
     }
 
+    fun changePassword(context: Context, newPassword: String) {
+        val sharedPreferences = context.getSharedPreferences(NAME, Context.MODE_PRIVATE)
+
+        sharedPreferences
+                .edit()
+                .putString(KEY_PASSWORD, newPassword)
+                .apply()
+    }
+
     companion object{
         const val NAME = "admin_preferences"
         const val KEY_PASSWORD = "password"

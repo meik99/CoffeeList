@@ -7,6 +7,7 @@ import org.koin.core.KoinComponent
 import org.koin.core.inject
 import rynkbit.tk.coffeelist.db.AppDatabase
 import rynkbit.tk.coffeelist.db.dao.BaseDao
+import java.lang.IllegalStateException
 import java.util.*
 
 abstract class BaseFacade<DatabaseEntity : Entity, Entity> : KoinComponent{
