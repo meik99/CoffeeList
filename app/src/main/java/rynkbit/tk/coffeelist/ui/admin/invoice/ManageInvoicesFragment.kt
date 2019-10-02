@@ -35,26 +35,28 @@ class ManageInvoicesFragment : Fragment() {
         listInvoices.adapter = invoiceAdapter
         listInvoices.layoutManager = LinearLayoutManager(context,
                 LinearLayoutManager.VERTICAL, false)
-    }
 
-    private fun updateInvoice(): ((Invoice) -> Unit) = {invoice ->
-        InvoiceFacade()
-                .update(invoice)
-                .observe(this, Observer {  })
-        InvoiceFacade()
-                .updateStockOnInvoiceStateChange(invoice)
-                .observe(this, Observer {  })
-    }
-
-    override fun onResume() {
-        super.onResume()
         updateInvoices()
     }
 
-    private fun updateInvoices() {
+    private fun updateInvoice(): ((Invoice) -> Unit) = { invoice ->
         InvoiceFacade()
-                .findAll()
+                .updateStockOnInvoiceStateChange(invoice)
                 .observe(this, Observer {
+                    InvoiceFacade()
+                        .update(invoice)
+                        .observe(this, Observer {
+                        })
+                })
+    }
+
+    private fun updateInvoices() {
+        val liveData = InvoiceFacade()
+                .findAll()
+
+        liveData
+                .observe(this, Observer {
+                    liveData.removeObservers(this)
                     invoiceAdapter.updateInvoices(it)
                 })
     }

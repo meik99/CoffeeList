@@ -61,6 +61,14 @@
             <action
                 android:id="@+id/action_administrationFragment_to_manageItemsFragment"
                 app:destination="@id/manageItemsFragment" />
+            <action
+                android:id="@+id/action_administrationFragment_to_changePasswordFragment"
+                app:destination="@id/changePasswordFragment" />
         </fragment>
+        <fragment
+            android:id="@+id/changePasswordFragment"
+            android:name="rynkbit.tk.coffeelist.ui.admin.password.ChangePasswordFragment"
+            android:label="fragment_change_password"
+            tools:layout="@layout/fragment_change_password" />
     </navigation>
 </navigation>

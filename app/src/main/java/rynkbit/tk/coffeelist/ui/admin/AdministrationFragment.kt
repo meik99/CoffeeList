@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.IdRes
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
@@ -34,6 +35,14 @@ class AdministrationFragment : Fragment() {
             Navigation.findNavController(activity!!, R.id.nav_host)
                     .navigate(R.id.action_administrationFragment_to_manageInvoicesFragment)
         }
+        btnAdminChangePassword.setOnClickListener {
+            navigate(R.id.action_administrationFragment_to_changePasswordFragment)
+        }
+    }
+
+    private fun navigate(@IdRes actionId: Int){
+        Navigation.findNavController(activity!!, R.id.nav_host)
+                .navigate(actionId)
     }
 
 }

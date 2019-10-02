@@ -66,4 +66,8 @@
     <string name="invoice_state_closed">Geschlossen</string>
     <string name="invoice_state_open">Offen</string>
     <string name="invoice_state_revoked">Annulliert</string>
+    <string name="new_password">Neues Passwort</string>
+    <string name="password_has_been_changed">Passwort wurde geändert</string>
+    <string name="passwords_do_not_match">Passwörter stimmen nicht überein</string>
+    <string name="repeat_password">Passwort wiederholen</string>
 </resources>
