@@ -37,36 +37,13 @@ class ManageInvoicesFragment : Fragment() {
                 LinearLayoutManager.VERTICAL, false)
     }
 
-    private fun updateInvoice(): ((Invoice, InvoiceState) -> Unit) = {invoice, oldState ->
+    private fun updateInvoice(): ((Invoice) -> Unit) = {invoice ->
         InvoiceFacade()
                 .update(invoice)
-                .observe(this, Observer {
-                    if (oldState != InvoiceState.REVOKED && invoice.state != InvoiceState.REVOKED) {
-                        updateInvoices()
-                    } else {
-                        ItemFacade()
-                                .findAll()
-                                .observe(this, Observer {
-                                    val item = it.find { item -> item.id == invoice.itemId }
-                                    if (item != null){
-                                        ItemFacade()
-                                                .update(
-                                                        UIItem(
-                                                                id = item.id,
-                                                                name = item.name,
-                                                                price = item.price,
-                                                                stock = item.stock + if(oldState == InvoiceState.REVOKED) -1 else 1
-                                                                //If old state was revoked, subtract from stock, otherwise add 1
-                                                        )
-                                                ).observe(this, Observer {
-                                                    updateInvoices()
-                                                })
-                                    }else{
-                                        updateInvoices()
-                                    }
-                                })
-                    }
-                })
+                .observe(this, Observer {  })
+        InvoiceFacade()
+                .updateStockOnInvoiceStateChange(invoice)
+                .observe(this, Observer {  })
     }
 
     override fun onResume() {

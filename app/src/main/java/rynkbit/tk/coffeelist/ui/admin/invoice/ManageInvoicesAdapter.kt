@@ -21,7 +21,7 @@ import java.util.*
 class ManageInvoicesAdapter : RecyclerView.Adapter<ManageInvoicesAdapter.ViewHolder>() {
     private val invoices = mutableListOf<Invoice>()
 
-    var onInvoiceStateChange: ((Invoice, InvoiceState) -> Unit)? = null
+    var onInvoiceStateChange: ((Invoice) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(LayoutInflater.from(parent.context)
@@ -67,7 +67,7 @@ class ManageInvoicesAdapter : RecyclerView.Adapter<ManageInvoicesAdapter.ViewHol
                                     itemPrice = invoice.itemPrice,
                                     date = invoice.date,
                                     state = InvoiceState.values()[position]
-                            ), invoice.state
+                            )
                         )
                     }
                 }
