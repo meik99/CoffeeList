@@ -67,5 +67,7 @@
     <string name="item_price_label">Item Price</string>
     <string name="date">Date</string>
     <string name="invoice_state">State</string>
-
+    <string name="invoice_state_open">Open</string>
+    <string name="invoice_state_closed">Closed</string>
+    <string name="invoice_state_revoked">Revoked</string>
 </resources>

@@ -8,6 +8,7 @@ import rynkbit.tk.coffeelist.contract.entity.Invoice
 import rynkbit.tk.coffeelist.contract.entity.InvoiceState
 import rynkbit.tk.coffeelist.contract.entity.Item
 import rynkbit.tk.coffeelist.db.entity.DatabaseInvoice
+import java.lang.IllegalStateException
 import java.util.*
 
 class InvoiceFacade : BaseFacade<DatabaseInvoice, Invoice>() {
@@ -41,15 +42,15 @@ class InvoiceFacade : BaseFacade<DatabaseInvoice, Invoice>() {
 
     fun createInvoiceForCustomerAndItem(item: Item, customer: Customer): LiveData<Long> {
         return insert(DatabaseInvoice(
-                        id = 0,
-                        customerId = customer.id,
-                        customerName = customer.name,
-                        itemId = item.id,
-                        itemName = item.name,
-                        itemPrice = item.price,
-                        date = Date(),
-                        state = InvoiceState.OPEN
-                ))
+                id = 0,
+                customerId = customer.id,
+                customerName = customer.name,
+                itemId = item.id,
+                itemName = item.name,
+                itemPrice = item.price,
+                date = Date(),
+                state = InvoiceState.OPEN
+        ))
     }
 
     fun deleteByCustomer(customerId: Int): LiveData<Unit> {
@@ -94,6 +95,51 @@ class InvoiceFacade : BaseFacade<DatabaseInvoice, Invoice>() {
                                 }
 
                     }
+                }
+                .subscribe()
+        return liveData
+    }
+
+    fun update(invoice: Invoice): LiveData<Unit> {
+        return super.update(
+                DatabaseInvoice(
+                        id = invoice.id,
+                        customerId = invoice.customerId,
+                        customerName = invoice.customerName,
+                        itemId = invoice.itemId,
+                        itemName = invoice.itemName,
+                        itemPrice = invoice.itemPrice,
+                        state = invoice.state,
+                        date = invoice.date
+                ), Invoice::class.java)
+    }
+
+    fun updateStockOnInvoiceStateChange(invoice: Invoice): LiveData<Unit> {
+        val liveData = MutableLiveData<Unit>()
+
+        appDatabase
+                .invoiceDao()
+                .findAll()
+                .subscribeOn(Schedulers.newThread())
+                .map {
+                    val filteredInvoice = it.find { filterInvoice -> filterInvoice.id == invoice.id }
+                    val oldState = filteredInvoice?.state ?: throw IllegalStateException("Invoice does not exist.")
+
+                    return@map if (oldState == InvoiceState.REVOKED && invoice.state != InvoiceState.REVOKED) {
+                        -1
+                    } else if (oldState != InvoiceState.REVOKED && invoice.state == InvoiceState.REVOKED) {
+                        1
+                    } else {
+                        0
+                    }
+                }
+                .map {stockChange ->
+                    return@map appDatabase
+                            .itemDao()
+                            .updateStock(invoice.itemId, stockChange)
+                }
+                .map {
+                    liveData.postValue(Unit)
                 }
                 .subscribe()
         return liveData

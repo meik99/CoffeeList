@@ -63,4 +63,7 @@
     <string name="item_id">Produkt Id</string>
     <string name="item_name">Produktname</string>
     <string name="item_price_label">Produktpreis</string>
+    <string name="invoice_state_closed">Geschlossen</string>
+    <string name="invoice_state_open">Offen</string>
+    <string name="invoice_state_revoked">Annulliert</string>
 </resources>
