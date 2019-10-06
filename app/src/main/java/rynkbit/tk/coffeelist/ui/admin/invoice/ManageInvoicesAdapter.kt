@@ -7,10 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.edit_invoice.view.*
-import kotlinx.android.synthetic.main.edit_item.view.*
 import rynkbit.tk.coffeelist.R
 import rynkbit.tk.coffeelist.contract.entity.Invoice
 import rynkbit.tk.coffeelist.contract.entity.InvoiceState
@@ -21,7 +19,7 @@ import java.util.*
 class ManageInvoicesAdapter : RecyclerView.Adapter<ManageInvoicesAdapter.ViewHolder>() {
     private val invoices = mutableListOf<Invoice>()
 
-    var onInvoiceStateChange: ((Invoice, InvoiceState) -> Unit)? = null
+    var onInvoiceStateChange: ((Invoice) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(LayoutInflater.from(parent.context)
@@ -67,8 +65,7 @@ class ManageInvoicesAdapter : RecyclerView.Adapter<ManageInvoicesAdapter.ViewHol
                                     itemPrice = invoice.itemPrice,
                                     date = invoice.date,
                                     state = InvoiceState.values()[position]
-                            ), invoice.state
-                        )
+                            ))
                     }
                 }
             }

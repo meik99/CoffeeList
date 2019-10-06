@@ -112,4 +112,58 @@ class InvoiceFacade : BaseFacade<DatabaseInvoice, Invoice>() {
                         date = invoice.date
                 ), Invoice::class.java)
     }
+
+    fun changeState(invoice: Invoice): LiveData<Unit> {
+        val liveData = MutableLiveData<Unit>()
+        val newState = invoice.state
+        var oldState = invoice.state
+
+        appDatabase
+                .invoiceDao()
+                .findById(invoice.id)
+                .subscribeOn(Schedulers.newThread())
+                .flatMap { oldInvoice ->
+                    oldState = oldInvoice.state
+                    return@flatMap appDatabase
+                            .itemDao()
+                            .findById(invoice.itemId)
+                }
+                .map { item ->
+                    var stockChange = 0
+
+                    if (newState == InvoiceState.REVOKED && oldState != InvoiceState.REVOKED) {
+                        stockChange = 1
+                    }
+                    else if(newState != InvoiceState.REVOKED && oldState == InvoiceState.REVOKED) {
+                        stockChange = -1
+                    }
+
+
+                    return@map appDatabase
+                            .itemDao()
+                            .updateStock(item.id, item.stock + stockChange)
+                            .subscribe()
+                }
+                .map {
+                    return@map appDatabase
+                            .invoiceDao()
+                            .update(DatabaseInvoice(
+                                    id = invoice.id,
+                                    itemId = invoice.itemId,
+                                    itemName = invoice.itemName,
+                                    itemPrice = invoice.itemPrice,
+                                    customerId = invoice.customerId,
+                                    customerName = invoice.customerName,
+                                    state = invoice.state,
+                                    date = invoice.date
+                            )).subscribe()
+                }
+                .map {
+                    liveData.postValue(Unit)
+                }
+                .subscribe()
+
+
+        return liveData
+    }
 }
