@@ -32,6 +32,7 @@ class ManageInvoicesFragment : Fragment() {
         listInvoices.adapter = invoiceAdapter
         listInvoices.layoutManager = LinearLayoutManager(context,
                 LinearLayoutManager.VERTICAL, false)
+
         updateInvoices()
     }
 
@@ -44,9 +45,12 @@ class ManageInvoicesFragment : Fragment() {
     }
 
     private fun updateInvoices() {
-        InvoiceFacade()
+        val liveData = InvoiceFacade()
                 .findAll()
+
+        liveData
                 .observe(this, Observer {
+                    liveData.removeObservers(this)
                     invoiceAdapter.updateInvoices(it)
                 })
     }

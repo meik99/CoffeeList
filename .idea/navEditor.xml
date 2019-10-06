@@ -85,6 +85,11 @@
                                   </option>
                                   <option name="myPositions">
                                     <map>
+                                      <entry key="action_administrationFragment_to_changePasswordFragment">
+                                        <value>
+                                          <LayoutPositions />
+                                        </value>
+                                      </entry>
                                       <entry key="action_administrationFragment_to_manageCustomer">
                                         <value>
                                           <LayoutPositions />
@@ -101,6 +106,18 @@
                                         </value>
                                       </entry>
                                     </map>
+                                  </option>
+                                </LayoutPositions>
+                              </value>
+                            </entry>
+                            <entry key="changePasswordFragment">
+                              <value>
+                                <LayoutPositions>
+                                  <option name="myPosition">
+                                    <Point>
+                                      <option name="x" value="465" />
+                                      <option name="y" value="176" />
+                                    </Point>
                                   </option>
                                 </LayoutPositions>
                               </value>
