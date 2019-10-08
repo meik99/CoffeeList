@@ -24,19 +24,19 @@ class AdministrationFragment : Fragment() {
         viewModel = ViewModelProvider(this).get(AdministrationViewModel::class.java)
 
         btnAdminManageCustomer.setOnClickListener {
-            Navigation.findNavController(activity!!, R.id.nav_host)
-                    .navigate(R.id.action_administrationFragment_to_manageCustomer)
+            navigate(R.id.action_administrationFragment_to_manageCustomer)
         }
         btnAdminManageItems.setOnClickListener {
-            Navigation.findNavController(activity!!, R.id.nav_host)
-                    .navigate(R.id.action_administrationFragment_to_manageItemsFragment)
+            navigate(R.id.action_administrationFragment_to_manageItemsFragment)
         }
         btnAdminManageInvoices.setOnClickListener {
-            Navigation.findNavController(activity!!, R.id.nav_host)
-                    .navigate(R.id.action_administrationFragment_to_manageInvoicesFragment)
+            navigate(R.id.action_administrationFragment_to_manageInvoicesFragment)
         }
         btnAdminChangePassword.setOnClickListener {
             navigate(R.id.action_administrationFragment_to_changePasswordFragment)
+        }
+        btnAdminCreateBackup.setOnClickListener {
+            navigate(R.id.action_administrationFragment_to_createBackupFragment)
         }
     }
 
