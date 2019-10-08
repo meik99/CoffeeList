@@ -1,21 +1,18 @@
 package rynkbit.tk.coffeelist.ui.admin.invoice
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.manage_invoices_fragment.*
-
 import rynkbit.tk.coffeelist.R
 import rynkbit.tk.coffeelist.contract.entity.Invoice
-import rynkbit.tk.coffeelist.contract.entity.InvoiceState
 import rynkbit.tk.coffeelist.db.facade.InvoiceFacade
-import rynkbit.tk.coffeelist.db.facade.ItemFacade
-import rynkbit.tk.coffeelist.ui.entity.UIItem
 
 class ManageInvoicesFragment : Fragment() {
     private lateinit var viewModel: ManageInvoicesViewModel
@@ -39,15 +36,12 @@ class ManageInvoicesFragment : Fragment() {
         updateInvoices()
     }
 
-    private fun updateInvoice(): ((Invoice) -> Unit) = { invoice ->
+    private fun updateInvoice(): ((Invoice) -> Unit) = {invoice ->
         InvoiceFacade()
-                .updateStockOnInvoiceStateChange(invoice)
-                .observe(this, Observer {
-                    InvoiceFacade()
-                        .update(invoice)
-                        .observe(this, Observer {
-                        })
-                })
+                .changeState(invoice)
+                .observe(this) {
+
+                }
     }
 
     private fun updateInvoices() {
