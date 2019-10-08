@@ -78,14 +78,7 @@
             android:name="rynkbit.tk.coffeelist.ui.admin.backup.create.CreateBackupFragment"
             android:label="fragment_create_backup"
             tools:layout="@layout/fragment_create_backup" >
-            <action
-                android:id="@+id/action_createBackupFragment_to_directoryChooserFragment"
-                app:destination="@id/directoryChooserFragment" />
         </fragment>
-        <fragment
-            android:id="@+id/directoryChooserFragment"
-            android:name="rynkbit.tk.coffeelist.ui.admin.backup.DirectoryChooserFragment"
-            android:label="fragment_directory_chooser"
-            tools:layout="@layout/fragment_directory_chooser" />
+
     </navigation>
 </navigation>
