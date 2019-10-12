@@ -12,6 +12,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
 import kotlinx.android.synthetic.main.fragment_create_backup.*
 import rynkbit.tk.coffeelist.R
+import java.io.FileNotFoundException
+import java.io.FileOutputStream
+import java.io.IOException
 
 /**
  * A simple [Fragment] subclass.
@@ -39,13 +42,40 @@ class CreateBackupFragment : Fragment() {
             txtCurrentPath.post {
                 txtCurrentPath.text = uri.path
             }
+
+            btnWriteBackup.post {
+                btnWriteBackup.isEnabled = uri.path != null
+            }
         }
 
+        btnWriteBackup.isEnabled = false
         btnSelectPath.setOnClickListener {
             val intent = Intent(Intent.ACTION_CREATE_DOCUMENT)
-            intent.type = "text/plain"
+            intent.type = "*/*"
+            intent.putExtra(Intent.EXTRA_TITLE, "backup.coffee")
+
             intent.addCategory(Intent.CATEGORY_OPENABLE)
             startActivityForResult(intent, OPEN_REQUEST_CODE)
+        }
+
+        btnWriteBackup.setOnClickListener {
+            try {
+                activity!!
+                        .contentResolver
+                        .openFileDescriptor(
+                                viewmodel.currentUri.value!!,
+                                "w"
+                        )
+                        ?.use {fileDescriptor ->
+                            FileOutputStream(fileDescriptor.fileDescriptor).use {fileOutputStream ->
+                                fileOutputStream.write(viewmodel.backupData)
+                            }
+                        }
+            }catch (e: FileNotFoundException) {
+                e.printStackTrace()
+            }catch (e: IOException) {
+                e.printStackTrace()
+            }
         }
     }
 

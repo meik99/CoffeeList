@@ -136,27 +136,6 @@
                                       <option name="y" value="902" />
                                     </Point>
                                   </option>
-                                  <option name="myPositions">
-                                    <map>
-                                      <entry key="action_createBackupFragment_to_directoryChooserFragment">
-                                        <value>
-                                          <LayoutPositions />
-                                        </value>
-                                      </entry>
-                                    </map>
-                                  </option>
-                                </LayoutPositions>
-                              </value>
-                            </entry>
-                            <entry key="directoryChooserFragment">
-                              <value>
-                                <LayoutPositions>
-                                  <option name="myPosition">
-                                    <Point>
-                                      <option name="x" value="723" />
-                                      <option name="y" value="902" />
-                                    </Point>
-                                  </option>
                                 </LayoutPositions>
                               </value>
                             </entry>
