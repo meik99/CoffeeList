@@ -74,4 +74,6 @@
     <string name="not_set">Kein Verzeichnis ausgewählt</string>
     <string name="select_file">Datei auswählen</string>
     <string name="write_backup">Backup erstellen</string>
+    <string name="loading_data">Daten werden geladen</string>
+    <string name="path_not_set">Datei wählen</string>
 </resources>

@@ -79,4 +79,6 @@
     <string name="not_set">Not Set</string>
     <string name="select_file">Select File</string>
     <string name="write_backup">Write Backup</string>
+    <string name="loading_data">Loading Data</string>
+    <string name="path_not_set">Path not set</string>
 </resources>
