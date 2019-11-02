@@ -45,7 +45,7 @@ class JSONCustomerConverter {
     fun convertManyToObject(jsonArray: JSONArray): List<Customer> {
         val customers = mutableListOf<Customer>()
 
-        for (i in 0..jsonArray.length()){
+        for (i in 0 until jsonArray.length()){
             customers.add(
                     convertToObject(jsonArray.getJSONObject(i))
             )

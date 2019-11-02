@@ -38,6 +38,9 @@ class AdministrationFragment : Fragment() {
         btnAdminCreateBackup.setOnClickListener {
             navigate(R.id.action_administrationFragment_to_createBackupFragment)
         }
+        btnAdminReadBackup.setOnClickListener {
+            navigate(R.id.action_administrationFragment_to_readBackupFragment)
+        }
     }
 
     private fun navigate(@IdRes actionId: Int){

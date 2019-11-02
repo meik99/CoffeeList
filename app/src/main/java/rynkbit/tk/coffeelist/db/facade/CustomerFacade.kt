@@ -2,7 +2,6 @@ package rynkbit.tk.coffeelist.db.facade
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
 import rynkbit.tk.coffeelist.contract.entity.Customer
 import rynkbit.tk.coffeelist.contract.entity.InvoiceState
@@ -73,5 +72,25 @@ class CustomerFacade : BaseFacade<DatabaseCustomer, Customer>() {
                 customer.id,
                 customer.name
         ), Customer::class.java)
+    }
+
+    fun replaceAll(customers: List<Customer>) {
+        appDatabase
+                .customerDao()
+                .deleteAll()
+                .subscribeOn(Schedulers.newThread())
+                .map {
+                    for(customer in customers){
+                        appDatabase
+                                .customerDao()
+                                .insert(DatabaseCustomer(
+                                        id = customer.id,
+                                        name = customer.name
+                                ))
+                                .blockingGet()
+                    }
+
+                }
+                .subscribe()
     }
 }

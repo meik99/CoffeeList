@@ -81,4 +81,5 @@
     <string name="write_backup">Write Backup</string>
     <string name="loading_data">Loading Data</string>
     <string name="path_not_set">Path not set</string>
+    <string name="read_backup">Read backup</string>
 </resources>
