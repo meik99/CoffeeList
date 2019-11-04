@@ -54,7 +54,7 @@ class JSONItemConverter{
     fun convertManyToObject(array: JSONArray): List<Item> {
         val items = mutableListOf<Item>()
 
-        for (i in 0..array.length()) {
+        for (i in 0 until array.length()) {
             items.add(
                     convertToObject(array.getJSONObject(i))
             )

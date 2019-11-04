@@ -49,16 +49,18 @@ class CustomerFacade : BaseFacade<DatabaseCustomer, Customer>() {
 
                     invoices.forEach {
                         if(it.state == InvoiceState.OPEN) {
-                            appDatabase
-                                    .itemDao()
-                                    .findById(it.itemId)
-                                    .subscribeOn(Schedulers.newThread())
-                                    .map {item ->
-                                        balance += item.price
-                                        liveData.postValue(balance)
-                                        return@map item
-                                    }
-                                    .subscribe()
+                            it.itemId?.let { id ->
+                                appDatabase
+                                        .itemDao()
+                                        .findById(id)
+                                        .subscribeOn(Schedulers.newThread())
+                                        .map {item ->
+                                            balance += item.price
+                                            liveData.postValue(balance)
+                                            return@map item
+                                        }
+                                        .subscribe()
+                            }
                         }
                     }
 
@@ -74,7 +76,9 @@ class CustomerFacade : BaseFacade<DatabaseCustomer, Customer>() {
         ), Customer::class.java)
     }
 
-    fun replaceAll(customers: List<Customer>) {
+    fun replaceAll(customers: List<Customer>): LiveData<Unit> {
+        val mutableLiveData = MutableLiveData<Unit>()
+
         appDatabase
                 .customerDao()
                 .deleteAll()
@@ -90,7 +94,11 @@ class CustomerFacade : BaseFacade<DatabaseCustomer, Customer>() {
                                 .blockingGet()
                     }
 
+                    mutableLiveData.postValue(Unit)
+
                 }
                 .subscribe()
+
+        return mutableLiveData
     }
 }

@@ -4,9 +4,9 @@ import java.util.*
 
 interface Invoice {
     val id: Int
-    val customerId: Int
+    val customerId: Int?
     val customerName: String
-    val itemId: Int
+    val itemId: Int?
     val itemName: String
     val itemPrice: Double
     val date: Date

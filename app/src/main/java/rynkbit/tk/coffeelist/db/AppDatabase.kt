@@ -18,7 +18,7 @@ import rynkbit.tk.coffeelist.db.entity.DatabaseItem
             DatabaseItem::class,
             DatabaseInvoice::class
         ],
-        version = 3,
+        version = 4,
         exportSchema = false
 )
 @TypeConverters(

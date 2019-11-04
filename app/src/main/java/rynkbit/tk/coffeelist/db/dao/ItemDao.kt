@@ -4,7 +4,6 @@ import androidx.room.Dao
 import androidx.room.Query
 import io.reactivex.Flowable
 import io.reactivex.Single
-import rynkbit.tk.coffeelist.contract.entity.InvoiceState
 import rynkbit.tk.coffeelist.db.entity.DatabaseItem
 
 @Dao
@@ -23,4 +22,7 @@ interface ItemDao : BaseDao<DatabaseItem> {
 
     @Query("update item set stock = :stock where id = :id")
     fun updateStock(id: Int, stock: Int): Single<Int>
+
+    @Query("delete from item")
+    fun deleteAll(): Single<Unit>
 }

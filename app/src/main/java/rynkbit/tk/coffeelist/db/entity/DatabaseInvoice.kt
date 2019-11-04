@@ -30,10 +30,10 @@ class DatabaseInvoice(
         @PrimaryKey(autoGenerate = true)
         override val id: Int,
         @ColumnInfo(name = "customer_id")
-        override val customerId: Int,
+        override val customerId: Int?,
         override val customerName: String,
         @ColumnInfo(name = "item_id")
-        override val itemId: Int,
+        override val itemId: Int?,
         override val itemName: String,
         override val itemPrice: Double,
         override val date: Date,

@@ -69,5 +69,17 @@ class JSONInvoiceConverter {
         return array
     }
 
+    fun convertManyToObject(array: JSONArray): List<Invoice> {
+        val invoices = mutableListOf<Invoice>()
+
+        for (i in 0 until array.length()){
+            invoices.add(
+                    convertToObject(array.getJSONObject(i))
+            )
+        }
+
+        return invoices
+    }
+
     
 }

@@ -2,8 +2,6 @@ package rynkbit.tk.coffeelist.db.facade
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import io.reactivex.Scheduler
-import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
 import rynkbit.tk.coffeelist.contract.entity.Item
 import rynkbit.tk.coffeelist.db.entity.DatabaseItem
@@ -117,5 +115,31 @@ class ItemFacade : BaseFacade<DatabaseItem, Item>() {
                 ),
                 Item::class.java
         )
+    }
+
+    fun replaceAll(items: List<Item>): LiveData<Unit> {
+        val mutableLiveData = MutableLiveData<Unit>()
+
+        appDatabase
+                .itemDao()
+                .deleteAll()
+                .subscribeOn(Schedulers.newThread())
+                .map {
+                    for (item in items) {
+                        appDatabase
+                                .itemDao()
+                                .insert(DatabaseItem(
+                                        id = item.id,
+                                        name = item.name,
+                                        price = item.price,
+                                        stock = item.stock
+                                ))
+                                .blockingGet()
+                    }
+                    mutableLiveData.postValue(Unit)
+                }
+                .subscribe()
+
+        return mutableLiveData
     }
 }
