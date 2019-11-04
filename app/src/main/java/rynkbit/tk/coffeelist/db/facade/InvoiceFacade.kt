@@ -124,9 +124,14 @@ class InvoiceFacade : BaseFacade<DatabaseInvoice, Invoice>() {
                 .subscribeOn(Schedulers.newThread())
                 .flatMap { oldInvoice ->
                     oldState = oldInvoice.state
-                    return@flatMap appDatabase
-                            .itemDao()
-                            .findById(invoice.itemId)
+
+                    if(invoice.itemId != null) {
+                        return@flatMap appDatabase
+                                .itemDao()
+                                .findById(invoice.itemId!!)
+                    } else {
+                      return@flatMap null
+                    }
                 }
                 .map { item ->
                     var stockChange = 0
@@ -165,5 +170,36 @@ class InvoiceFacade : BaseFacade<DatabaseInvoice, Invoice>() {
 
 
         return liveData
+    }
+
+    fun replaceAll(invoices: List<Invoice>): LiveData<Unit> {
+        val mutableLiveData = MutableLiveData<Unit>()
+
+        appDatabase
+                .invoiceDao()
+                .deleteAll()
+                .subscribeOn(Schedulers.newThread())
+                .map {
+                    for (invoice in invoices){
+                        appDatabase
+                                .invoiceDao()
+                                .insert(DatabaseInvoice(
+                                        id = invoice.id,
+                                        itemId = invoice.itemId,
+                                        itemName = invoice.itemName,
+                                        itemPrice = invoice.itemPrice,
+                                        customerId = invoice.customerId,
+                                        customerName = invoice.customerName,
+                                        date = invoice.date,
+                                        state = invoice.state
+                                ))
+                                .blockingGet()
+                    }
+
+                    mutableLiveData.postValue(Unit)
+                }
+                .subscribe()
+
+        return mutableLiveData
     }
 }

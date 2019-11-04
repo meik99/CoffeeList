@@ -23,4 +23,7 @@ interface InvoiceDao : BaseDao<DatabaseInvoice> {
 
     @Query("delete from invoice where customer_id = :customerId")
     fun deleteByCustomer(customerId: Int): Single<Unit>
+
+    @Query("delete from invoice")
+    fun deleteAll(): Single<Unit>
 }

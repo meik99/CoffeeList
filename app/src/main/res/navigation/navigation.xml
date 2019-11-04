@@ -64,11 +64,29 @@
             <action
                 android:id="@+id/action_administrationFragment_to_changePasswordFragment"
                 app:destination="@id/changePasswordFragment" />
+            <action
+                android:id="@+id/action_administrationFragment_to_createBackupFragment"
+                app:destination="@id/createBackupFragment" />
+            <action
+                android:id="@+id/action_administrationFragment_to_readBackupFragment"
+                app:destination="@id/readBackupFragment" />
         </fragment>
         <fragment
             android:id="@+id/changePasswordFragment"
             android:name="rynkbit.tk.coffeelist.ui.admin.password.ChangePasswordFragment"
             android:label="fragment_change_password"
             tools:layout="@layout/fragment_change_password" />
+        <fragment
+            android:id="@+id/createBackupFragment"
+            android:name="rynkbit.tk.coffeelist.ui.admin.backup.create.CreateBackupFragment"
+            android:label="fragment_create_backup"
+            tools:layout="@layout/fragment_create_backup" >
+        </fragment>
+        <fragment
+            android:id="@+id/readBackupFragment"
+            android:name="rynkbit.tk.coffeelist.ui.admin.backup.read.ReadBackupFragment"
+            android:label="fragment_read_backup"
+            tools:layout="@layout/fragment_read_backup" />
+
     </navigation>
 </navigation>

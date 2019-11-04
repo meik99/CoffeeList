@@ -28,10 +28,6 @@
         <activity
             android:name="net.rdrei.android.dirchooser.DirectoryChooserActivity"
             android:theme="@style/DirectoryChooserTheme" />
-        <activity
-            android:name=".ui.admin.edit.mvc.EditNamedObjectActivity"
-            android:label="@string/title_activity_edit_user"
-            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

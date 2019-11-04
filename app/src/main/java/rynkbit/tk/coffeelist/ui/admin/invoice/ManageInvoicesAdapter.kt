@@ -58,9 +58,9 @@ class ManageInvoicesAdapter : RecyclerView.Adapter<ManageInvoicesAdapter.ViewHol
                         this(
                             UIInvoice(
                                     id = invoice.id,
-                                    customerId = invoice.customerId,
+                                    customerId = invoice.customerId ?: -1,
                                     customerName = invoice.customerName,
-                                    itemId = invoice.itemId,
+                                    itemId = invoice.itemId ?: -1,
                                     itemName = invoice.itemName,
                                     itemPrice = invoice.itemPrice,
                                     date = invoice.date,

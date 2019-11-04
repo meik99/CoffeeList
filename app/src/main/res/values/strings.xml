@@ -70,11 +70,16 @@
     <string name="invoice_state_open">Open</string>
     <string name="invoice_state_closed">Closed</string>
     <string name="invoice_state_revoked">Revoked</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
     <string name="new_password">New Password</string>
     <string name="repeat_password">Repeat Password</string>
     <string name="passwords_do_not_match">Passwords do not match</string>
     <string name="password_has_been_changed">Password has been changed</string>
+    <string name="hello_blank_fragment" translatable="false">Hello World</string>
+    <string name="current_file">Current File</string>
+    <string name="not_set">Not Set</string>
+    <string name="select_file">Select File</string>
+    <string name="write_backup">Write Backup</string>
+    <string name="loading_data">Loading Data</string>
+    <string name="path_not_set">Path not set</string>
+    <string name="read_backup">Read backup</string>
 </resources>

@@ -79,13 +79,18 @@
                                 <LayoutPositions>
                                   <option name="myPosition">
                                     <Point>
-                                      <option name="x" value="-124" />
-                                      <option name="y" value="412" />
+                                      <option name="x" value="-122" />
+                                      <option name="y" value="416" />
                                     </Point>
                                   </option>
                                   <option name="myPositions">
                                     <map>
                                       <entry key="action_administrationFragment_to_changePasswordFragment">
+                                        <value>
+                                          <LayoutPositions />
+                                        </value>
+                                      </entry>
+                                      <entry key="action_administrationFragment_to_createBackupFragment">
                                         <value>
                                           <LayoutPositions />
                                         </value>
@@ -105,6 +110,11 @@
                                           <LayoutPositions />
                                         </value>
                                       </entry>
+                                      <entry key="action_administrationFragment_to_readBackupFragment">
+                                        <value>
+                                          <LayoutPositions />
+                                        </value>
+                                      </entry>
                                     </map>
                                   </option>
                                 </LayoutPositions>
@@ -115,8 +125,19 @@
                                 <LayoutPositions>
                                   <option name="myPosition">
                                     <Point>
-                                      <option name="x" value="465" />
-                                      <option name="y" value="176" />
+                                      <option name="x" value="414" />
+                                    </Point>
+                                  </option>
+                                </LayoutPositions>
+                              </value>
+                            </entry>
+                            <entry key="createBackupFragment">
+                              <value>
+                                <LayoutPositions>
+                                  <option name="myPosition">
+                                    <Point>
+                                      <option name="x" value="321" />
+                                      <option name="y" value="969" />
                                     </Point>
                                   </option>
                                 </LayoutPositions>
@@ -127,8 +148,8 @@
                                 <LayoutPositions>
                                   <option name="myPosition">
                                     <Point>
-                                      <option name="x" value="292" />
-                                      <option name="y" value="432" />
+                                      <option name="x" value="582" />
+                                      <option name="y" value="367" />
                                     </Point>
                                   </option>
                                 </LayoutPositions>
@@ -139,8 +160,8 @@
                                 <LayoutPositions>
                                   <option name="myPosition">
                                     <Point>
-                                      <option name="x" value="292" />
-                                      <option name="y" value="852" />
+                                      <option name="x" value="27" />
+                                      <option name="y" value="957" />
                                     </Point>
                                   </option>
                                 </LayoutPositions>
@@ -151,8 +172,20 @@
                                 <LayoutPositions>
                                   <option name="myPosition">
                                     <Point>
-                                      <option name="x" value="292" />
-                                      <option name="y" value="12" />
+                                      <option name="x" value="54" />
+                                      <option name="y" value="-36" />
+                                    </Point>
+                                  </option>
+                                </LayoutPositions>
+                              </value>
+                            </entry>
+                            <entry key="readBackupFragment">
+                              <value>
+                                <LayoutPositions>
+                                  <option name="myPosition">
+                                    <Point>
+                                      <option name="x" value="588" />
+                                      <option name="y" value="806" />
                                     </Point>
                                   </option>
                                 </LayoutPositions>
