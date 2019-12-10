@@ -41,6 +41,9 @@ class AdministrationFragment : Fragment() {
         btnAdminReadBackup.setOnClickListener {
             navigate(R.id.action_administrationFragment_to_readBackupFragment)
         }
+        btnAdminProtocol.setOnClickListener {
+            navigate(R.id.action_administrationFragment_to_protocolFragment)
+        }
     }
 
     private fun navigate(@IdRes actionId: Int){
